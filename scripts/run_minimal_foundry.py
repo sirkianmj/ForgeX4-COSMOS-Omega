@@ -8,9 +8,7 @@
 # Date: 2025-09-25
 #
 # Description:
-# This script serves as the entry point for running a minimal, end-to-end
-# test of the evolutionary foundry. It loads the initial genomes, configures
-# the foundry, and kicks off the evolutionary process.
+# This script runs the minimal foundry and forges the final champion artifact.
 #
 import os
 import sys
@@ -20,13 +18,15 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from cosmos.parser import parser
 from cosmos.foundry import foundry
+from cosmos.forge import forge # <-- NEW IMPORT
 
 # --- Configuration ---
-INITIAL_GENOME_PATH = "data/genomes/gaia/gaia_v0.1.c" # We'll evolve Gaia directly for now
+INITIAL_GENOME_PATH = "data/genomes/gaia/gaia_v0.1.c"
+CHAMPION_ARTIFACT_PATH = "artifacts/phase1/champion_v0.1.c" # <-- NEW
 
 FOUNDRY_CONFIG = {
-    "population_size": 10,
-    "mutation_rate": 0.2,  # A higher rate to ensure we see mutations happen
+    "population_size": 20,  # Increased for higher chance of finding a champion
+    "mutation_rate": 0.2,
     "generations": 5,
 }
 
@@ -35,16 +35,24 @@ def main():
     print("--- Minimal Viable Foundry Run ---")
     
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    file_path = os.path.join(project_root, INITIAL_GENOME_PATH)
+    initial_file_path = os.path.join(project_root, INITIAL_GENOME_PATH)
+    output_artifact_path = os.path.join(project_root, CHAMPION_ARTIFACT_PATH)
 
-    print(f"Loading initial genome from: {file_path}")
-    initial_ast = parser.parse_c_file_to_ast(file_path)
+    print(f"Loading initial genome from: {initial_file_path}")
+    initial_ast = parser.parse_c_file_to_ast(initial_file_path)
 
     print("Initializing the Foundry...")
     engine = foundry.Foundry(initial_ast, FOUNDRY_CONFIG)
 
     print("Starting the evolutionary run...")
-    engine.run()
+    champion = engine.run()
+
+    # --- NEW: Forge the champion at the end of the run ---
+    if champion['genome']:
+        forge.forge_champion(champion['genome'], output_artifact_path)
+    else:
+        print("Evolutionary run finished with no viable champion.")
+
 
 if __name__ == '__main__':
     main()
