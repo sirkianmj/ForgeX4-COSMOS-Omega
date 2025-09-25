@@ -5,16 +5,19 @@
 # Project Director: Kian Mansouri Jamshidi
 #
 # File: cosmos/foundry/foundry.py
-# Date: 2024-05-24
+# Date: 2025-09-25
 #
 # Description:
 # This file contains the core Foundry class, which orchestrates the
-# genetic algorithm and the evolutionary process.
+# genetic algorithm and the evolutionary process. This is a DEBUG version
+# with extensive logging in the mutation step.
 #
 import copy
 import random
 from pycparser import c_ast
 from cosmos.foundry.mutations import hardening
+from cosmos.foundry import fitness
+from cosmos.parser import parser # <-- Added Import
 
 class Foundry:
     """
@@ -26,8 +29,6 @@ class Foundry:
         self.mutation_rate = config.get("mutation_rate", 0.1)
         self.generations = config.get("generations", 5)
 
-        # A population is a list of individuals, where each individual
-        # is a dictionary containing its genome (AST) and fitness score.
         self.population = []
 
     def _initialize_population(self):
@@ -35,7 +36,6 @@ class Foundry:
         print("Initializing population...")
         self.population = []
         for _ in range(self.population_size):
-            # We must use deepcopy to ensure each individual has a unique AST object.
             individual = {
                 'genome': copy.deepcopy(self.initial_ast),
                 'fitness': 0.0
@@ -45,26 +45,43 @@ class Foundry:
 
     def _evaluate_population(self):
         """
-        Calculates and assigns a fitness score to each individual in the population.
+        Calculates and assigns a fitness score to each individual in the population
+        by compiling and testing them in the Crucible.
         """
-        # TODO (Task 3.2): This is the placeholder for the real fitness function.
-        # The real function will:
-        # 1. Un-parse the AST to C code.
-        # 2. Compile the C code with the RISC-V toolchain.
-        # 3. Run the Uranus fuzzer against the compiled binary.
-        # 4. Assign a score based on whether it crashes.
-        for individual in self.population:
-            # For now, a placeholder fitness.
-            individual['fitness'] = random.uniform(0, 10)
+        print("Evaluating population fitness...")
+        for i, individual in enumerate(self.population):
+            print(f"  - Evaluating individual {i+1}/{self.population_size}...", end='', flush=True)
+            score = fitness.evaluate_fitness(individual['genome'])
+            individual['fitness'] = score
+            print(f" score: {score}")
 
     def _mutate_population(self):
         """Applies mutations to individuals in the population."""
         print("Applying mutations...")
-        for individual in self.population:
+        for i, individual in enumerate(self.population):
             if random.random() < self.mutation_rate:
-                print(f"  - Mutating individual...")
-                # Apply our one and only mutation for now.
-                individual['genome'] = hardening.mutate_gets_to_fgets(individual['genome'])
+                print(f"  - Mutating individual {i}...")
+                
+                # --- DEBUG LOGGING START ---
+                # 1. Show the code BEFORE mutation
+                print("    --- BEFORE ---")
+                pre_mutation_code = parser.unparse_ast_to_c(individual['genome'])
+                for line in pre_mutation_code.splitlines():
+                    if "gets(" in line or "fgets(" in line:
+                        print(f"    {line.strip()}")
+                
+                # 2. Apply the mutation
+                mutated_ast = hardening.mutate_gets_to_fgets(individual['genome'])
+                individual['genome'] = mutated_ast # Make sure we save it back
+
+                # 3. Show the code AFTER mutation
+                print("    --- AFTER ---")
+                post_mutation_code = parser.unparse_ast_to_c(individual['genome'])
+                for line in post_mutation_code.splitlines():
+                    if "gets(" in line or "fgets(" in line:
+                        print(f"    {line.strip()}")
+                print("    ---------------")
+                # --- DEBUG LOGGING END ---
 
     def run(self):
         """Runs the entire evolutionary process."""
@@ -73,14 +90,11 @@ class Foundry:
         for gen in range(self.generations):
             print(f"\n--- Generation {gen + 1}/{self.generations} ---")
 
-            # For now, the loop is simple: evaluate, then mutate.
-            self._evaluate_population()
+            # Corrected loop order: Mutate first, then evaluate.
             self._mutate_population()
+            self._evaluate_population()
 
-            # Log the best fitness of this generation
             best_fitness = max(ind['fitness'] for ind in self.population)
             print(f"Best fitness in generation {gen + 1}: {best_fitness:.2f}")
 
-        # TODO: Add selection and crossover steps.
-        # TODO: Return the "champion" genome.
         print("\nEvolutionary run complete.")

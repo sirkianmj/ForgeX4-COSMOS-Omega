@@ -5,7 +5,7 @@
 # Project Director: Kian Mansouri Jamshidi
 #
 # File: scripts/validate_parser.py
-# Date: 2024-05-24
+# Date: 2025-09-25
 #
 # Description:
 # A simple script to validate the core functionality of the parser module.

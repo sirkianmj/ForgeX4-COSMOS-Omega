@@ -5,7 +5,7 @@
 # Project Director: Kian Mansouri Jamshidi
 #
 # File: cosmos/parser/parser.py
-# Date: 2024-05-24
+# Date: 2025-09-25
 #
 # Description:
 # This module is responsible for the critical task of converting C source code
@@ -18,6 +18,12 @@ import pycparser # <-- ADDED
 from pycparser import c_parser, c_ast
 from pycparser.c_generator import CGenerator
 
+def clean_ast(ast: c_ast.FileAST):
+    """
+    Removes all top-level Typedef nodes from an AST.
+    This is used to strip out the fake libc typedefs before compilation.
+    """
+    ast.ext = [node for node in ast.ext if not isinstance(node, c_ast.Typedef)]
 
 def get_pycparser_fake_libc_path() -> str:
     """Finds the path to the fake libc headers provided by pycparser."""

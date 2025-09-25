@@ -5,7 +5,7 @@
 # Project Director: Kian Mansouri Jamshidi
 #
 # File: scripts/run_minimal_foundry.py
-# Date: 2024-05-24
+# Date: 2025-09-25
 #
 # Description:
 # This script serves as the entry point for running a minimal, end-to-end
