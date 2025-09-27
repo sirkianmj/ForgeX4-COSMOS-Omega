@@ -50,3 +50,10 @@ ENV/
 
 # Project-specific ignores
 clear/
+
+# Telemetry data storage
+data/telemetry/
+
+# PLY (pycparser dependency) cache files
+lextab.py
+yacctab.py
