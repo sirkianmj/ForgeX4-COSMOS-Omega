@@ -14,7 +14,7 @@
 
 ForgeX4 COSMOS-Ω is a completed research project that breaks the reactive cycle of cybersecurity. Our vision was to create the world's first autonomous, multi-physics foundry that does not merely patch vulnerabilities, but **autonomously synthesizes novel, verifiable security policies.** The system is a successfully implemented scientific instrument that automates security innovation itself.
 
-This repository contains the complete source code, experimental data, research notebooks, and final artifacts for the project, led by Project Director and Chief Scientist **Kian Mansouri Jamshidi**.
+This repository contains the complete source code, experimental data, research notebooks, and final artifacts for the project, led by Project Director  **Kian Mansouri Jamshidi**.
 
 ---
 
@@ -91,3 +91,4 @@ If you use this research or code in your academic or professional work, please c
   journal      = {GitHub repository},
   howpublished = {\url{https://github.com/sirkianmj/ForgeX4-COSMOS-Omega}}
 }```
+
