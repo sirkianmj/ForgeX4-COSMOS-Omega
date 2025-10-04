@@ -56,10 +56,19 @@ def evaluate_genome_worker(individual: dict) -> dict:
     """
     genome = individual['genome']
     
-    # --- PIVOT: Instruct the Titan to run behavioral scripts, not send strings ---
-    benign_result = worker_execution_titan.instrumented_run(payload_type="benign", genome=genome)
-    malicious_result = worker_execution_titan.instrumented_run(payload_type="malicious", genome=genome)
-    
+    # --- THIS IS THE CORRECTED SECTION ---
+    # We now create the byte payloads here and pass them with the correct
+    # argument name ('payload') to the instrumented_run function.
+
+    # A simple, safe input that the C program can process normally.
+    benign_payload = b'{"name":"Normal Input"}'
+    # A classic, long string designed to cause a buffer overflow.
+    malicious_payload = b'A' * 500
+
+    benign_result = worker_execution_titan.instrumented_run(payload=benign_payload, genome=genome)
+    malicious_result = worker_execution_titan.instrumented_run(payload=malicious_payload, genome=genome)
+    # ------------------------------------
+
     # Return the "truth packet" for the main thread to score
     return {
         'id': individual['id'],

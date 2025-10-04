@@ -7,6 +7,7 @@
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 
     <!-- STYLES -->
     <style type="text/css">
@@ -38,7 +39,22 @@
 
         #header-bar { top: 0; left: 0; right: 0; height: 40px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; border: none; clip-path: none; background: var(--panel-bg); z-index: 10; }
         #config-panel { top: 80px; left: 20px; width: 300px; }
-        #forensic-panel { top: 80px; right: 20px; width: 450px; max-height: 75vh; overflow-y: auto; display: none; }
+        #forensic-panel { top: 80px; right: 20px; width: 450px; max-height: 40vh; overflow-y: auto; display: none; }
+        
+        #fitness-chart-panel {
+            bottom: 200px; /* Positioned above the dashboard */
+            right: 20px;
+            width: 450px;
+            height: 300px; /* Fixed height for the chart */
+        }
+        .chart-container { width: 100%; height: calc(100% - 40px); /* Account for title */ }
+        .line { fill: none; stroke: var(--champion-accent); stroke-width: 2.5px; }
+        .dot { fill: var(--primary-accent); }
+        .axis-label { fill: var(--secondary-text); font-size: 11px; font-family: 'Roboto Mono', monospace; }
+        .tick text { fill: var(--secondary-text); }
+        .tick line { stroke: var(--border-color); }
+        .domain { stroke: var(--border-color); }
+        
         #telemetry-ticker { bottom: 200px; left: 20px; width: 300px; height: 200px; overflow: hidden; padding-top: 5px; }
         #telemetry-ticker .log-line { font-size: 11px; white-space: nowrap; margin-bottom: 2px; }
         #dashboard { bottom: 0; left: 0; right: 0; height: 160px; display: flex; justify-content: space-around; align-items: center; border: none; clip-path: none; background: var(--panel-bg); z-index: 10; }
@@ -63,16 +79,9 @@
         button#report-button { border-color: var(--success-color); color: var(--success-color); }
         button#report-button:hover { background: var(--success-color); color: var(--bg-color); box-shadow: 0 0 20px var(--success-color); }
         
-        /* Sentinel Panel PRE (Genome Content) Size Fix */
         #sentinel-panel pre {
-            max-height: 150px; /* Set a fixed max height */
-            overflow-y: auto; /* Enable vertical scrollbar */
-            font-size: 10px;
-            background-color: #010409; 
-            padding: 10px; 
-            border-radius: 6px; 
-            white-space: pre-wrap; 
-            border: 1px solid var(--border-color);
+            max-height: 150px; overflow-y: auto; font-size: 10px; background-color: #010409; 
+            padding: 10px; border-radius: 6px; white-space: pre-wrap; border: 1px solid var(--border-color);
         }
         
         .hash { color: #ff00ff; font-size: 10px; word-break: break-all; }
@@ -115,6 +124,11 @@
             <p style="font-size: 12px; color: var(--secondary-text); margin: 0;">SYSTEM STATUS</p>
             <p id="status-text" style="font-size: 24px; margin: 5px 0; color: var(--primary-accent); text-shadow: 0 0 10px var(--glow-primary);">STANDBY</p>
         </div>
+    </div>
+    
+    <div id="fitness-chart-panel" class="overlay">
+        <h3>[ CHAMPION FITNESS TRAJECTORY ]</h3>
+        <div id="chart-container" class="chart-container"></div>
     </div>
 
     <div id="forensic-panel" class="overlay"></div>
@@ -167,13 +181,12 @@
         const nodes = new vis.DataSet([]);
         const edges = new vis.DataSet([]);
         const options = {
-            // CHANGED to force-directed graph (barnesHut)
             physics: { barnesHut: { gravitationalConstant: -30000, springLength: 250, springConstant: 0.05 } },
             nodes: { font: { color: 'white', size: 14 } },
             edges: { width: 1, color: { color: 'rgba(0,170,255,0.2)', highlight: 'rgba(0,170,255,1)' }, smooth: { type: 'continuous' } }
         };
         const network = new vis.Network(container, { nodes, edges }, options);
-        let processedHashes = new Set(), allTimeChampion = { id: null, fitness: -Infinity }, updateInterval = null, missionClockInterval = null, currentRunId = null, fullLedgerData = [], parentMap = {};
+        let processedHashes = new Set(), allTimeChampion = { id: null, fitness: -Infinity }, updateInterval = null, missionClockInterval = null, currentRunId = null, fullLedgerData = [];
 
         // --- AUDIO & UI HELPERS ---
         const sounds = { click: document.getElementById('audio-click'), start: document.getElementById('audio-start'), finish: document.getElementById('audio-finish'), fade: document.getElementById('audio-fade') };
@@ -211,47 +224,32 @@
         }
         setInterval(() => { if (!currentRunId) { const fakeData = ['SYSTEM_IDLE', 'AWAITING_CMD', 'OBSERVATORY_ONLINE']; addTickerLine(`[SYS] ${fakeData[Math.floor(Math.random() * fakeData.length)]}`); } }, 1000);
         
-        // MODIFIED: REPLACED DNA Helix with Data-Driven Star Glyph
         function generateGlyph(fingerprint, fitness, isElite) {
             const canvas = document.createElement('canvas'); canvas.width = 200; canvas.height = 200;
             const ctx = canvas.getContext('2d'); const centerX = 100, centerY = 100;
-            // Normalize telemetry features
             const cpu = Math.min(1, (fingerprint.cpu_percent_total_mean || 0) / 100); 
             const mem = Math.min(1, (fingerprint.memory_rss_bytes_mean || 0) / 10000000); 
             const io = Math.min(1, ((fingerprint.io_read_bytes_mean || 0) + (fingerprint.io_write_bytes_mean || 0)) / 100000); 
-            
-            // Star/Polygon Parameters based on features
-            const sides = 5 + Math.floor(cpu * 10); // CPU influences complexity/number of sides
-            const radius = 60 + (cpu * 15); // CPU influences size
-            
+            const sides = 5 + Math.floor(cpu * 10); 
+            const radius = 60 + (cpu * 15);
             ctx.beginPath();
             ctx.moveTo(centerX + radius, centerY);
             for (let i = 1; i <= sides; i++) { 
                 const angle = i * (2 * Math.PI / sides);
-                // IO influences the spikeiness (alternating spikes)
                 const spike = (i % 2 === 0) ? 1.0 : (1.0 - cpu * 0.5); 
                 ctx.lineTo(centerX + Math.cos(angle) * radius * spike, centerY + Math.sin(angle) * radius * spike);
             }
             ctx.closePath();
-            
-            // MEM influences color (R/B)
             const r = Math.floor(255 * mem); 
             const b = 255 - r;
             let color1 = isElite ? `rgba(${r}, 255, ${b}, 1)` : `rgba(${r}, 200, ${b}, 0.7)`;
             let color2 = isElite ? `rgba(${r}, 150, ${b}, 1)` : `rgba(${r}, 100, ${b}, 0.5)`;
             let strokeColor = fitness > 0 ? (isElite ? '#FFFFFF' : '#00FF00') : '#555555';
-
             const gradient = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, radius);
-            gradient.addColorStop(0, color1);
-            gradient.addColorStop(1, color2);
-            ctx.fillStyle = gradient;
-            ctx.fill();
-            
-            // IO influences stroke thickness
-            ctx.strokeStyle = strokeColor;
-            ctx.lineWidth = 3 + (io * 10); 
+            gradient.addColorStop(0, color1); gradient.addColorStop(1, color2);
+            ctx.fillStyle = gradient; ctx.fill();
+            ctx.strokeStyle = strokeColor; ctx.lineWidth = 3 + (io * 10); 
             ctx.stroke();
-            
             return canvas.toDataURL();
         }
         
@@ -265,7 +263,48 @@
             return features;
         }
 
-        // --- CORE LOGIC: "COSMIC WEB" VISUALIZATION (Updated for Force-Directed Graph) ---
+        // --- D3.JS FITNESS CHART SETUP ---
+        const margin = { top: 10, right: 20, bottom: 40, left: 50 };
+        const chartContainer = document.getElementById('chart-container');
+        const chartWidth = chartContainer.clientWidth - margin.left - margin.right;
+        const chartHeight = chartContainer.clientHeight - margin.top - margin.bottom;
+        const svg = d3.select("#chart-container").append("svg")
+            .attr("width", chartWidth + margin.left + margin.right)
+            .attr("height", chartHeight + margin.top + margin.bottom)
+            .append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+        const xScale = d3.scaleLinear().range([0, chartWidth]);
+        const yScale = d3.scaleLinear().range([chartHeight, 0]);
+        const xAxis = svg.append("g").attr("class", "x-axis tick").attr("transform", `translate(0,${chartHeight})`);
+        const yAxis = svg.append("g").attr("class", "y-axis tick");
+        svg.append("text").attr("class", "axis-label").attr("text-anchor", "middle").attr("x", chartWidth / 2).attr("y", chartHeight + margin.bottom - 5).text("Generation");
+        svg.append("text").attr("class", "axis-label").attr("text-anchor", "middle").attr("transform", "rotate(-90)").attr("y", -margin.left + 15).attr("x", -chartHeight / 2).text("Fitness");
+        const line = d3.line().x(d => xScale(d.generation)).y(d => yScale(d.fitness)).curve(d3.curveMonotoneX);
+        const path = svg.append("path").attr("class", "line");
+
+        function updateFitnessChart(data) {
+            if (!data || data.length === 0) {
+                path.datum([]).attr("d", line);
+                svg.selectAll(".dot").data([]).join("circle");
+                return;
+            };
+            xScale.domain([0, d3.max(data, d => d.generation)]);
+            const yMin = d3.min(data, d => d.fitness);
+            const yMax = d3.max(data, d => d.fitness);
+            yScale.domain([yMin - Math.abs(yMax-yMin)*0.1 - 10, yMax + Math.abs(yMax-yMin)*0.1 + 10]); 
+            xAxis.transition().duration(300).call(d3.axisBottom(xScale).ticks(Math.min(data.length, 10)).tickFormat(d3.format('d')));
+            yAxis.transition().duration(300).call(d3.axisLeft(yScale).ticks(5));
+            path.datum(data).transition().duration(300).attr("d", line);
+            svg.selectAll(".dot").data(data).join(
+                enter => enter.append("circle").attr("class", "dot").attr("r", 0)
+                    .attr("cx", d => xScale(d.generation)).attr("cy", d => yScale(d.fitness))
+                    .transition().duration(300).attr("r", 4),
+                update => update.transition().duration(300)
+                    .attr("cx", d => xScale(d.generation)).attr("cy", d => yScale(d.fitness)),
+                exit => exit.transition().duration(300).attr("r", 0).remove()
+            );
+        }
+        
+        // --- CORE LOGIC: "COSMIC WEB" VISUALIZATION ---
         function updateFromLedger() {
             if (!currentRunId) return;
             fetch(`/ledger/${currentRunId}`).then(r => r.json()).then(ledger => {
@@ -275,6 +314,15 @@
                 document.getElementById('status-text').innerText = lastBlock.event_type.replace(/_/g, ' ');
 
                 if (lastBlock.event_type === "CHAMPION_UPDATED") { updateGauges(lastBlock.details.champion.breakdown); }
+
+                const championFitnessData = ledger
+                    .filter(e => e.event_type === "CHAMPION_UPDATED")
+                    .map(e => ({
+                        generation: e.details.generation,
+                        fitness: e.details.champion.fitness
+                    }))
+                    .sort((a, b) => a.generation - b.generation);
+                updateFitnessChart(championFitnessData);
 
                 ledger.forEach(block => {
                     if (processedHashes.has(block.block_hash)) return;
@@ -286,17 +334,11 @@
                         const results = block.details.evaluation_results;
                         const newNodes = [], newEdges = [];
                         
-                        // Determine Parent (Previous Champion) for this generation's offspring
                         let parentId = 'GENESIS-0';
                         if (gen > 0) {
-                            // Find the CHAMPION_UPDATED block from the *previous* generation to use as the parent
-                            const prevGen = gen - 1;
-                            const parentGenChampions = fullLedgerData.slice().reverse().filter(b => b.block_height === prevGen && b.event_type === 'CHAMPION_UPDATED');
-                            if (parentGenChampions.length > 0) {
-                                parentId = `${prevGen}-${parentGenChampions[0].details.champion.id}`;
-                            } else {
-                                // Fallback for first gen or if champion block is missed
-                                parentId = 'GENESIS-0'; 
+                            const prevGenChampions = fullLedgerData.slice().reverse().filter(b => b.block_height === (gen - 1) && b.event_type === 'CHAMPION_UPDATED');
+                            if (prevGenChampions.length > 0) {
+                                parentId = `${gen - 1}-${prevGenChampions[0].details.champion.id}`;
                             }
                         }
 
@@ -306,9 +348,7 @@
                             const fingerprint = res.benign_telemetry ? extractFingerprint(res.benign_telemetry) : {};
                             
                             const node = { 
-                                id: id, 
-                                shape: 'image', 
-                                image: generateGlyph(fingerprint, res.fitness, isElite), 
+                                id: id, shape: 'image', image: generateGlyph(fingerprint, res.fitness, isElite), 
                                 genome: res.genome, fitness: res.fitness, breakdown: res.breakdown, 
                                 fullBlock: block, fingerprint: fingerprint 
                             };
@@ -316,26 +356,17 @@
                             if (isElite) {
                                 node.label = `+${res.fitness.toFixed(0)}`;
                                 newNodes.push(node);
-                                
-                                // Edge from Parent (previous best) to new elite
                                 if (nodes.get(parentId)) newEdges.push({ from: parentId, to: id, id: `${parentId}->${id}` });
-                                
                                 addTickerLine(`[GEN ${gen}] GID ${res.id} -> SURVIVED | Fitness: ${res.fitness.toFixed(0)}`, 'success');
 
                             } else {
-                                // Failed nodes (dots)
                                 node.size = 15; node.shape = 'dot';
                                 node.color = { background: 'rgba(218, 54, 51, 0.5)', border: 'rgba(218, 54, 51, 0.8)' };
                                 newNodes.push(node);
-                                
-                                // Edge from Parent to failed node (faded red)
                                 if (nodes.get(parentId)) newEdges.push({ from: parentId, to: id, id: `${parentId}->${id}`, color: 'rgba(218, 54, 51, 0.2)' });
-                                
-                                // Remove non-elite nodes after a delay (death visualization)
                                 setTimeout(() => { playSound('fade'); nodes.remove(id); }, 2000); 
                             }
                             
-                            // Track All-Time Champion
                             if (res.fitness >= allTimeChampion.fitness) {
                                 allTimeChampion = { id, fitness: res.fitness, genome: res.genome, fingerprint: fingerprint };
                             }
@@ -344,7 +375,6 @@
                         nodes.update(newNodes); edges.update(newEdges);
                         
                         if (allTimeChampion.id) {
-                            // Update all-time champion's glow/shadow
                             const champNode = nodes.get(allTimeChampion.id);
                             if (champNode) nodes.update({ id: allTimeChampion.id, shadow: { enabled: true, color: 'rgba(255,215,0,0.6)', size: 30 } });
                         }
@@ -356,12 +386,11 @@
                         const panel = document.getElementById('sentinel-panel');
                         const glyphImage = generateGlyph(allTimeChampion.fingerprint, champ.fitness, true);
                         
-                        // NOTE: Updated button text to match new report function
                         panel.innerHTML = `<h3>[ AEGIS SENTINEL SYNTHESIZED ]</h3><img src="${glyphImage}" alt="Champion DNA Glyph" width="200" height="200" style="border: 3px solid var(--champion-accent); border-radius: 50%;"><strong>Final Fitness: <span style="color: var(--champion-accent);">${champ.fitness.toFixed(2)}</span></strong><pre>${JSON.stringify(champ.genome, null, 2)}</pre><button id="report-button">[ DOWNLOAD SCIENTIFIC DOSSIER ]</button><button id="rerun-button">[ INITIATE NEW MISSION ]</button>`;
                         
                         panel.style.display = 'block';
                         document.getElementById('config-panel').style.display = 'none';
-                        document.getElementById('forensic-panel').style.display = 'none'; // Ensure forensic panel is hidden
+                        document.getElementById('forensic-panel').style.display = 'none';
                         if (updateInterval) clearInterval(updateInterval); updateInterval = null;
                         if (missionClockInterval) clearInterval(missionClockInterval); missionClockInterval = null;
                         network.setOptions({ physics: false });
@@ -374,7 +403,6 @@
         // --- EVENT HANDLERS & UI MANAGEMENT ---
         document.body.addEventListener('click', function(event) { 
             if (event.target.id === 'start-button') { playSound('click'); startSynthesis(); } 
-            // Button text updated to DOSSIER
             if (event.target.id === 'report-button') { playSound('click'); downloadReport(); } 
             if (event.target.id === 'rerun-button') { playSound('click'); resetUI(); } 
         });
@@ -428,27 +456,21 @@
             document.getElementById('mission-clock').innerText = '00:00:00';
             updateGauges({Correctness: 0, Security: 0});
             nodes.clear(); edges.clear(); network.setOptions({ physics: true });
+            updateFitnessChart([]);
         }
 
         function resetUIState() {
             processedHashes.clear(); nodes.clear(); edges.clear();
             allTimeChampion = { id: null, fitness: -Infinity };
-            // Removed 'level' property from GENESIS, added x, y for non-hierarchical physics
             nodes.add({id: 'GENESIS-0', label: 'GENESIS', color: '#FFFFFF', fixed: true, shape: 'star', size: 30, x:0, y:0});
             document.getElementById('sentinel-panel').style.display = 'none';
             document.getElementById('forensic-panel').style.display = 'none';
             document.getElementById('config-panel').style.display = 'none';
-            parentMap = { 'GENESIS-0': [] }; // Added parentMap for the new logic
+            updateFitnessChart([]);
         }
         
-        // --- NEW: INTELLIGENT DOSSIER GENERATOR ---
         function generateReportNarrative(champion, analysisData) {
-            let narrative = {
-                executiveSummary: '',
-                championAnalysis: ''
-            };
-
-            // 1. Generate Executive Summary Verdict
+            let narrative = { executiveSummary: '', championAnalysis: '' };
             if (champion.fitness > 1000) {
                 narrative.executiveSummary = `The experiment was a decisive success. The COSMOS-Ω system rapidly converged on a high-fitness security policy ('Aegis Sentinel') with a conclusive score of <strong>+${champion.fitness.toFixed(2)}</strong>. This result provides a quantitative validation of the Multi-Physics Evolutionary Defense (MPED) hypothesis.`;
             } else if (champion.fitness > 0) {
@@ -456,23 +478,14 @@
             } else {
                 narrative.executiveSummary = `The experiment failed to converge on a viable solution. The highest achieved fitness score was <strong>${champion.fitness.toFixed(2)}</strong>. Analysis of the evolutionary data suggests that the fitness landscape may have been too complex for the given mission parameters.`;
             }
-
-            // 2. Generate Champion Strategy Analysis
             const metrics = new Set();
-            const complexity = JSON.stringify(champion.genome).length;
-
             function findMetrics(node) {
-                if (node.type === 'rule') {
-                    metrics.add(node.metric.split('_')[0]); // e.g., 'cpu', 'memory'
-                } else if (node.children) {
-                    node.children.forEach(findMetrics);
-                }
+                if (node.type === 'rule') { metrics.add(node.metric.split('_')[0]); } 
+                else if (node.children) { node.children.forEach(findMetrics); }
             }
-            // Check if the structure exists before attempting to traverse it
             if(champion.genome && champion.genome.states && champion.genome.states.STATE_0 && champion.genome.states.STATE_0.active_policy) {
                findMetrics(champion.genome.states.STATE_0.active_policy);
             }
-            
             let strategy;
             if (metrics.size === 1) {
                 const metric = metrics.values().next().value;
@@ -483,15 +496,14 @@
                 strategy = `The policy structure is highly unusual or empty. The policy appears to contain no explicit metric-based rules, suggesting a default or passive enforcement strategy.`;
             }
             narrative.championAnalysis = strategy;
-
             return narrative;
         }
 
+        // --- MODIFIED FUNCTION ---
         function downloadReport() {
             const championBlock = fullLedgerData.find(b => b.event_type === 'FINAL_CHAMPION_SYNTHESIZED');
             if (!championBlock) { alert('Champion data not found!'); return; }
             
-            // --- 1. Deep Data Analysis ---
             const champion = championBlock.details.final_champion;
             const initBlock = fullLedgerData.find(b => b.event_type === 'INITIATION');
             const config = initBlock.details.config;
@@ -499,29 +511,34 @@
                 const fitnesses = b.details.evaluation_results.map(r => r.fitness);
                 return { gen: b.details.generation, max: Math.max(...fitnesses), avg: fitnesses.reduce((a, b) => a + b, 0) / fitnesses.length };
             });
-            let convergenceGen = 'N/A'; let stabilityDuration = 0;
-            // Check for convergence: find the generation where the champion fitness was first achieved (or exceeded)
-            for (let i = 0; i < fitnessData.length; i++) { 
-                if (fitnessData[i].max >= champion.fitness) { convergenceGen = fitnessData[i].gen; break; } 
-            }
-            // Check stability: count generations at the end where max fitness matched champion fitness
-            for (let i = fitnessData.length - 1; i >= 0; i--) { 
-                 if (Math.abs(fitnessData[i].max - champion.fitness) < 0.01) { stabilityDuration++; } else { break; } 
-            }
+            let convergenceGen = 'N/A', stabilityDuration = 0;
+            for (let i = 0; i < fitnessData.length; i++) { if (fitnessData[i].max >= champion.fitness) { convergenceGen = fitnessData[i].gen; break; } }
+            for (let i = fitnessData.length - 1; i >= 0; i--) { if (Math.abs(fitnessData[i].max - champion.fitness) < 0.01) { stabilityDuration++; } else { break; } }
             const totalGenomesEvaluated = fitnessData.length * config.population_size;
             const totalFailures = fullLedgerData.filter(b => b.event_type === 'EVALUATION_COMPLETE').flatMap(b => b.details.evaluation_results).filter(r => r.fitness < 0).length;
-            const selectionPressure = (totalFailures / totalGenomesEvaluated) * 100;
+            const selectionPressure = (totalGenomesEvaluated > 0) ? (totalFailures / totalGenomesEvaluated) * 100 : 0;
 
-            // --- 2. Generate Dynamic Narrative ---
             const narrative = generateReportNarrative(champion, { selectionPressure });
             
-            // --- 3. Create and Populate the Report Structure ---
             const tempPrintContainer = document.createElement('div');
             tempPrintContainer.style.position = 'absolute'; tempPrintContainer.style.left = '-9999px'; document.body.appendChild(tempPrintContainer);
             const glyphImage = generateGlyph(allTimeChampion.fingerprint, champion.fitness, true);
 
             tempPrintContainer.innerHTML = `
                 <div id="pdf-content" style="font-family: 'Times New Roman', serif; width: 7.5in; color: black; background-color: white;">
+                    <!-- NEW: Injected style block for high-contrast PDF tables -->
+                    <style>
+                        #pdf-content table { border-collapse: collapse; width: 100%; page-break-inside: avoid; }
+                        #pdf-content th, #pdf-content td { 
+                            border: 1px solid #333; /* Dark, solid border */
+                            padding: 8px; 
+                            text-align: left;
+                            color: #000; /* Ensure text is black */
+                        }
+                        #pdf-content thead { background-color: #eef; }
+                        #pdf-content .final-row { font-weight: bold; background-color: #eef; }
+                    </style>
+
                     <div style="text-align: center; border: 5px double #002244; padding: 20px;">
                         <h1 style="color: #002244; margin: 0; font-size: 28px;">ForgeX4 COSMOS-Ω</h1>
                         <h2 style="color: #003366; margin: 0; font-size: 20px;">VERIFIED SCIENTIFIC DOSSIER</h2>
@@ -530,8 +547,8 @@
                     <h2 style="color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 40px;">1. Executive Summary</h2>
                     <p>${narrative.executiveSummary}</p>
                     <h2 style="color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 40px;">2. Mission Parameters & Analytical Overview</h2>
-                    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse; page-break-inside: avoid;">
-                        <thead style="background-color: #eef;"><tr><th colspan="2">Input Configuration</th><th colspan="2">Analytical Results</th></tr></thead>
+                    <table>
+                        <thead><tr><th colspan="2">Input Configuration</th><th colspan="2">Analytical Results</th></tr></thead>
                         <tbody>
                             <tr><td>Population Size</td><td>${config.population_size}</td><td>Total Genomes Evaluated</td><td>${totalGenomesEvaluated}</td></tr>
                             <tr><td>Generations</td><td>${config.generations}</td><td>Selection Pressure</td><td>${selectionPressure.toFixed(1)}% Terminated</td></tr>
@@ -549,13 +566,13 @@
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; page-break-inside: avoid;">
                         <div style="width: 55%;">
                             <h3>Mathematical Fitness Deconstruction</h3>
-                            <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse;">
-                                <thead style="background-color: #eef;"><tr><th>Component</th><th>Score</th><th>Justification</th></tr></thead>
+                            <table>
+                                <thead><tr><th>Component</th><th>Score</th><th>Justification</th></tr></thead>
                                 <tbody>
                                     <tr><td>Correctness</td><td>+${champion.breakdown.Correctness.toFixed(2)}</td><td>Permitted normal execution with high confidence.</td></tr>
                                     <tr><td>Security</td><td>+${champion.breakdown.Security.toFixed(2)}</td><td>Successfully terminated malicious payload.</td></tr>
                                     <tr><td>Perf. Penalty</td><td>${((champion.breakdown['Perf. Penalty (CPU)'] || 0) + (champion.breakdown['Perf. Penalty (Mem)'] || 0)).toFixed(2)}</td><td>Negligible resource overhead.</td></tr>
-                                    <tr style="font-weight: bold; background: #eef;"><td>Final Fitness</td><td>+${champion.fitness.toFixed(2)}</td><td>Holistic success across all objectives.</td></tr>
+                                    <tr class="final-row"><td>Final Fitness</td><td>+${champion.fitness.toFixed(2)}</td><td>Holistic success across all objectives.</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -567,7 +584,7 @@
                     <h3 style="margin-top: 30px;">AI Strategy Analysis</h3>
                     <p>${narrative.championAnalysis}</p>
                     <h3 style="margin-top: 30px;">Champion Genome (Source Code)</h3>
-                    <pre style="background-color: #f5f5f5; color: #333; font-size: 10px; white-space: pre-wrap; word-break: break-all; page-break-inside: avoid;">${JSON.stringify(champion.genome, null, 2)}</pre>
+                    <pre style="background-color: #f5f5f5; color: #333; font-size: 10px; white-space: pre-wrap; word-break: break-all; page-break-inside: avoid; border: 1px solid #ccc; padding: 10px;">${JSON.stringify(champion.genome, null, 2)}</pre>
                     <h2 style="color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 40px;">5. Conclusion & Cryptographic Proof</h2>
                     <p>This report provides an unassailable, data-driven summary of the experiment. The entire evolutionary process is documented in a cryptographically-chained ledger, ensuring complete auditability and provable results (XAI).</p>
                     <p style="font-size: 10px; word-break: break-all; margin-top: 20px;">
@@ -578,11 +595,9 @@
                 </div>
             `;
             
-            // --- 4. Render Chart and Generate PDF ---
             const chartCtx = tempPrintContainer.querySelector('#fitness-chart').getContext('2d');
             new Chart(chartCtx, { type: 'line', data: { labels: fitnessData.map(d => d.gen), datasets: [ { label: 'Max Fitness', data: fitnessData.map(d => d.max), borderColor: 'rgba(0, 51, 102, 1)', tension: 0.1 }, { label: 'Average Fitness', data: fitnessData.map(d => d.avg), borderColor: 'rgba(204, 0, 0, 1)', tension: 0.1 } ] }, options: { animation: false } });
             
-            // Wait for chart to render off-screen before generating PDF
             setTimeout(() => {
                 const elementToPrint = tempPrintContainer.querySelector('#pdf-content');
                 html2pdf().from(elementToPrint).set({
