@@ -1,0 +1,27 @@
+[
+    {
+        "run_id": "d3c5fa10b26a931f",
+        "block_height": 0,
+        "nonce": "ba724221",
+        "timestamp": "2025-09-30T21:58:44.743089Z",
+        "event_type": "GENESIS",
+        "details": {
+            "run_id": "d3c5fa10b26a931f",
+            "detail": "Cryptographic chain initiated."
+        },
+        "previous_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "event_hash": "76416fe681a08e5339efe57b2a45134241fa39215aaec0376d123f414b3e9950"
+    },
+    {
+        "run_id": "d3c5fa10b26a931f",
+        "block_height": 0,
+        "nonce": "17213698",
+        "timestamp": "2025-09-30T21:58:45.410471Z",
+        "event_type": "INITIAL_POPULATION_CREATED",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "76416fe681a08e5339efe57b2a45134241fa39215aaec0376d123f414b3e9950",
+        "event_hash": "75b753508b06fafe7f1516781c77edb482d476a497d980c7812959f3be6e6d69"
+    }
+]

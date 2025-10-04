@@ -1,0 +1,574 @@
+[
+    {
+        "timestamp": "2025-09-29T08:24:14.613713Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes_evaluated": 10
+        },
+        "previous_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "event_hash": "98895444050b6fc12b62a2f0c611c711f13b95290628df6e74d1eec1e4adadd6"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.679693Z",
+        "epoch": 0,
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "new_champion_genome_id": 0,
+            "new_champion_fitness": -500.0
+        },
+        "previous_event_hash": "98895444050b6fc12b62a2f0c611c711f13b95290628df6e74d1eec1e4adadd6",
+        "event_hash": "414afdd26363e35dbeeac1f821e080c458939df7679be354dba6eb4423633dd6"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.680443Z",
+        "epoch": 1,
+        "event_type": "GENERATION_START",
+        "details": {
+            "cronos_population_size": 10
+        },
+        "previous_event_hash": "414afdd26363e35dbeeac1f821e080c458939df7679be354dba6eb4423633dd6",
+        "event_hash": "6423fc2dfe3a2bcf84503b6430b9a6869798e4b9295dad1704b80b071168227a"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.851244Z",
+        "epoch": 1,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 3,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "6423fc2dfe3a2bcf84503b6430b9a6869798e4b9295dad1704b80b071168227a",
+        "event_hash": "e42b5e40033bf3eb1957bc37c95a8d0ce9c61d68227bb79141e73742e3b0bfaf"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.879987Z",
+        "epoch": 1,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 6,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "e42b5e40033bf3eb1957bc37c95a8d0ce9c61d68227bb79141e73742e3b0bfaf",
+        "event_hash": "38cbbc9f6598d346fbac82f5813a0c3efdcfec5cf516d828b02d00db35323fd4"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.881470Z",
+        "epoch": 1,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 0,
+            "action_taken": "SYSTEM_2_MUTATION"
+        },
+        "previous_event_hash": "38cbbc9f6598d346fbac82f5813a0c3efdcfec5cf516d828b02d00db35323fd4",
+        "event_hash": "6bc3ebbf2bab8a4614d53437a74d11402ce8567ced90179b6a985ba8ea54b321"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.882176Z",
+        "epoch": 1,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 1,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "6bc3ebbf2bab8a4614d53437a74d11402ce8567ced90179b6a985ba8ea54b321",
+        "event_hash": "d4bf91ee25ac133c8c5ce87db5ad00290358d9bfbfd7fb9a14d25c562438c7aa"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.882990Z",
+        "epoch": 1,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 2,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "d4bf91ee25ac133c8c5ce87db5ad00290358d9bfbfd7fb9a14d25c562438c7aa",
+        "event_hash": "6279a98e317fe26f637e08e7a086e3673698c15c92426899dd5c84866c8c92e5"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.883867Z",
+        "epoch": 1,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 3,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "6279a98e317fe26f637e08e7a086e3673698c15c92426899dd5c84866c8c92e5",
+        "event_hash": "ba77757651ce4394f0c8e7afb14ada1786c82282e068d05e202a4b885ba9cea2"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.884588Z",
+        "epoch": 1,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 4,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "ba77757651ce4394f0c8e7afb14ada1786c82282e068d05e202a4b885ba9cea2",
+        "event_hash": "d2e7110f6d1a104bf8b49a58a23c3d2bb747e07d0f0926e7c790ae81463346b3"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:14.884826Z",
+        "epoch": 1,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 5,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "d2e7110f6d1a104bf8b49a58a23c3d2bb747e07d0f0926e7c790ae81463346b3",
+        "event_hash": "6e61ffb15a6250c57f42454bf1d758d1ba6dc2274926581ef2d90479be199f6b"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:16.956552Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes_evaluated": 10
+        },
+        "previous_event_hash": "6e61ffb15a6250c57f42454bf1d758d1ba6dc2274926581ef2d90479be199f6b",
+        "event_hash": "c6242835940c464fbc454d24ec38ea5c5753947f720bcf3360e245aa05d7cfc0"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:16.957185Z",
+        "epoch": 2,
+        "event_type": "GENERATION_START",
+        "details": {
+            "cronos_population_size": 10
+        },
+        "previous_event_hash": "c6242835940c464fbc454d24ec38ea5c5753947f720bcf3360e245aa05d7cfc0",
+        "event_hash": "f8c604c9883a6b165fe4c803796244fe937850fedc91ef2d2ca5f6fec2fa47a8"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:17.280424Z",
+        "epoch": 2,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 7,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "f8c604c9883a6b165fe4c803796244fe937850fedc91ef2d2ca5f6fec2fa47a8",
+        "event_hash": "c7d8131d0dd1cae10b31493a94ed060c8e7eaad77db8d17a9380df4b9f74e61f"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:17.313961Z",
+        "epoch": 2,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 9,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "c7d8131d0dd1cae10b31493a94ed060c8e7eaad77db8d17a9380df4b9f74e61f",
+        "event_hash": "127e70b572133eb9dbbc81f68c16e59ea8ef5e9d2790777c4fed96cd6a5ce754"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:17.314724Z",
+        "epoch": 2,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 0,
+            "action_taken": "SYSTEM_2_MUTATION"
+        },
+        "previous_event_hash": "127e70b572133eb9dbbc81f68c16e59ea8ef5e9d2790777c4fed96cd6a5ce754",
+        "event_hash": "3edca502b6f4a56de02aae96e66bf140fce5634ab75fd58dbb6feb45b3029abb"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:17.314845Z",
+        "epoch": 2,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 1,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "3edca502b6f4a56de02aae96e66bf140fce5634ab75fd58dbb6feb45b3029abb",
+        "event_hash": "4c8ba2744838c166b516a59142753a234f05fff856930779c7801448f9187d90"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:17.314951Z",
+        "epoch": 2,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 2,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "4c8ba2744838c166b516a59142753a234f05fff856930779c7801448f9187d90",
+        "event_hash": "89286502228d95414837f4f0ea145a51b58623748bdc25d50a1b0d38b1462ca6"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:17.315052Z",
+        "epoch": 2,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 3,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "89286502228d95414837f4f0ea145a51b58623748bdc25d50a1b0d38b1462ca6",
+        "event_hash": "a2cffa1997125f458dee0c641ca5537827f15d328cf471939963636b590b5cc7"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:17.315150Z",
+        "epoch": 2,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 4,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "a2cffa1997125f458dee0c641ca5537827f15d328cf471939963636b590b5cc7",
+        "event_hash": "31a6c8999c11e05099a19f87fe17047b6883deb2ea063b7f02fcaeab8ee408d0"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:17.315314Z",
+        "epoch": 2,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 5,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "31a6c8999c11e05099a19f87fe17047b6883deb2ea063b7f02fcaeab8ee408d0",
+        "event_hash": "47f15199390de0cfe7e346585f6c769a553688a1ef4f3af46676b5e502d167fe"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.447459Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes_evaluated": 10
+        },
+        "previous_event_hash": "47f15199390de0cfe7e346585f6c769a553688a1ef4f3af46676b5e502d167fe",
+        "event_hash": "c036f5669fe485a10b630daec3cdcd47e3946e4ac5747be47c9f82b5e2bc39e7"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.448622Z",
+        "epoch": 3,
+        "event_type": "GENERATION_START",
+        "details": {
+            "cronos_population_size": 10
+        },
+        "previous_event_hash": "c036f5669fe485a10b630daec3cdcd47e3946e4ac5747be47c9f82b5e2bc39e7",
+        "event_hash": "23e17f6a2c0262ca3460a211c980ba7e232f5d0f75ff35979e1e0ab01d8e692f"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.656473Z",
+        "epoch": 3,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 6,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "23e17f6a2c0262ca3460a211c980ba7e232f5d0f75ff35979e1e0ab01d8e692f",
+        "event_hash": "9238292b730b9bfe7013b84044a3815d2c444b5db50e315ac332b485a6cc02b1"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.686954Z",
+        "epoch": 3,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 7,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "9238292b730b9bfe7013b84044a3815d2c444b5db50e315ac332b485a6cc02b1",
+        "event_hash": "95c4a0db2cc4398bdc2741d019a51bcabad7a2da01b0422326d172a4c93c7c3f"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.733033Z",
+        "epoch": 3,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 9,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "95c4a0db2cc4398bdc2741d019a51bcabad7a2da01b0422326d172a4c93c7c3f",
+        "event_hash": "eb3a90874a1f0f12ea90c3b4d601968d741098045d77321a837a8a9102d89973"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.735272Z",
+        "epoch": 3,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 0,
+            "action_taken": "SYSTEM_2_MUTATION"
+        },
+        "previous_event_hash": "eb3a90874a1f0f12ea90c3b4d601968d741098045d77321a837a8a9102d89973",
+        "event_hash": "faa67b2b3d55a115e3f187664a5e739d74378ca122a426d27147afa6ebdbb7c2"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.735628Z",
+        "epoch": 3,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 1,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "faa67b2b3d55a115e3f187664a5e739d74378ca122a426d27147afa6ebdbb7c2",
+        "event_hash": "4b8e9dc0dfdfdf6c4c7cfe920a8583666c534dfec1133a55cf0ed2b34bafbb31"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.736001Z",
+        "epoch": 3,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 2,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "4b8e9dc0dfdfdf6c4c7cfe920a8583666c534dfec1133a55cf0ed2b34bafbb31",
+        "event_hash": "7c69e2feafa4dd9d2367b27f790a548b2c88542fdd01a7f01ead22cf5f799840"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.736287Z",
+        "epoch": 3,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 3,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "7c69e2feafa4dd9d2367b27f790a548b2c88542fdd01a7f01ead22cf5f799840",
+        "event_hash": "956bf2c6c98b592ca55f163c052f7d64a62fb62a216c036190265fcfc90e451e"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.736543Z",
+        "epoch": 3,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 4,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "956bf2c6c98b592ca55f163c052f7d64a62fb62a216c036190265fcfc90e451e",
+        "event_hash": "3c97e8b12c1d6de74c1ac8e51246691e6a0ab3c045b386bfac1e15868b50bd2f"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:19.736855Z",
+        "epoch": 3,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 5,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "3c97e8b12c1d6de74c1ac8e51246691e6a0ab3c045b386bfac1e15868b50bd2f",
+        "event_hash": "b009ba7f008dc4f262e39bbfbc468738dbff9cba3bb7c8c3e1150c09710d2de2"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:21.935334Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes_evaluated": 10
+        },
+        "previous_event_hash": "b009ba7f008dc4f262e39bbfbc468738dbff9cba3bb7c8c3e1150c09710d2de2",
+        "event_hash": "59d673d76a3b0e6305dec05920d35cadfc6c681cd10387ed28e4fafcc9c81230"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:21.935838Z",
+        "epoch": 4,
+        "event_type": "GENERATION_START",
+        "details": {
+            "cronos_population_size": 10
+        },
+        "previous_event_hash": "59d673d76a3b0e6305dec05920d35cadfc6c681cd10387ed28e4fafcc9c81230",
+        "event_hash": "2cba9e7a3b0b7c7541d80268f8407941192176e581406d7e63b67623fdb19df9"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:22.088864Z",
+        "epoch": 4,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 8,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "2cba9e7a3b0b7c7541d80268f8407941192176e581406d7e63b67623fdb19df9",
+        "event_hash": "27f5033c78de6ea5686434507e16214ad0417aa83b4455568a4a867ce76e1b6d"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:22.108213Z",
+        "epoch": 4,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 9,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "27f5033c78de6ea5686434507e16214ad0417aa83b4455568a4a867ce76e1b6d",
+        "event_hash": "b666cbd50b408fe4024f7393dd73fb35c9360504e7cb82b8f07b2ac007970b61"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:22.109235Z",
+        "epoch": 4,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 0,
+            "action_taken": "SYSTEM_2_MUTATION"
+        },
+        "previous_event_hash": "b666cbd50b408fe4024f7393dd73fb35c9360504e7cb82b8f07b2ac007970b61",
+        "event_hash": "fc9c07720eb135bdcc2725371fd49ce20c8e990027e24b6044e6d0d51219e939"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:22.110309Z",
+        "epoch": 4,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 1,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "fc9c07720eb135bdcc2725371fd49ce20c8e990027e24b6044e6d0d51219e939",
+        "event_hash": "fe9eeec1320930c6396f2d580774f7d1d35d2f80734fbd61bdc1b65a5c9d1d80"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:22.111527Z",
+        "epoch": 4,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 2,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "fe9eeec1320930c6396f2d580774f7d1d35d2f80734fbd61bdc1b65a5c9d1d80",
+        "event_hash": "70142f70f8b82cc01090b6fc458d8da4c906a1fc28face69971dcd30999acbad"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:22.112381Z",
+        "epoch": 4,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 3,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "70142f70f8b82cc01090b6fc458d8da4c906a1fc28face69971dcd30999acbad",
+        "event_hash": "35dab6b6a844e2fecf9f09a64b804330976b98dcda7253e40f73c873b4526455"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:22.112833Z",
+        "epoch": 4,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 4,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "35dab6b6a844e2fecf9f09a64b804330976b98dcda7253e40f73c873b4526455",
+        "event_hash": "1bf0d660b6ad7a556caceeb70683a5ada7b5d86a944adb5f6d761df0e3f2a3d6"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:22.113030Z",
+        "epoch": 4,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 5,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "1bf0d660b6ad7a556caceeb70683a5ada7b5d86a944adb5f6d761df0e3f2a3d6",
+        "event_hash": "3565c323fc27c47da8d84769231db4d04447e4a1ecb87ae5fa8b7f18528e4696"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.567987Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes_evaluated": 10
+        },
+        "previous_event_hash": "3565c323fc27c47da8d84769231db4d04447e4a1ecb87ae5fa8b7f18528e4696",
+        "event_hash": "8b1bb6ab471f49ff00ec34a27a5519eca2a4d72312d6239e0d6ea86751e99748"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.568822Z",
+        "epoch": 5,
+        "event_type": "GENERATION_START",
+        "details": {
+            "cronos_population_size": 10
+        },
+        "previous_event_hash": "8b1bb6ab471f49ff00ec34a27a5519eca2a4d72312d6239e0d6ea86751e99748",
+        "event_hash": "2d9a5e31d9e4e8079cb6dfe8bf9928898874aae431ca5b008ed7b924867e16ad"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.822513Z",
+        "epoch": 5,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 2,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "2d9a5e31d9e4e8079cb6dfe8bf9928898874aae431ca5b008ed7b924867e16ad",
+        "event_hash": "e9a564ebd615f3257aa76968287e0e9c0b945066d6b9e8fe84988f9762903661"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.845715Z",
+        "epoch": 5,
+        "event_type": "CRONOS_MUTATION",
+        "details": {
+            "genome_id": 5,
+            "mutation_applied": "hardening.mutate_gets_to_fgets"
+        },
+        "previous_event_hash": "e9a564ebd615f3257aa76968287e0e9c0b945066d6b9e8fe84988f9762903661",
+        "event_hash": "07ac56abd2f893ea85ef2bf9fc6bd8d124629ce03abd75b3b5444f8550cfa416"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.846624Z",
+        "epoch": 5,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 0,
+            "action_taken": "SYSTEM_2_MUTATION"
+        },
+        "previous_event_hash": "07ac56abd2f893ea85ef2bf9fc6bd8d124629ce03abd75b3b5444f8550cfa416",
+        "event_hash": "915ef7242cfc826ec93cf2addf9dc9f24ccc4ac552d883108e4c001bf2f58e14"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.847091Z",
+        "epoch": 5,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 1,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "915ef7242cfc826ec93cf2addf9dc9f24ccc4ac552d883108e4c001bf2f58e14",
+        "event_hash": "568b59993b2f3b8541c617fd7f704f41ce854b1d15ebb248c5f5a6909d787cc3"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.847312Z",
+        "epoch": 5,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 2,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "568b59993b2f3b8541c617fd7f704f41ce854b1d15ebb248c5f5a6909d787cc3",
+        "event_hash": "47e7cf9f4a5d683ee61fbce6cd9e67742b6d94b204a755413e70b201b4aa872a"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.847908Z",
+        "epoch": 5,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 3,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "47e7cf9f4a5d683ee61fbce6cd9e67742b6d94b204a755413e70b201b4aa872a",
+        "event_hash": "71175b03f4274d728c0ef4db82a4d32efbb7c2e1dfed0f3877deb94759bb2f44"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.848012Z",
+        "epoch": 5,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 4,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "71175b03f4274d728c0ef4db82a4d32efbb7c2e1dfed0f3877deb94759bb2f44",
+        "event_hash": "feae14239399e92ff7771b4749150b55ab19733a928d50d5cd7034fe7207c33a"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:24.848127Z",
+        "epoch": 5,
+        "event_type": "URANUS_MUTATION",
+        "details": {
+            "genome_id": 5,
+            "action_taken": "SYSTEM_1_MUTATION"
+        },
+        "previous_event_hash": "feae14239399e92ff7771b4749150b55ab19733a928d50d5cd7034fe7207c33a",
+        "event_hash": "3c0073e909648eaebf3bc5f53d2abca964fe33ca483004af43aff33de47b7cfe"
+    },
+    {
+        "timestamp": "2025-09-29T08:24:27.509997Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes_evaluated": 10
+        },
+        "previous_event_hash": "3c0073e909648eaebf3bc5f53d2abca964fe33ca483004af43aff33de47b7cfe",
+        "event_hash": "9d5277947270a712f3c27210e7b3781c449b3876213096b25fc2b5d959565a27"
+    }
+]

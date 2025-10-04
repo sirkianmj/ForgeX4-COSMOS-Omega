@@ -1,0 +1,3324 @@
+[
+    {
+        "timestamp": "2025-09-30T14:08:24.036667Z",
+        "epoch": 0,
+        "event_type": "INITIAL_POPULATION_CREATED",
+        "details": {
+            "num_genomes": 10,
+            "initial_genome": {
+                "max_total_syscalls": 87,
+                "max_cpu_percent": 5.198
+            }
+        },
+        "previous_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "event_hash": "f49455664f8566767f00c0339cb5ddfc43a21c03e457dc98256ca180f4b50042"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:24.038786Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "f49455664f8566767f00c0339cb5ddfc43a21c03e457dc98256ca180f4b50042",
+        "event_hash": "2b5726098c152ddeae111bc34595f3a1dfce4b5578a784d4b8ab4ae867b1eafb"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:24.040176Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "2b5726098c152ddeae111bc34595f3a1dfce4b5578a784d4b8ab4ae867b1eafb",
+        "event_hash": "2359c7c64db2b86481464307d655f7c56590721e080bb9646c535ae81c062fbe"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:24.048030Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 2
+        },
+        "previous_event_hash": "2359c7c64db2b86481464307d655f7c56590721e080bb9646c535ae81c062fbe",
+        "event_hash": "828082d530797ca4887d56c5204aa83c9071cf903b29210551e83b1df49abe35"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:24.051797Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "828082d530797ca4887d56c5204aa83c9071cf903b29210551e83b1df49abe35",
+        "event_hash": "e82f4765f13a7e885343ddb434fe4e77c7de8aae3434663cded6020c59e9e2cf"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:24.062642Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 4
+        },
+        "previous_event_hash": "e82f4765f13a7e885343ddb434fe4e77c7de8aae3434663cded6020c59e9e2cf",
+        "event_hash": "46f29d55b0ba493058803460bc1ce5df199cf007e4055263c2d0322279bd26e3"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:24.064674Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 5
+        },
+        "previous_event_hash": "46f29d55b0ba493058803460bc1ce5df199cf007e4055263c2d0322279bd26e3",
+        "event_hash": "53d5478445f8bf885f6aa46bb28ec7b7424fad46b174616a2b1dc400ac9fd6d7"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.023180Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "53d5478445f8bf885f6aa46bb28ec7b7424fad46b174616a2b1dc400ac9fd6d7",
+        "event_hash": "35c576c6663483269f8ab9c1f3a0ab339e7db6e54f0360427971f68d853204be"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.023296Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "35c576c6663483269f8ab9c1f3a0ab339e7db6e54f0360427971f68d853204be",
+        "event_hash": "9c3d66b3d4f21584907ba87eb318938e6c0fd325e8c3d57f9434d8d4ee6015c0"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.234131Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 5,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "9c3d66b3d4f21584907ba87eb318938e6c0fd325e8c3d57f9434d8d4ee6015c0",
+        "event_hash": "ba74d4fe4827bf2f5ba480c1f11f52ee05bcc3050faa091912812ef170c3b104"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.234240Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 7
+        },
+        "previous_event_hash": "ba74d4fe4827bf2f5ba480c1f11f52ee05bcc3050faa091912812ef170c3b104",
+        "event_hash": "a1d15e8365083134edb5c646988aa669b82ba51608c9feb722b0cf87c3947b26"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.244354Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "a1d15e8365083134edb5c646988aa669b82ba51608c9feb722b0cf87c3947b26",
+        "event_hash": "350cfd9b56c18332f223bd74ed065a6de76da3ddb575121459289fb25679bc3c"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.244560Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 8
+        },
+        "previous_event_hash": "350cfd9b56c18332f223bd74ed065a6de76da3ddb575121459289fb25679bc3c",
+        "event_hash": "f0bd3e8e76db6225c169abacd935e18c0033e5b2edb878c0ea127ce07b5b95d0"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.288752Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 2,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "f0bd3e8e76db6225c169abacd935e18c0033e5b2edb878c0ea127ce07b5b95d0",
+        "event_hash": "25d897e1d036ed1f7430e36c25576e457356562bf1b5437b01bf5ccb644c8e09"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.291204Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 9
+        },
+        "previous_event_hash": "25d897e1d036ed1f7430e36c25576e457356562bf1b5437b01bf5ccb644c8e09",
+        "event_hash": "720e7f7b40b9c1bff66989844e09b469db29dae98b09215ee8e4ebdf446725f3"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.321600Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 4,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "720e7f7b40b9c1bff66989844e09b469db29dae98b09215ee8e4ebdf446725f3",
+        "event_hash": "00c6834d1e3c24b33273822cfd826841481f72f0dc73733b470aee82bf45798d"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:36.323124Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "00c6834d1e3c24b33273822cfd826841481f72f0dc73733b470aee82bf45798d",
+        "event_hash": "ee53d05fcbe8b2b278382f2596d2b10cea7fe12ae304bbf2e9a1fdc77743dd1c"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:46.673084Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "ee53d05fcbe8b2b278382f2596d2b10cea7fe12ae304bbf2e9a1fdc77743dd1c",
+        "event_hash": "b3cbea65e33f43d8cdb85795ce2f621bbfe80bcafdfa330cf774eae0b8dd2c38"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.285411Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 7,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "b3cbea65e33f43d8cdb85795ce2f621bbfe80bcafdfa330cf774eae0b8dd2c38",
+        "event_hash": "b3c8fe48e5ab26c23ad5497b6ee55b17e6e12ee6c2499ac713b8775f9e5284cd"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.341385Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 9,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "b3c8fe48e5ab26c23ad5497b6ee55b17e6e12ee6c2499ac713b8775f9e5284cd",
+        "event_hash": "2539bb0c033dedaef4ee89c6580c598b3cf422c43ba603a0a88f327a9cf12f75"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.354290Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 8,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "2539bb0c033dedaef4ee89c6580c598b3cf422c43ba603a0a88f327a9cf12f75",
+        "event_hash": "d63abb8d3fa5a5c6b920ff79305a46568114655dea53c3efc9a4bcd1e1835d90"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.356409Z",
+        "epoch": 0,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "d63abb8d3fa5a5c6b920ff79305a46568114655dea53c3efc9a4bcd1e1835d90",
+        "event_hash": "9f4c8aa60a53dc72542cd2dd6eea3f542634d681752616400ae9ac43e59cad57"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.357253Z",
+        "epoch": 1,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 78
+        },
+        "previous_event_hash": "9f4c8aa60a53dc72542cd2dd6eea3f542634d681752616400ae9ac43e59cad57",
+        "event_hash": "67fd5a629e0244899da3f4849a2e854738ed7e4cb4412faa3857639bd39703b1"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.357310Z",
+        "epoch": 1,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 74
+        },
+        "previous_event_hash": "67fd5a629e0244899da3f4849a2e854738ed7e4cb4412faa3857639bd39703b1",
+        "event_hash": "af398c2ed722115e0637631fcbd06290a6bc7cb327f7923c58328e221280a607"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.357399Z",
+        "epoch": 1,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 2.57
+        },
+        "previous_event_hash": "af398c2ed722115e0637631fcbd06290a6bc7cb327f7923c58328e221280a607",
+        "event_hash": "f2d2d8c5b2ca678d3b02f1eaec89108a3285a45df825a472d32c77233c42a83d"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.357444Z",
+        "epoch": 1,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 78
+        },
+        "previous_event_hash": "f2d2d8c5b2ca678d3b02f1eaec89108a3285a45df825a472d32c77233c42a83d",
+        "event_hash": "25f6119cb8a75520c8868c66b282988f7cb04dbc01c35535c49adcb26eb826af"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.357474Z",
+        "epoch": 1,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 79,
+            "new_value": 93
+        },
+        "previous_event_hash": "25f6119cb8a75520c8868c66b282988f7cb04dbc01c35535c49adcb26eb826af",
+        "event_hash": "923a7cbf0d1cc929c2522d1a2d6c822ac2a28aa9c3e6de8005dab2eaac53fc93"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.357524Z",
+        "epoch": 1,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 1.83
+        },
+        "previous_event_hash": "923a7cbf0d1cc929c2522d1a2d6c822ac2a28aa9c3e6de8005dab2eaac53fc93",
+        "event_hash": "65967feb51a6b8e32bc0dcb1492b940ed6db594a9a3247b35c8ab9c4456dbb71"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.357559Z",
+        "epoch": 1,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 95
+        },
+        "previous_event_hash": "65967feb51a6b8e32bc0dcb1492b940ed6db594a9a3247b35c8ab9c4456dbb71",
+        "event_hash": "f431efa25b98f81d6e68b32709bae517896873070dee3c539c4c0562f44c96a3"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.358160Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "f431efa25b98f81d6e68b32709bae517896873070dee3c539c4c0562f44c96a3",
+        "event_hash": "45565a085570fb39295670389e1a5be45d9736d95a88bdb7f63013fe373e5e80"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.358606Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "45565a085570fb39295670389e1a5be45d9736d95a88bdb7f63013fe373e5e80",
+        "event_hash": "8294a0b467ed26c2a9791b4c2687acca033f83acd023c7af44d0d478614f7171"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.362627Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "8294a0b467ed26c2a9791b4c2687acca033f83acd023c7af44d0d478614f7171",
+        "event_hash": "432536c294b2756cc1f601a89e6035aae504090cd8838d26275826cc4514f8f2"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.370900Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "432536c294b2756cc1f601a89e6035aae504090cd8838d26275826cc4514f8f2",
+        "event_hash": "e410c59fe267d74d3e3e2942721f5e02907ce5d52570d1b166f5b7669db17d7b"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.373983Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "e410c59fe267d74d3e3e2942721f5e02907ce5d52570d1b166f5b7669db17d7b",
+        "event_hash": "a4db60141e67431743ca1a0c23c4c09c4da384523844816113216220c7b66829"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:47.376084Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "a4db60141e67431743ca1a0c23c4c09c4da384523844816113216220c7b66829",
+        "event_hash": "405747b0f8c466cd656ade123e3819d93281c0f0d037bcd382bb188aadff24f3"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:58.767317Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "405747b0f8c466cd656ade123e3819d93281c0f0d037bcd382bb188aadff24f3",
+        "event_hash": "141a6a3a38f5cfa6dd390a323b13843284a09d713eccf1f35ab60fee4535655e"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:58.767433Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 8
+        },
+        "previous_event_hash": "141a6a3a38f5cfa6dd390a323b13843284a09d713eccf1f35ab60fee4535655e",
+        "event_hash": "df433d5d17c0153815651dc7df32344d3f19b214d91219a13681633160e84021"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:58.968598Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "df433d5d17c0153815651dc7df32344d3f19b214d91219a13681633160e84021",
+        "event_hash": "aa24139677c69b568db155087d53fd68741e507c5fccc2e0a15e0e002bea63f8"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:58.968684Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 2
+        },
+        "previous_event_hash": "aa24139677c69b568db155087d53fd68741e507c5fccc2e0a15e0e002bea63f8",
+        "event_hash": "88b63e373724f4a6d0a3d8e276859b198b39092e076f2f3d1781c48ce13f532f"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:59.122938Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "88b63e373724f4a6d0a3d8e276859b198b39092e076f2f3d1781c48ce13f532f",
+        "event_hash": "af1dfa13cde72246f599de87d7e94f5b23b6dbdf01a3ff66bd5ecb0beebcb1a9"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:59.123041Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "af1dfa13cde72246f599de87d7e94f5b23b6dbdf01a3ff66bd5ecb0beebcb1a9",
+        "event_hash": "2a9a74c6fdb9728b6c07561cbdadd4b7fe9cd2211dd44ff88531fd718da0f282"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:59.226347Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "2a9a74c6fdb9728b6c07561cbdadd4b7fe9cd2211dd44ff88531fd718da0f282",
+        "event_hash": "9b187d4deaec932d9bd59b6cf456e2e8218e219498fd6d81c5dfa2ec9ea6a83f"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:59.226464Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "9b187d4deaec932d9bd59b6cf456e2e8218e219498fd6d81c5dfa2ec9ea6a83f",
+        "event_hash": "5f5623479cde7d5b1f042c1d7137deaceff1e42f25f95b37af20e5018f492047"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:59.228180Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "5f5623479cde7d5b1f042c1d7137deaceff1e42f25f95b37af20e5018f492047",
+        "event_hash": "e6f9995b1ae5ad006c88e7a36bf05f94da689678cff794b247f80811cbc24326"
+    },
+    {
+        "timestamp": "2025-09-30T14:08:59.255093Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "e6f9995b1ae5ad006c88e7a36bf05f94da689678cff794b247f80811cbc24326",
+        "event_hash": "fa47dc17101f3e1ac04bbb4acc5e5922c401c5168293c62bb114cef90120e56f"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:09.425815Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 8,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "fa47dc17101f3e1ac04bbb4acc5e5922c401c5168293c62bb114cef90120e56f",
+        "event_hash": "7a6080cdcc1361e946e7133b413cd88636743df0384f8b2865323ecfc412b7b1"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:09.627066Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 2,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "7a6080cdcc1361e946e7133b413cd88636743df0384f8b2865323ecfc412b7b1",
+        "event_hash": "95d92824dee7d123f5980a08533f1765e5b5c17bacfdd3eb919f3c3cdc660c5c"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:09.986168Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "95d92824dee7d123f5980a08533f1765e5b5c17bacfdd3eb919f3c3cdc660c5c",
+        "event_hash": "3d57e72c21bfb0284fa7ce0e5f246422366215b19fa6110dfad7fbaa2be0b2ed"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.026245Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "3d57e72c21bfb0284fa7ce0e5f246422366215b19fa6110dfad7fbaa2be0b2ed",
+        "event_hash": "e8836662dc5f6e08a25e30fa10e6e0bc8b3fdb401276ce30e521df5ef68000c7"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.028849Z",
+        "epoch": 1,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "e8836662dc5f6e08a25e30fa10e6e0bc8b3fdb401276ce30e521df5ef68000c7",
+        "event_hash": "8ca1f6b45e7bb7fb11a9787e6730fe8b2cc6f23707cd7caf1fc96c3ae7531c44"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.029648Z",
+        "epoch": 2,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 3.47,
+            "new_value": 3.01
+        },
+        "previous_event_hash": "8ca1f6b45e7bb7fb11a9787e6730fe8b2cc6f23707cd7caf1fc96c3ae7531c44",
+        "event_hash": "c9b7e3a610eb38469bd476f2598713cccba53cbae496fe3fe72f8dc112be6ce5"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.029709Z",
+        "epoch": 2,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 74,
+            "new_value": 68
+        },
+        "previous_event_hash": "c9b7e3a610eb38469bd476f2598713cccba53cbae496fe3fe72f8dc112be6ce5",
+        "event_hash": "d18afb8000c47934d51632c88405ba566de2e64fd125ea0761ba863239beffb9"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.029744Z",
+        "epoch": 2,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 2.57,
+            "new_value": 3.01
+        },
+        "previous_event_hash": "d18afb8000c47934d51632c88405ba566de2e64fd125ea0761ba863239beffb9",
+        "event_hash": "d1c8073f8d6e3cc35ae20682ee35fca462f4342ba55f3c3f18c5831eb009cf7e"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.029771Z",
+        "epoch": 2,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 78,
+            "new_value": 62
+        },
+        "previous_event_hash": "d1c8073f8d6e3cc35ae20682ee35fca462f4342ba55f3c3f18c5831eb009cf7e",
+        "event_hash": "050d4b2417ba9018b7b4ddfd57e0cd7ed89e776f22fb81be67a3fc586a0ab38c"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.029799Z",
+        "epoch": 2,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 2.66
+        },
+        "previous_event_hash": "050d4b2417ba9018b7b4ddfd57e0cd7ed89e776f22fb81be67a3fc586a0ab38c",
+        "event_hash": "4a7eac06a4036c15c0c96f7c7fa9f0e386951757c36c4fd076b7935054657c00"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.029830Z",
+        "epoch": 2,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 1.83,
+            "new_value": 1.0
+        },
+        "previous_event_hash": "4a7eac06a4036c15c0c96f7c7fa9f0e386951757c36c4fd076b7935054657c00",
+        "event_hash": "64f7dcdeff2aa74b7c6e1059796e38f23a350a44e068178f0a069fef3330c4ad"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.029864Z",
+        "epoch": 2,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 7.63
+        },
+        "previous_event_hash": "64f7dcdeff2aa74b7c6e1059796e38f23a350a44e068178f0a069fef3330c4ad",
+        "event_hash": "c788046a17d45f18b856521e747593016cb1f57cd996b4a28ea63aa23a6be986"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.032207Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "c788046a17d45f18b856521e747593016cb1f57cd996b4a28ea63aa23a6be986",
+        "event_hash": "40389b70c9236891101f719c957be7c0306301c49c89967588e7062e4a8fdb00"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.032828Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "40389b70c9236891101f719c957be7c0306301c49c89967588e7062e4a8fdb00",
+        "event_hash": "f421851b12a91a219a7aec34c0193b5d4a0015a55fc15cb8b6820bc91fb940a0"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.033947Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "f421851b12a91a219a7aec34c0193b5d4a0015a55fc15cb8b6820bc91fb940a0",
+        "event_hash": "1c12f1fa78b08ce72c9d46c452c71ddd354689ba8e13f7456077ffa0ca1cccf2"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.036543Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "1c12f1fa78b08ce72c9d46c452c71ddd354689ba8e13f7456077ffa0ca1cccf2",
+        "event_hash": "ac0fcae651ed8bc747c7ba9f8af071cef6d35322c37ebba7b6219941d15c0238"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.037995Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "ac0fcae651ed8bc747c7ba9f8af071cef6d35322c37ebba7b6219941d15c0238",
+        "event_hash": "7d5adec6f3f8d9191016d57ff23bdea8d87d25071ef1417a0beb19b140d9c483"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:10.044181Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "7d5adec6f3f8d9191016d57ff23bdea8d87d25071ef1417a0beb19b140d9c483",
+        "event_hash": "8b4bd74f3b935f654423619025ca3fca50ce2b1093e217ecaa25d31b082f9c66"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:21.799138Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "8b4bd74f3b935f654423619025ca3fca50ce2b1093e217ecaa25d31b082f9c66",
+        "event_hash": "80b84e74e2a0669e2e499d57d031709417abbcacdeb19b1a197139b2d7d97bc2"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:21.799250Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "80b84e74e2a0669e2e499d57d031709417abbcacdeb19b1a197139b2d7d97bc2",
+        "event_hash": "9c3c45ac9a8aa7d5f8369335202b07e0e991bab7de398431c109bb99dc5f4673"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:21.889271Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "9c3c45ac9a8aa7d5f8369335202b07e0e991bab7de398431c109bb99dc5f4673",
+        "event_hash": "88b427418644ea597627ca857e8858d14a428cf6f45b022128ea43d28dd1cb8c"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:21.889514Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "88b427418644ea597627ca857e8858d14a428cf6f45b022128ea43d28dd1cb8c",
+        "event_hash": "4c83167bbdab0dc0d5ccd69af9248050c7cf4d580717eeb0fc95c2791196abc6"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:21.956803Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "4c83167bbdab0dc0d5ccd69af9248050c7cf4d580717eeb0fc95c2791196abc6",
+        "event_hash": "0a99a7b0594ba28ab0704dd83a00fa711f156b2f2b0f4b03fb109d7b6abaa0e2"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:21.956915Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "0a99a7b0594ba28ab0704dd83a00fa711f156b2f2b0f4b03fb109d7b6abaa0e2",
+        "event_hash": "74dc3280e7eaef11c6a31c6f6ba7254e594341a9522b0419b2516ae1df9bde86"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:21.976668Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "74dc3280e7eaef11c6a31c6f6ba7254e594341a9522b0419b2516ae1df9bde86",
+        "event_hash": "0e33e2ace497a4e1e509108b7321ed2fd172aa91cf39e60556f7db018857c961"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:21.976921Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "0e33e2ace497a4e1e509108b7321ed2fd172aa91cf39e60556f7db018857c961",
+        "event_hash": "efafa8400ddcf1996ba062284ade82c9c7ac0986f86fde05663ba9798cfeae51"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:22.013108Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "efafa8400ddcf1996ba062284ade82c9c7ac0986f86fde05663ba9798cfeae51",
+        "event_hash": "d11c6255589c73dc08f2912d2aa3080b8e9afe76c71fc2a469f527a6b95969f1"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:22.017491Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "d11c6255589c73dc08f2912d2aa3080b8e9afe76c71fc2a469f527a6b95969f1",
+        "event_hash": "5d9f7b72470fe5ae0ea486c42b32d6788e80feaeeeee8ee1bc8f6b0113608588"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:32.732251Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "5d9f7b72470fe5ae0ea486c42b32d6788e80feaeeeee8ee1bc8f6b0113608588",
+        "event_hash": "17b6d1f1426b3a20678440123f7d841dd8646eb31513e47be0800064ac0e0e1c"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.017369Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "17b6d1f1426b3a20678440123f7d841dd8646eb31513e47be0800064ac0e0e1c",
+        "event_hash": "906456ac3ed9576c6e9684290ffca38cc74f2f9e73ef7357a8ed078617154dcd"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.173234Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "906456ac3ed9576c6e9684290ffca38cc74f2f9e73ef7357a8ed078617154dcd",
+        "event_hash": "76941c7593e0ed42e33e7dc2c8d7549a814275fa07fe194e8f83c381ceed9d66"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.220719Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "76941c7593e0ed42e33e7dc2c8d7549a814275fa07fe194e8f83c381ceed9d66",
+        "event_hash": "14cc6d34016074f366f5cbb6bcf70bd483839c398d940d42028042425294e94a"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.223838Z",
+        "epoch": 2,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "14cc6d34016074f366f5cbb6bcf70bd483839c398d940d42028042425294e94a",
+        "event_hash": "9b4e7944a9a55c9576c36d04e47762d308bdf61d8c8bc2dcb65c92fc11d83baa"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.224877Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 68,
+            "new_value": 80
+        },
+        "previous_event_hash": "9b4e7944a9a55c9576c36d04e47762d308bdf61d8c8bc2dcb65c92fc11d83baa",
+        "event_hash": "a83211dff3153b56979f33e3d397a232875f3dd939cdf0dc80afebce269efa38"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.224925Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 1.0,
+            "new_value": 1.0
+        },
+        "previous_event_hash": "a83211dff3153b56979f33e3d397a232875f3dd939cdf0dc80afebce269efa38",
+        "event_hash": "0df67964aa0984894e50f59942a05b2788d4f9a793e5d0a564f271f37caa4a94"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.224958Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 68,
+            "new_value": 48
+        },
+        "previous_event_hash": "0df67964aa0984894e50f59942a05b2788d4f9a793e5d0a564f271f37caa4a94",
+        "event_hash": "f35a45ab12ecdb0b6a88b70ad44b560297aa08c362eb20a077cdf8349c96b068"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.224987Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 73
+        },
+        "previous_event_hash": "f35a45ab12ecdb0b6a88b70ad44b560297aa08c362eb20a077cdf8349c96b068",
+        "event_hash": "f97260db642071276424a58071157ac3a64b663006d45b51b7ed422a8eb33817"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.225054Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 3.01,
+            "new_value": 4.6
+        },
+        "previous_event_hash": "f97260db642071276424a58071157ac3a64b663006d45b51b7ed422a8eb33817",
+        "event_hash": "a087bcbc7b4e520639d55bd1c14eba31562c6165517fd4fdb2933a53e77fa35a"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.226263Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 78,
+            "new_value": 63
+        },
+        "previous_event_hash": "a087bcbc7b4e520639d55bd1c14eba31562c6165517fd4fdb2933a53e77fa35a",
+        "event_hash": "c724f837bcb81075044e4b655143c84df7ef6a308d95fa6c520a2109b3c54534"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.226311Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 7.63,
+            "new_value": 11.94
+        },
+        "previous_event_hash": "c724f837bcb81075044e4b655143c84df7ef6a308d95fa6c520a2109b3c54534",
+        "event_hash": "89e90edc14b6576f594067e83a0bfed5c3bf8d923f13eeeec4c41b9964969ee1"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.226342Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 98
+        },
+        "previous_event_hash": "89e90edc14b6576f594067e83a0bfed5c3bf8d923f13eeeec4c41b9964969ee1",
+        "event_hash": "7d4742f876f52388573abee5aa810d47d7b28c715183d7f59e1d854babb1751f"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.226370Z",
+        "epoch": 3,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 8.46
+        },
+        "previous_event_hash": "7d4742f876f52388573abee5aa810d47d7b28c715183d7f59e1d854babb1751f",
+        "event_hash": "08b964fc0e2da23f28bac58664e44271b7cec9b01682921484f00be40f6bc73c"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.227598Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "08b964fc0e2da23f28bac58664e44271b7cec9b01682921484f00be40f6bc73c",
+        "event_hash": "4ac0644a7553e63e75e1d9ab2740afdc75dd4cde980c1a74dabcd231127a0183"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.229407Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "4ac0644a7553e63e75e1d9ab2740afdc75dd4cde980c1a74dabcd231127a0183",
+        "event_hash": "ca46d6d7cb0bc62a6411bc09fa449dea60e7cb609d060c21f3d459d247e1b732"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.230268Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "ca46d6d7cb0bc62a6411bc09fa449dea60e7cb609d060c21f3d459d247e1b732",
+        "event_hash": "eac8e5989d594982db9c276532fb215ccfcd7364d1355b154e75869be00bf11e"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.231265Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "eac8e5989d594982db9c276532fb215ccfcd7364d1355b154e75869be00bf11e",
+        "event_hash": "4ee0a29a0c9cd79b508d2368d7f89e06fedae4d395462093768c318cd9c528e4"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.236249Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "4ee0a29a0c9cd79b508d2368d7f89e06fedae4d395462093768c318cd9c528e4",
+        "event_hash": "c9cf73ffe2e3ef62bb70188a494158d5dd8a4915063a42ef96fb65ee3978b5ec"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:33.240242Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "c9cf73ffe2e3ef62bb70188a494158d5dd8a4915063a42ef96fb65ee3978b5ec",
+        "event_hash": "ce6d20313e9ee87f964f1678cf3bee6cab942e6beddb488db280a09a8f8d431f"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.114014Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "ce6d20313e9ee87f964f1678cf3bee6cab942e6beddb488db280a09a8f8d431f",
+        "event_hash": "18cead2055b32d7f27963e97aed5777704684d19f999fcf79a52e546f363702b"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.114134Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "18cead2055b32d7f27963e97aed5777704684d19f999fcf79a52e546f363702b",
+        "event_hash": "bad4dc10aef99f692fc3523801b336c8d5a7772d8ea1a3e955c0512614b37a63"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.138064Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "bad4dc10aef99f692fc3523801b336c8d5a7772d8ea1a3e955c0512614b37a63",
+        "event_hash": "57af99d84a9f78073fa29bc43f5d57d55c86177b873d6cc9e3b15ff6cdff8a25"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.138164Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "57af99d84a9f78073fa29bc43f5d57d55c86177b873d6cc9e3b15ff6cdff8a25",
+        "event_hash": "a1f01681e1da5c0e91c3c3148992649071ba3b476ce985846d2d7bd4daf7224d"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.140974Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "a1f01681e1da5c0e91c3c3148992649071ba3b476ce985846d2d7bd4daf7224d",
+        "event_hash": "f6fc07f807e7c3cb109a17f3ce0973ecb30becc3b790ff0cca1b005ba19f3a72"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.141031Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "f6fc07f807e7c3cb109a17f3ce0973ecb30becc3b790ff0cca1b005ba19f3a72",
+        "event_hash": "248c113036dc2bd848375c235cb37d4b48c432b335dfa3e42fc83567ca267ed1"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.153866Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "248c113036dc2bd848375c235cb37d4b48c432b335dfa3e42fc83567ca267ed1",
+        "event_hash": "f5dbe679cc818dcceaf7dc0c50c444cb7d1b2fd7e37cec7633a50c6cca6c4429"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.153951Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "f5dbe679cc818dcceaf7dc0c50c444cb7d1b2fd7e37cec7633a50c6cca6c4429",
+        "event_hash": "d27a8ca5f41d296474df002727e51c1e1571481751c6a1a9abc787a5f966dba8"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.156938Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "d27a8ca5f41d296474df002727e51c1e1571481751c6a1a9abc787a5f966dba8",
+        "event_hash": "527e1a10e096194d905cd149dd5252d411ff1d799dce575e77ae096fd746be87"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:45.198541Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "527e1a10e096194d905cd149dd5252d411ff1d799dce575e77ae096fd746be87",
+        "event_hash": "044cfb0d41c68e6ef08f620b84c729adddba6a520dc25bdc3b9f8d9611ea87e7"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.340240Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "044cfb0d41c68e6ef08f620b84c729adddba6a520dc25bdc3b9f8d9611ea87e7",
+        "event_hash": "9d070d5f03ec7c3ab729a602af2b692b2a250aacd0c507236e0daac47db6a1a2"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.379111Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "9d070d5f03ec7c3ab729a602af2b692b2a250aacd0c507236e0daac47db6a1a2",
+        "event_hash": "f29867516488670ea4242a9597367a20c9a34777053e5658ea66acbeccd4cfde"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.431592Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "f29867516488670ea4242a9597367a20c9a34777053e5658ea66acbeccd4cfde",
+        "event_hash": "862fe95701990f495076df4748aa32bce337ce809b526d60aae301f810254ebb"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.435669Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "862fe95701990f495076df4748aa32bce337ce809b526d60aae301f810254ebb",
+        "event_hash": "26f05d43f2ec6a66c09b19b0b72f15df495df730c510d4c6da2940f28f2eb556"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.437129Z",
+        "epoch": 3,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "26f05d43f2ec6a66c09b19b0b72f15df495df730c510d4c6da2940f28f2eb556",
+        "event_hash": "a3fbc8b96a60764a4f9b51da5c99cbd7bf07f112f847a82993116b4c4f7385a2"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.437982Z",
+        "epoch": 4,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 80,
+            "new_value": 73
+        },
+        "previous_event_hash": "a3fbc8b96a60764a4f9b51da5c99cbd7bf07f112f847a82993116b4c4f7385a2",
+        "event_hash": "3106165ccd586e5aaa5df3ceea93cba1166f4e5286769bd09404980519a4c1fa"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.438080Z",
+        "epoch": 4,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 4.82
+        },
+        "previous_event_hash": "3106165ccd586e5aaa5df3ceea93cba1166f4e5286769bd09404980519a4c1fa",
+        "event_hash": "fc6d1247013de93815823173f00addebe284cd767169573ca1ee214bf2fa5aaf"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.438119Z",
+        "epoch": 4,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 78
+        },
+        "previous_event_hash": "fc6d1247013de93815823173f00addebe284cd767169573ca1ee214bf2fa5aaf",
+        "event_hash": "3159fe0971d253a0094a26e23754a5a7cf514872fe85ca4ad66919af857ebdf0"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.438174Z",
+        "epoch": 4,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 4.6,
+            "new_value": 7.91
+        },
+        "previous_event_hash": "3159fe0971d253a0094a26e23754a5a7cf514872fe85ca4ad66919af857ebdf0",
+        "event_hash": "f7445f4451d135e4332718863b7019ab6c67094c823365b807bb49edf281d827"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.438246Z",
+        "epoch": 4,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 4.59
+        },
+        "previous_event_hash": "f7445f4451d135e4332718863b7019ab6c67094c823365b807bb49edf281d827",
+        "event_hash": "dc7815820c21211fb9f12ff9cad280886baea697a82343c013bce15c666900d1"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.441491Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "dc7815820c21211fb9f12ff9cad280886baea697a82343c013bce15c666900d1",
+        "event_hash": "05b1510a69b185dd1c1f553d4b5429b753d6f34dbfff1a4dbb6a49e9d0d4f89d"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.441851Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "05b1510a69b185dd1c1f553d4b5429b753d6f34dbfff1a4dbb6a49e9d0d4f89d",
+        "event_hash": "2a95a61a20e67a7f73d6bb15477ada5a7e534d22be1d73e6f966a5e8afcaf049"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.442344Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "2a95a61a20e67a7f73d6bb15477ada5a7e534d22be1d73e6f966a5e8afcaf049",
+        "event_hash": "680b51f9892a0e806e70265ea45f191183d98a02846051b7085db4698c93c75d"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.444723Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "680b51f9892a0e806e70265ea45f191183d98a02846051b7085db4698c93c75d",
+        "event_hash": "f04e21c8f5512135865f987d519c6fc71f9e040db30cbd7702114107f0dd0a1f"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.452269Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "f04e21c8f5512135865f987d519c6fc71f9e040db30cbd7702114107f0dd0a1f",
+        "event_hash": "8330c50f30be6e233633fe62e83da917f22ab7aa9a9c86429e3c35e6195e890c"
+    },
+    {
+        "timestamp": "2025-09-30T14:09:56.454677Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "8330c50f30be6e233633fe62e83da917f22ab7aa9a9c86429e3c35e6195e890c",
+        "event_hash": "00678c47da2953ce7a510baa6e2a9fcc56660c5c1426a7f035cec15650944176"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:07.378341Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "00678c47da2953ce7a510baa6e2a9fcc56660c5c1426a7f035cec15650944176",
+        "event_hash": "fcba53603dd68ae4c4030d753eaf7f3180f66fca00d8a018842104f95ca4c757"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:07.378433Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "fcba53603dd68ae4c4030d753eaf7f3180f66fca00d8a018842104f95ca4c757",
+        "event_hash": "22599a6f5a087cb4324c41bcbeddb1f2fa396ae08d11d5c4c3d7f5428596f5a1"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:07.736995Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "22599a6f5a087cb4324c41bcbeddb1f2fa396ae08d11d5c4c3d7f5428596f5a1",
+        "event_hash": "dbab0781671d79848f400cadda63010c0d5291cbde9cb80bb22c7c9336b0d8a6"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:07.737086Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "dbab0781671d79848f400cadda63010c0d5291cbde9cb80bb22c7c9336b0d8a6",
+        "event_hash": "e94775de09946c2c35ca24eb3c03c02d948a5b39e7c150f66d5569a28ef428d4"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:08.111989Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "e94775de09946c2c35ca24eb3c03c02d948a5b39e7c150f66d5569a28ef428d4",
+        "event_hash": "7f5a94a576d5433eff17343f5b26995390315a561428691310867a1ac61495a1"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:08.112083Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "7f5a94a576d5433eff17343f5b26995390315a561428691310867a1ac61495a1",
+        "event_hash": "243ca4ad72d21c3e495fccbaca0cb9249fee3f1900834bacc608cafcd85ec60e"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:08.140110Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "243ca4ad72d21c3e495fccbaca0cb9249fee3f1900834bacc608cafcd85ec60e",
+        "event_hash": "e05a09b23e75d38ed02cdfbbd8ca35bc92152ef6fbc89b209a61b0913960b540"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:08.140215Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "e05a09b23e75d38ed02cdfbbd8ca35bc92152ef6fbc89b209a61b0913960b540",
+        "event_hash": "9023ae3b6edb3372125bbefc62791f92dea23b726ca6fbf97c5878ed8b2b7211"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:08.165193Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "9023ae3b6edb3372125bbefc62791f92dea23b726ca6fbf97c5878ed8b2b7211",
+        "event_hash": "de820778ca46ec285716627448b5a11e9b9e0d1703f9aa4c7a83fbebbadca2b0"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:08.170771Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "de820778ca46ec285716627448b5a11e9b9e0d1703f9aa4c7a83fbebbadca2b0",
+        "event_hash": "02a9668fbd12925f8bc3520b1540325c65988b9421e5e6d2834b5c1a77624d89"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.015419Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "02a9668fbd12925f8bc3520b1540325c65988b9421e5e6d2834b5c1a77624d89",
+        "event_hash": "ec3f861b60e5544f51964589c7c33fffad4b8f88d8e266371594dda8cdaa29bb"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.383310Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "ec3f861b60e5544f51964589c7c33fffad4b8f88d8e266371594dda8cdaa29bb",
+        "event_hash": "59a44511c2c5805b10b397c7b7a161f8c3defdbd1045a44d49998d09deea28c6"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.939031Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "59a44511c2c5805b10b397c7b7a161f8c3defdbd1045a44d49998d09deea28c6",
+        "event_hash": "edffa2098a2fe6e9b42b40e259b54a0bdff9adeb3fcf6cd055e423ff749cd8d0"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.956751Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "edffa2098a2fe6e9b42b40e259b54a0bdff9adeb3fcf6cd055e423ff749cd8d0",
+        "event_hash": "6fe563074dd301b9794519e1efb3d71d77440497033cb78c2b7ec22312c20928"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.959787Z",
+        "epoch": 4,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "6fe563074dd301b9794519e1efb3d71d77440497033cb78c2b7ec22312c20928",
+        "event_hash": "7acc725b3cdb3f0cc56d0daef9a917a10d9d3a24b9294e83538771ffda88d0dc"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.960017Z",
+        "epoch": 5,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 67
+        },
+        "previous_event_hash": "7acc725b3cdb3f0cc56d0daef9a917a10d9d3a24b9294e83538771ffda88d0dc",
+        "event_hash": "7447ddce20d9b0c972de7361bb9b856cade8d4862212adbc300d4d924472ddfb"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.960083Z",
+        "epoch": 5,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 4.59,
+            "new_value": 2.14
+        },
+        "previous_event_hash": "7447ddce20d9b0c972de7361bb9b856cade8d4862212adbc300d4d924472ddfb",
+        "event_hash": "c276800e5a2ee08b12ae1e53f08d9fda158bee40a8a0bda59e5325450d81ac59"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.960113Z",
+        "epoch": 5,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 63,
+            "new_value": 76
+        },
+        "previous_event_hash": "c276800e5a2ee08b12ae1e53f08d9fda158bee40a8a0bda59e5325450d81ac59",
+        "event_hash": "feebde87f7c54b85e1197ed6471f682a35079f5811c743c9fefa991f0270f22b"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.960148Z",
+        "epoch": 5,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 7.36
+        },
+        "previous_event_hash": "feebde87f7c54b85e1197ed6471f682a35079f5811c743c9fefa991f0270f22b",
+        "event_hash": "8ff02374f5207b4eeeb3a29d31c7a95a629f4d0a55afb71aaad0a4447e292c85"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.960187Z",
+        "epoch": 5,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 7.91,
+            "new_value": 4.14
+        },
+        "previous_event_hash": "8ff02374f5207b4eeeb3a29d31c7a95a629f4d0a55afb71aaad0a4447e292c85",
+        "event_hash": "43828ab912a09f9471426b826aa64d4efa05065e91ba6bc02b2fee9dd8003984"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.961845Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "43828ab912a09f9471426b826aa64d4efa05065e91ba6bc02b2fee9dd8003984",
+        "event_hash": "0656f2b5d788b47f2f8021049c4c999b068eaf494d914317abf6e591731a2b7a"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.964451Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "0656f2b5d788b47f2f8021049c4c999b068eaf494d914317abf6e591731a2b7a",
+        "event_hash": "87cff2c4a905bf3f4f2a9d6cc4f717efc22dba25737c512e08708421beff897e"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.964860Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "87cff2c4a905bf3f4f2a9d6cc4f717efc22dba25737c512e08708421beff897e",
+        "event_hash": "8a69c7219a0d6660b50caf3b0bf40d7e019ed0657c01c71afbe8604d0700dc67"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.965134Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "8a69c7219a0d6660b50caf3b0bf40d7e019ed0657c01c71afbe8604d0700dc67",
+        "event_hash": "ec5b0b2c282603641eb3da790b0a8f959ef0adbcb73f7363605113a478ffb85c"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.968923Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "ec5b0b2c282603641eb3da790b0a8f959ef0adbcb73f7363605113a478ffb85c",
+        "event_hash": "2f5fe4274074c61f299988b1e0f864e48b900062ee25fbdd49baa8664a383ab6"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:18.972719Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "2f5fe4274074c61f299988b1e0f864e48b900062ee25fbdd49baa8664a383ab6",
+        "event_hash": "0097e211106e0a1641a4ddac2a766ec0c5780dc9504008beed48bc6b499ab196"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.735206Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "0097e211106e0a1641a4ddac2a766ec0c5780dc9504008beed48bc6b499ab196",
+        "event_hash": "f7f6043c2895cdff909afca67e2b150f4bb739d2a3e6841bc4864df64111b7f2"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.735320Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "f7f6043c2895cdff909afca67e2b150f4bb739d2a3e6841bc4864df64111b7f2",
+        "event_hash": "3452e5c9e79596513b182128b01cd6d6e7178ac2188d2686dc1e64bca4000864"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.932498Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "3452e5c9e79596513b182128b01cd6d6e7178ac2188d2686dc1e64bca4000864",
+        "event_hash": "32e783ac0c949efa31d8fa513a0ac83a68d640940e23a9cac2b0325ce4427880"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.932646Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "32e783ac0c949efa31d8fa513a0ac83a68d640940e23a9cac2b0325ce4427880",
+        "event_hash": "9de38b85e284891f7033ba5e82caf6d45b214d1920edc9f89e07ef8c8699e58a"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.934990Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "9de38b85e284891f7033ba5e82caf6d45b214d1920edc9f89e07ef8c8699e58a",
+        "event_hash": "1068096c6ce91fefeacd8277a1a86231e5c98dac5d09266b22b7454dd41577be"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.935084Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "1068096c6ce91fefeacd8277a1a86231e5c98dac5d09266b22b7454dd41577be",
+        "event_hash": "b7e3c361e49a8e3d171dbd2094707a2c0eb15050000fe637a256a0d5fab0c53a"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.937916Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "b7e3c361e49a8e3d171dbd2094707a2c0eb15050000fe637a256a0d5fab0c53a",
+        "event_hash": "1f82f03516aa59ccf6382f2669aa10dbd865fb9b9f1600eb0a684a9435af1667"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.937987Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "1f82f03516aa59ccf6382f2669aa10dbd865fb9b9f1600eb0a684a9435af1667",
+        "event_hash": "b766bebb94b95742b738868ab63545ec62cfe4113debee77603f88fc12f02d37"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.965539Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "b766bebb94b95742b738868ab63545ec62cfe4113debee77603f88fc12f02d37",
+        "event_hash": "b97f07cbf8ed0efdf0b5b751a2f31b495a1e6ea2da9e2d8196f976317b9d1942"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:30.969761Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "b97f07cbf8ed0efdf0b5b751a2f31b495a1e6ea2da9e2d8196f976317b9d1942",
+        "event_hash": "aacc9787ed5ed3696400a105ca234c5a4fc994adaacdd0b12b4a59e013eba775"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:41.389932Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "aacc9787ed5ed3696400a105ca234c5a4fc994adaacdd0b12b4a59e013eba775",
+        "event_hash": "f3a8d0fc1bf9a3552e95227f727f6f034b3cb73dc2db92d68cd41c232095f95d"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.053329Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "f3a8d0fc1bf9a3552e95227f727f6f034b3cb73dc2db92d68cd41c232095f95d",
+        "event_hash": "4f2cebf61fd6836c6ea04127017571048440a5c24683466e515340a5fabd6d5d"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.059747Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "4f2cebf61fd6836c6ea04127017571048440a5c24683466e515340a5fabd6d5d",
+        "event_hash": "a7da3526a60b02a9cc5a6e985e7facb45bd0cc29e18e6a31cf325f2eb71d01c6"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.098074Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "a7da3526a60b02a9cc5a6e985e7facb45bd0cc29e18e6a31cf325f2eb71d01c6",
+        "event_hash": "dd70d0357f41b75db92daf346c5387ba915adf090061db3e4495491e1d38b273"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.100329Z",
+        "epoch": 5,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "dd70d0357f41b75db92daf346c5387ba915adf090061db3e4495491e1d38b273",
+        "event_hash": "31772b3fd92f645824e27cc226e2b6cd7ea6acd8e20ddd739cf93c1aa7365a01"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.100734Z",
+        "epoch": 6,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 73
+        },
+        "previous_event_hash": "31772b3fd92f645824e27cc226e2b6cd7ea6acd8e20ddd739cf93c1aa7365a01",
+        "event_hash": "b1d6d733a1d8dddb7ac190bb8229cd5494ad79046ef9e8a1d0c7590287392cd7"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.100779Z",
+        "epoch": 6,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 73,
+            "new_value": 80
+        },
+        "previous_event_hash": "b1d6d733a1d8dddb7ac190bb8229cd5494ad79046ef9e8a1d0c7590287392cd7",
+        "event_hash": "6eb41820236ebbdff2e8278f449d366ef5153c08829243266ff80186bf37582f"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.100832Z",
+        "epoch": 6,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 4.14,
+            "new_value": 4.28
+        },
+        "previous_event_hash": "6eb41820236ebbdff2e8278f449d366ef5153c08829243266ff80186bf37582f",
+        "event_hash": "e4b24f8b84fd6755f78c95d23c82c0c879cad49426c255d39fee7ec9e512e6b6"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.100857Z",
+        "epoch": 6,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 67,
+            "new_value": 82
+        },
+        "previous_event_hash": "e4b24f8b84fd6755f78c95d23c82c0c879cad49426c255d39fee7ec9e512e6b6",
+        "event_hash": "214183426045281a3d3f7258a22f24e3dd42717fda6ed047db1988facfe9e449"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.100883Z",
+        "epoch": 6,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 1.0,
+            "new_value": 4.98
+        },
+        "previous_event_hash": "214183426045281a3d3f7258a22f24e3dd42717fda6ed047db1988facfe9e449",
+        "event_hash": "232689edaf6d6771da066627690535391990c3df95e6735996f4c8d0efb85f5b"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.100904Z",
+        "epoch": 6,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 104
+        },
+        "previous_event_hash": "232689edaf6d6771da066627690535391990c3df95e6735996f4c8d0efb85f5b",
+        "event_hash": "0bf184ccd377926eb31b0e7bc13131cb59a26dd766f42e5c103fa5de520a0301"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.100916Z",
+        "epoch": 6,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 1.0,
+            "new_value": 5.2
+        },
+        "previous_event_hash": "0bf184ccd377926eb31b0e7bc13131cb59a26dd766f42e5c103fa5de520a0301",
+        "event_hash": "6dbbb148bfd416be9505ba73e6c9ef90ebbfe6cfc3d10519333aa8b11a5ce42e"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.101428Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "6dbbb148bfd416be9505ba73e6c9ef90ebbfe6cfc3d10519333aa8b11a5ce42e",
+        "event_hash": "7e92f4b749c5cfd5c6331be7d1b31d27adb554c90c05dc96cb1bf3057a5723c0"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.101997Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "7e92f4b749c5cfd5c6331be7d1b31d27adb554c90c05dc96cb1bf3057a5723c0",
+        "event_hash": "8d69594a3be4d0bb602017c6b5dde78fd104d8ebfcb86a9f99a6860262d0a40a"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.103397Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "8d69594a3be4d0bb602017c6b5dde78fd104d8ebfcb86a9f99a6860262d0a40a",
+        "event_hash": "79742f6c2d892e3aaa132109c9bec3787e3bd7d8d09b61fd77cc8827f2599a13"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.107336Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "79742f6c2d892e3aaa132109c9bec3787e3bd7d8d09b61fd77cc8827f2599a13",
+        "event_hash": "1f5c57cbb149db40d64367a9a5666a677e458d662578a533845fe4a54d60a96b"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.111199Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "1f5c57cbb149db40d64367a9a5666a677e458d662578a533845fe4a54d60a96b",
+        "event_hash": "267efe094333261a4e3992113acab763983b274ebf7e430770bc201e348b4644"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:42.113991Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 3
+        },
+        "previous_event_hash": "267efe094333261a4e3992113acab763983b274ebf7e430770bc201e348b4644",
+        "event_hash": "f27d22c218d5833122e3d502096936cb7b8acef751610fb8684fdc8c9265bd16"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:53.863324Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "f27d22c218d5833122e3d502096936cb7b8acef751610fb8684fdc8c9265bd16",
+        "event_hash": "5972432d69ec9670bc4aac0cb54804ce3b76b63b70f550a1e3b0eb1001f23db6"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:53.863552Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "5972432d69ec9670bc4aac0cb54804ce3b76b63b70f550a1e3b0eb1001f23db6",
+        "event_hash": "dca41aa2904d29e35951207d897ce982bd7f5e4866ee718d3cc7898631a72c51"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:54.105083Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "dca41aa2904d29e35951207d897ce982bd7f5e4866ee718d3cc7898631a72c51",
+        "event_hash": "deb57ec8488c9ae16d026189029c4724b1724a8359000d0fa3e54cfd36b8df34"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:54.105243Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "deb57ec8488c9ae16d026189029c4724b1724a8359000d0fa3e54cfd36b8df34",
+        "event_hash": "972fe77188b61b5ce245131142f068569a599359f9f9638f9db75e7e08ea3e97"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:54.178961Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "972fe77188b61b5ce245131142f068569a599359f9f9638f9db75e7e08ea3e97",
+        "event_hash": "c3feabaedb1134d5daed8c6681075508dc5938b1d7a67b7bc22703aa8093faf3"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:54.179072Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "c3feabaedb1134d5daed8c6681075508dc5938b1d7a67b7bc22703aa8093faf3",
+        "event_hash": "22e95a494b3d64248e16993d6d1eafec5ec3662fc91040891bcc31b750c49273"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:54.179537Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "22e95a494b3d64248e16993d6d1eafec5ec3662fc91040891bcc31b750c49273",
+        "event_hash": "171cf35394226729bc7fb81cd6b9548d7dd5e9c79d8810353179e8e280163c51"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:54.179590Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "171cf35394226729bc7fb81cd6b9548d7dd5e9c79d8810353179e8e280163c51",
+        "event_hash": "aa3bd3cb3357ae06f4198b4109886bb5b4b5bc4c10633e9985f4d460ca105a37"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:54.187105Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "aa3bd3cb3357ae06f4198b4109886bb5b4b5bc4c10633e9985f4d460ca105a37",
+        "event_hash": "94a422947b55f334271be3b59d6f0efa1af57875eca4974132e7da47a47d9c49"
+    },
+    {
+        "timestamp": "2025-09-30T14:10:54.189657Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 3,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "94a422947b55f334271be3b59d6f0efa1af57875eca4974132e7da47a47d9c49",
+        "event_hash": "b6acf53a950f3362ac4bc72b40cf8452b15fe37bdd880ea680b7a2fe199148d1"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:04.510958Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "b6acf53a950f3362ac4bc72b40cf8452b15fe37bdd880ea680b7a2fe199148d1",
+        "event_hash": "a42e15fe82088dad30e13fee15352e0fa6a7d76f91aa2cde31ede160694aeca3"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.161237Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "a42e15fe82088dad30e13fee15352e0fa6a7d76f91aa2cde31ede160694aeca3",
+        "event_hash": "453e82f6ef21f067a7af6e6c0052899a31d40ea37072ef613592d6073e258799"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.188102Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "453e82f6ef21f067a7af6e6c0052899a31d40ea37072ef613592d6073e258799",
+        "event_hash": "3802e02594ebda71ef41f78445c15e979a87ba4c8e8e8189f043456d0e9f44ce"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.235217Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "3802e02594ebda71ef41f78445c15e979a87ba4c8e8e8189f043456d0e9f44ce",
+        "event_hash": "18a209fcdd620ea16e3f824950f082dd81c3e4dbf00a80a946aa10abde36a4fb"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.237592Z",
+        "epoch": 6,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "18a209fcdd620ea16e3f824950f082dd81c3e4dbf00a80a946aa10abde36a4fb",
+        "event_hash": "c96301fa45ff37909891604364ddf2a494b2be1f7e14007b642f3aac3b1c0e6f"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.238143Z",
+        "epoch": 7,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 102
+        },
+        "previous_event_hash": "c96301fa45ff37909891604364ddf2a494b2be1f7e14007b642f3aac3b1c0e6f",
+        "event_hash": "5c9f84f1b28bd9eeb8398c738471ebce5f67021f702299b6874aeadaa067d268"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.238207Z",
+        "epoch": 7,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 67
+        },
+        "previous_event_hash": "5c9f84f1b28bd9eeb8398c738471ebce5f67021f702299b6874aeadaa067d268",
+        "event_hash": "4201f909f268bda198370adb0b3de9d2544d41f2d5517ca54391a00118253025"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.238277Z",
+        "epoch": 7,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 7.36,
+            "new_value": 4.67
+        },
+        "previous_event_hash": "4201f909f268bda198370adb0b3de9d2544d41f2d5517ca54391a00118253025",
+        "event_hash": "81239f3f350fc977305b9bb342b6aac4e52da667195f4ccf67f759d9440f3925"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.238308Z",
+        "epoch": 7,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 77
+        },
+        "previous_event_hash": "81239f3f350fc977305b9bb342b6aac4e52da667195f4ccf67f759d9440f3925",
+        "event_hash": "b942887010f5b92e55403b3396a790b949aa29f8026b3c2169e8e478fcd759bd"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.238329Z",
+        "epoch": 7,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 4.98,
+            "new_value": 6.83
+        },
+        "previous_event_hash": "b942887010f5b92e55403b3396a790b949aa29f8026b3c2169e8e478fcd759bd",
+        "event_hash": "51264f5aadd028bd1fcb5a851b9054e446cbeb0e56fc68d52abd7fc7e3ae8957"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.238361Z",
+        "epoch": 7,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 106
+        },
+        "previous_event_hash": "51264f5aadd028bd1fcb5a851b9054e446cbeb0e56fc68d52abd7fc7e3ae8957",
+        "event_hash": "e6f4b96139ae009c96497331913dbc327b599010cf93b941dab3bcd88c4a7dce"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.240052Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "e6f4b96139ae009c96497331913dbc327b599010cf93b941dab3bcd88c4a7dce",
+        "event_hash": "3006bab8ddcab171a106e2dc6fa428f3457c95c8122c5d3faeb72e1647c6e986"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.241535Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "3006bab8ddcab171a106e2dc6fa428f3457c95c8122c5d3faeb72e1647c6e986",
+        "event_hash": "d3eb3f3448d8b0a35d85a7c122edb4fd1f3dae4df2dc2502656497f6b2d5415c"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.243861Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "d3eb3f3448d8b0a35d85a7c122edb4fd1f3dae4df2dc2502656497f6b2d5415c",
+        "event_hash": "0f3a435694d855caadfdb637984b9e91ebe186ff2bd0f9f63e11156631a42747"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.245784Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "0f3a435694d855caadfdb637984b9e91ebe186ff2bd0f9f63e11156631a42747",
+        "event_hash": "5e3047bf9f550668db0ac6e20c9f278d76ef84687b1a169a53b95248289216e8"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.245947Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "5e3047bf9f550668db0ac6e20c9f278d76ef84687b1a169a53b95248289216e8",
+        "event_hash": "8fb6015d595bae2dc85a9ff21d4d94af573664302afd3bc83e4ab4c5d0b7acac"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:05.249070Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "8fb6015d595bae2dc85a9ff21d4d94af573664302afd3bc83e4ab4c5d0b7acac",
+        "event_hash": "4868fdfb70e721d9751fb54e330939fbf5e1475b2a0a2730b5a20fa08957cd18"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.152702Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "4868fdfb70e721d9751fb54e330939fbf5e1475b2a0a2730b5a20fa08957cd18",
+        "event_hash": "e7e929527506182a64b6abe52c6a0e8f7617a9768589bce623b8ea741837dade"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.152968Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "e7e929527506182a64b6abe52c6a0e8f7617a9768589bce623b8ea741837dade",
+        "event_hash": "0979b046aa459d135961533efb8fa338c627415f19a198ebcc4bbef34900a63d"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.156020Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "0979b046aa459d135961533efb8fa338c627415f19a198ebcc4bbef34900a63d",
+        "event_hash": "23f9a96ef7c94710f15348c25f41d639f9b06a3df80e0ffb0217f7afba49d081"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.156108Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "23f9a96ef7c94710f15348c25f41d639f9b06a3df80e0ffb0217f7afba49d081",
+        "event_hash": "dee8f23e1e0f43ce4d7bb845138bab6e3031e2b05d12a653c86a5b418ab7699b"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.158864Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "dee8f23e1e0f43ce4d7bb845138bab6e3031e2b05d12a653c86a5b418ab7699b",
+        "event_hash": "aa04092472ad8b48a3621ba48b9214d33dde73d30d9612192426f2df8670dfbf"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.158949Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "aa04092472ad8b48a3621ba48b9214d33dde73d30d9612192426f2df8670dfbf",
+        "event_hash": "f655f3e161e1d4fe1fceb6f05343debce9d39a0437af7ba04b66a71131512fff"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.181166Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "f655f3e161e1d4fe1fceb6f05343debce9d39a0437af7ba04b66a71131512fff",
+        "event_hash": "202c8fa86b9b98550c0ef007728133d10166b1acb6d3912e45141f601ec6faf1"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.181287Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "202c8fa86b9b98550c0ef007728133d10166b1acb6d3912e45141f601ec6faf1",
+        "event_hash": "761d6e1faa4cec2e519bf0ba76be043823e06aff67b57255d7a3c45505e5fd48"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.205710Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "761d6e1faa4cec2e519bf0ba76be043823e06aff67b57255d7a3c45505e5fd48",
+        "event_hash": "d3f1d3daeafbba8d8d7acec3242b03d1b6b797c548da4bf2aff4e7dc5b2252c9"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:17.217663Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "d3f1d3daeafbba8d8d7acec3242b03d1b6b797c548da4bf2aff4e7dc5b2252c9",
+        "event_hash": "5e3b1f523abe530d4e321caac70e6bb8b70540f3a8c45a9b6e2012d46f3e9a0c"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.529958Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "5e3b1f523abe530d4e321caac70e6bb8b70540f3a8c45a9b6e2012d46f3e9a0c",
+        "event_hash": "e072f1d51249ba50c1662744eab743ece0b4acad84def1109f5fd114c4ddfce8"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.531416Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "e072f1d51249ba50c1662744eab743ece0b4acad84def1109f5fd114c4ddfce8",
+        "event_hash": "f7ace85b04c17676eec3c6c34855cafaeb00fac1e2acbfaa05ff3a6ba6652363"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.595312Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "f7ace85b04c17676eec3c6c34855cafaeb00fac1e2acbfaa05ff3a6ba6652363",
+        "event_hash": "ad0612c1dd38a0c82cea495c7ee924188b0bd3bff3fcdcfb5f64811c9bba58b8"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.596499Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "ad0612c1dd38a0c82cea495c7ee924188b0bd3bff3fcdcfb5f64811c9bba58b8",
+        "event_hash": "968fbacbea498bb2430c71714536a13d53dc5cf5f99334c034cbb15c06bdbb79"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.598794Z",
+        "epoch": 7,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "968fbacbea498bb2430c71714536a13d53dc5cf5f99334c034cbb15c06bdbb79",
+        "event_hash": "b4f2e97a6b41835ba04b6a3497662b5c0ceb45556032e18275c2f343dba538b8"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599028Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 67,
+            "new_value": 59
+        },
+        "previous_event_hash": "b4f2e97a6b41835ba04b6a3497662b5c0ceb45556032e18275c2f343dba538b8",
+        "event_hash": "1a202d795ebb34c04a929557ffd6bc2a87737b30df37fcdf2a45990b8216bee5"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599066Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 93
+        },
+        "previous_event_hash": "1a202d795ebb34c04a929557ffd6bc2a87737b30df37fcdf2a45990b8216bee5",
+        "event_hash": "918877b872265faf18ffc24ff35c40cba6554cd32d18177b230375bb0c17cb38"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599120Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 7.36,
+            "new_value": 8.56
+        },
+        "previous_event_hash": "918877b872265faf18ffc24ff35c40cba6554cd32d18177b230375bb0c17cb38",
+        "event_hash": "61389c48e401df7268056806c9c14d149af1d7cca8631018f032bd7d67c980f7"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599145Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 106,
+            "new_value": 102
+        },
+        "previous_event_hash": "61389c48e401df7268056806c9c14d149af1d7cca8631018f032bd7d67c980f7",
+        "event_hash": "f0b7393dc573ec75c29c2790bbd9c50e880768fb2994c391bf9bdc3d63dde317"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599164Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 103
+        },
+        "previous_event_hash": "f0b7393dc573ec75c29c2790bbd9c50e880768fb2994c391bf9bdc3d63dde317",
+        "event_hash": "ca6f0bfb518864ef6c1c1bd1405b6bc182f141a0355c902b1ac52d2eb69fa78b"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599183Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 102,
+            "new_value": 86
+        },
+        "previous_event_hash": "ca6f0bfb518864ef6c1c1bd1405b6bc182f141a0355c902b1ac52d2eb69fa78b",
+        "event_hash": "bc9ebf4588a80600a07071b833fde101385b236c0cc81deeaeda1a2a5ad02b2c"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599199Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 90
+        },
+        "previous_event_hash": "bc9ebf4588a80600a07071b833fde101385b236c0cc81deeaeda1a2a5ad02b2c",
+        "event_hash": "5b354a92dfa8f1c41bce889f307204fadb8c5355e8ca28310c7f83aaefff5f3d"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599219Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 7.36,
+            "new_value": 4.48
+        },
+        "previous_event_hash": "5b354a92dfa8f1c41bce889f307204fadb8c5355e8ca28310c7f83aaefff5f3d",
+        "event_hash": "3018ba4563ab204bf97c264188c347b3c062425b2c04eb6f7e276a753c4e9472"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599275Z",
+        "epoch": 8,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 73,
+            "new_value": 84
+        },
+        "previous_event_hash": "3018ba4563ab204bf97c264188c347b3c062425b2c04eb6f7e276a753c4e9472",
+        "event_hash": "afb6cac0189905da81393ab1ad2a788e8ebad139a1729c853cab7a0d95fd1984"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.599873Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "afb6cac0189905da81393ab1ad2a788e8ebad139a1729c853cab7a0d95fd1984",
+        "event_hash": "802fcd18498ab1284d7c49c579226f860a66335452bb6ff7bda19f980d196c66"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.600387Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "802fcd18498ab1284d7c49c579226f860a66335452bb6ff7bda19f980d196c66",
+        "event_hash": "fd9cd92fc2c866149f809c4571123d419cdb02b211b2213863b721a10e29e956"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.600787Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "fd9cd92fc2c866149f809c4571123d419cdb02b211b2213863b721a10e29e956",
+        "event_hash": "5c2c80c4ed81a0b2ee6b7bcbde471aa440bacb191b316ce496c6d1e4b08ff6ba"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.604351Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "5c2c80c4ed81a0b2ee6b7bcbde471aa440bacb191b316ce496c6d1e4b08ff6ba",
+        "event_hash": "972631b42db309050061f292ed373ee2d4a9aacf610d8ce3f7a0a6cc225d86a4"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.609557Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "972631b42db309050061f292ed373ee2d4a9aacf610d8ce3f7a0a6cc225d86a4",
+        "event_hash": "480e99356153832b416cd311701a0c38bdc8dc08061a4e2dec04dc67e4d70b9b"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:28.613520Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "480e99356153832b416cd311701a0c38bdc8dc08061a4e2dec04dc67e4d70b9b",
+        "event_hash": "a010ddd5d69064883aedb7d8740df41e7167504de95d599e205706a508e3a840"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.274857Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "a010ddd5d69064883aedb7d8740df41e7167504de95d599e205706a508e3a840",
+        "event_hash": "6e3eb89f467fbec5c823d04dd49a00a61cecb5a5ad214643cdb0e0fee4431307"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.274950Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "6e3eb89f467fbec5c823d04dd49a00a61cecb5a5ad214643cdb0e0fee4431307",
+        "event_hash": "27289359a73c7f9a3ff3173b7de2e1d828bd6b03f64e48f429e3d81a8ac94887"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.485717Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "27289359a73c7f9a3ff3173b7de2e1d828bd6b03f64e48f429e3d81a8ac94887",
+        "event_hash": "87e23e6ab258611db5f1717ad77c7e084770956fd4e55d64d8407e988e8b3c30"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.485822Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "87e23e6ab258611db5f1717ad77c7e084770956fd4e55d64d8407e988e8b3c30",
+        "event_hash": "e4710dd9d6716bf9ce31f1ba984875fc40cabc1e7cb53380cd8efc141aabb55a"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.534931Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "e4710dd9d6716bf9ce31f1ba984875fc40cabc1e7cb53380cd8efc141aabb55a",
+        "event_hash": "1c3c9e6f4179fdb683b8f0133e34cc50cf61f89a9c697da01ed87ddc6d19f562"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.535040Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "1c3c9e6f4179fdb683b8f0133e34cc50cf61f89a9c697da01ed87ddc6d19f562",
+        "event_hash": "50ab58fabd8faa8f90b7a8ef0e00897ce8e9dc5ad48f3b04ee091821a425c4b8"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.554836Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "50ab58fabd8faa8f90b7a8ef0e00897ce8e9dc5ad48f3b04ee091821a425c4b8",
+        "event_hash": "830f8accc377e497fb4b3251e73da10d5921f6f60104145b44875944b1368a1d"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.554938Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "830f8accc377e497fb4b3251e73da10d5921f6f60104145b44875944b1368a1d",
+        "event_hash": "8895af1758a2932ebe55ab618a04b889d2af049aae1f2ac5ea4059b5248f3593"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.579942Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "8895af1758a2932ebe55ab618a04b889d2af049aae1f2ac5ea4059b5248f3593",
+        "event_hash": "d969834a889516c4ec2d866ed12161dd408522a866ef046fa0c1bafabbadfb34"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:40.581891Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "d969834a889516c4ec2d866ed12161dd408522a866ef046fa0c1bafabbadfb34",
+        "event_hash": "80437e270dc17e6e32783487094b04730648ad2aac25a69cff28e53b676e1d87"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:50.915974Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "80437e270dc17e6e32783487094b04730648ad2aac25a69cff28e53b676e1d87",
+        "event_hash": "5e837702fc659019d1eea1c3f85dd765af0d038b2556d2a03b2937a354135c97"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.352182Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "5e837702fc659019d1eea1c3f85dd765af0d038b2556d2a03b2937a354135c97",
+        "event_hash": "96d470ae4628cf319054e34a7ef7f40f9db0f90614c7290be20c1e0113d6d83d"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.527233Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "96d470ae4628cf319054e34a7ef7f40f9db0f90614c7290be20c1e0113d6d83d",
+        "event_hash": "cb37566c9c6adb525e8f57c24c1ad3737f837aa21ebaf915d4ad15b06d8077f9"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.554144Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "cb37566c9c6adb525e8f57c24c1ad3737f837aa21ebaf915d4ad15b06d8077f9",
+        "event_hash": "b38fe6bb672db70ab13e58a2f04ca92ef7e25d3d7ba9647bab4638177c7ce680"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556187Z",
+        "epoch": 8,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "b38fe6bb672db70ab13e58a2f04ca92ef7e25d3d7ba9647bab4638177c7ce680",
+        "event_hash": "4e9c30b08799cc3c500bf4b625939e05a6365a9624db2769930e2f0bf21cdee5"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556584Z",
+        "epoch": 9,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 1.0,
+            "new_value": 1.0
+        },
+        "previous_event_hash": "4e9c30b08799cc3c500bf4b625939e05a6365a9624db2769930e2f0bf21cdee5",
+        "event_hash": "ea6f196d9387b9151a8697c403f7f9580878eb4017c41445ac6d6cc00676d888"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556635Z",
+        "epoch": 9,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 103,
+            "new_value": 91
+        },
+        "previous_event_hash": "ea6f196d9387b9151a8697c403f7f9580878eb4017c41445ac6d6cc00676d888",
+        "event_hash": "761f1853d1ecfe03310e77b0fde1287ca61e1493cadefaa2abbf41a475981461"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556663Z",
+        "epoch": 9,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 103
+        },
+        "previous_event_hash": "761f1853d1ecfe03310e77b0fde1287ca61e1493cadefaa2abbf41a475981461",
+        "event_hash": "f5aba723e5983b800a622dde6cf8326e64b0291736acfe1efb7ec620d1ba7e9e"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556685Z",
+        "epoch": 9,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 1.0,
+            "new_value": 5.27
+        },
+        "previous_event_hash": "f5aba723e5983b800a622dde6cf8326e64b0291736acfe1efb7ec620d1ba7e9e",
+        "event_hash": "26b08d456bde4a44912d6994c0e34838b6ba774416dbc0daf7ae0522fcd598b7"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556760Z",
+        "epoch": 9,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 7.76
+        },
+        "previous_event_hash": "26b08d456bde4a44912d6994c0e34838b6ba774416dbc0daf7ae0522fcd598b7",
+        "event_hash": "ee13705bab76e3c28690afb2eee4f65632ea5546807736a53a9c41cb4c41af67"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556795Z",
+        "epoch": 9,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 1.0,
+            "new_value": 1.0
+        },
+        "previous_event_hash": "ee13705bab76e3c28690afb2eee4f65632ea5546807736a53a9c41cb4c41af67",
+        "event_hash": "cc4a77eaa7dce018b3762a2861e684279fc03e79a3cc58fb85120adc805a153e"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556823Z",
+        "epoch": 9,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 84,
+            "new_value": 92
+        },
+        "previous_event_hash": "cc4a77eaa7dce018b3762a2861e684279fc03e79a3cc58fb85120adc805a153e",
+        "event_hash": "68a47379482b80bbd3699c50aab1e0594cb65aef58cf9413c0e3a90883c08e79"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.556856Z",
+        "epoch": 9,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 4.82,
+            "new_value": 4.0
+        },
+        "previous_event_hash": "68a47379482b80bbd3699c50aab1e0594cb65aef58cf9413c0e3a90883c08e79",
+        "event_hash": "b3027d429fef25dcc1a97007946a096ff2b341e3cef732bf87b190a5d2175fb4"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.558363Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "b3027d429fef25dcc1a97007946a096ff2b341e3cef732bf87b190a5d2175fb4",
+        "event_hash": "4e1914be9795305b801a17cd5be0e4f80584bd219b163357129dd6266450c96f"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.559003Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "4e1914be9795305b801a17cd5be0e4f80584bd219b163357129dd6266450c96f",
+        "event_hash": "445c483a2d1bf5d1257fdb9fcf4ebece146d8f1bb7ae104606659cf70f2df69f"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.559292Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "445c483a2d1bf5d1257fdb9fcf4ebece146d8f1bb7ae104606659cf70f2df69f",
+        "event_hash": "843e8e76df09d1bf7216b62b3e94eaf8e06553483ec7720dd77fd3684ed4ff86"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.560389Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "843e8e76df09d1bf7216b62b3e94eaf8e06553483ec7720dd77fd3684ed4ff86",
+        "event_hash": "f9322eee6d8d878c2abee4bb633197a5777e8defede110aa80250b32f43f7353"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.568437Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "f9322eee6d8d878c2abee4bb633197a5777e8defede110aa80250b32f43f7353",
+        "event_hash": "9bafc95a96c2eb8590cdeb86dadb6ce0135db3ba077418d2feabbe09b8a1ba5a"
+    },
+    {
+        "timestamp": "2025-09-30T14:11:51.570098Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "9bafc95a96c2eb8590cdeb86dadb6ce0135db3ba077418d2feabbe09b8a1ba5a",
+        "event_hash": "ebfd014e0eac3d78460c641db7ca4038fa28576beffb9bcc54d2c9cf27244c39"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.320839Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "ebfd014e0eac3d78460c641db7ca4038fa28576beffb9bcc54d2c9cf27244c39",
+        "event_hash": "73dc1c154e18836a98a6c4ad1da218324a6036f200e11d7d373a6dc7d82fd7b2"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.320945Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "73dc1c154e18836a98a6c4ad1da218324a6036f200e11d7d373a6dc7d82fd7b2",
+        "event_hash": "a0b6895fa361b94215d51a92c2b9db3e01b8303752274ab0d038d0e965e5e7ec"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.343170Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "a0b6895fa361b94215d51a92c2b9db3e01b8303752274ab0d038d0e965e5e7ec",
+        "event_hash": "b5e109f918af5fe908f49d0761536fb9418ce6fbd4e0b437accc8002659e5ec5"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.343684Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "b5e109f918af5fe908f49d0761536fb9418ce6fbd4e0b437accc8002659e5ec5",
+        "event_hash": "7dedc48550ba2ae8527b3b933eebfba6d87166c9b666ad91196c23a65f3e53a0"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.398491Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "7dedc48550ba2ae8527b3b933eebfba6d87166c9b666ad91196c23a65f3e53a0",
+        "event_hash": "fffc2c501282378187a6ddd7e42e1b8299fed71727f5f1c37634ebb51c2cde60"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.398577Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "fffc2c501282378187a6ddd7e42e1b8299fed71727f5f1c37634ebb51c2cde60",
+        "event_hash": "be0022180198f56ad5aaa94a7594ee60d6b32fd1dbcc407f6fc1f62c7964d612"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.422452Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "be0022180198f56ad5aaa94a7594ee60d6b32fd1dbcc407f6fc1f62c7964d612",
+        "event_hash": "f2bcdfc5e85c43861c1cc5c2cc0d1ac60f0548936d065ccf4e72baf43b83980f"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.422687Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "f2bcdfc5e85c43861c1cc5c2cc0d1ac60f0548936d065ccf4e72baf43b83980f",
+        "event_hash": "87bcf5569c064021b67a0a7d9218c378ccfc03c5512b28b72fe61bb8195e7a73"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.452756Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "87bcf5569c064021b67a0a7d9218c378ccfc03c5512b28b72fe61bb8195e7a73",
+        "event_hash": "289d0cf0c9ceae661f33f385be3ec98ffc0007ead4e84d21c692f5816496681b"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:03.461245Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "289d0cf0c9ceae661f33f385be3ec98ffc0007ead4e84d21c692f5816496681b",
+        "event_hash": "4d1d1499f9f02d0339488acde14b6a742f25eecc1607ca9ce786d0700201d89e"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.723979Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "4d1d1499f9f02d0339488acde14b6a742f25eecc1607ca9ce786d0700201d89e",
+        "event_hash": "14cce477bf9708574db86c78a5bba2d966a327008a2494b1ae2add4e8103013c"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.839535Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "14cce477bf9708574db86c78a5bba2d966a327008a2494b1ae2add4e8103013c",
+        "event_hash": "e843e1e02560f7f2e15b7060973da657dc54547fb811511903b4c1036f448ad7"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.883814Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "e843e1e02560f7f2e15b7060973da657dc54547fb811511903b4c1036f448ad7",
+        "event_hash": "f6700008503913c3066f75a4f195278f44f9d585a5c2e28c3dc099e16bc3a9ec"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.888488Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "f6700008503913c3066f75a4f195278f44f9d585a5c2e28c3dc099e16bc3a9ec",
+        "event_hash": "84f92722475dbf197d776beb34e3722319038194b585cce247574600ed90bec4"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.889944Z",
+        "epoch": 9,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "84f92722475dbf197d776beb34e3722319038194b585cce247574600ed90bec4",
+        "event_hash": "25b9c1b90a4b61de5e56bf3df43669109249a5b3b4bd0d8a9149dd26aa97ee59"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890195Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 91,
+            "new_value": 78
+        },
+        "previous_event_hash": "25b9c1b90a4b61de5e56bf3df43669109249a5b3b4bd0d8a9149dd26aa97ee59",
+        "event_hash": "839e5fe18c185ceea1e1660c111460d2b582a9fd2e95d9f52b7720e035787361"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890285Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 2.99
+        },
+        "previous_event_hash": "839e5fe18c185ceea1e1660c111460d2b582a9fd2e95d9f52b7720e035787361",
+        "event_hash": "ccc0b096f19cda02ea27af38623c08d2266af045e760fb7acb0494b5753e5c10"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890349Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 4.0,
+            "new_value": 4.02
+        },
+        "previous_event_hash": "ccc0b096f19cda02ea27af38623c08d2266af045e760fb7acb0494b5753e5c10",
+        "event_hash": "741c68176b6c4fab0be7943e43ce04f4609e16584f738abebe2f5b03490d706f"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890398Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.27,
+            "new_value": 6.04
+        },
+        "previous_event_hash": "741c68176b6c4fab0be7943e43ce04f4609e16584f738abebe2f5b03490d706f",
+        "event_hash": "697ef81a9350a610400e18ffaf9062bb1a43e08e707a32a23da1e1f4ea563617"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890453Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 77
+        },
+        "previous_event_hash": "697ef81a9350a610400e18ffaf9062bb1a43e08e707a32a23da1e1f4ea563617",
+        "event_hash": "8aae1936a4e4b7a98c5238da46623adb2ddbdd6b390495687f590c1b46ff4120"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890524Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 8.05
+        },
+        "previous_event_hash": "8aae1936a4e4b7a98c5238da46623adb2ddbdd6b390495687f590c1b46ff4120",
+        "event_hash": "f861e41e77e1fedea56b0375ddc0f8cba74a80f41fff4a2cf6f05f6ebb5b511b"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890711Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 70
+        },
+        "previous_event_hash": "f861e41e77e1fedea56b0375ddc0f8cba74a80f41fff4a2cf6f05f6ebb5b511b",
+        "event_hash": "3f4e00eb2cc3d2625d70622f824751bb2411c7aff66388ab68f0d614ad0e1e0a"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890757Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 87,
+            "new_value": 68
+        },
+        "previous_event_hash": "3f4e00eb2cc3d2625d70622f824751bb2411c7aff66388ab68f0d614ad0e1e0a",
+        "event_hash": "0406cda8bbc15e08e369c7b14b52964694202ff9ac397326d4d2181f0b94ab91"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890783Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 1.0,
+            "new_value": 1.0
+        },
+        "previous_event_hash": "0406cda8bbc15e08e369c7b14b52964694202ff9ac397326d4d2181f0b94ab91",
+        "event_hash": "19e1ee30bef029930780a6b7bb69b4a37290e6aed60f9172dc8fca39d92740ef"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890853Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_total_syscalls",
+            "original_value": 103,
+            "new_value": 102
+        },
+        "previous_event_hash": "19e1ee30bef029930780a6b7bb69b4a37290e6aed60f9172dc8fca39d92740ef",
+        "event_hash": "bc2c4ab9eff6bf0c8beced6aeebff173882ba01199a50c6fef4369c323140e1b"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.890918Z",
+        "epoch": 10,
+        "event_type": "SENTINEL_MUTATION",
+        "details": {
+            "gene": "max_cpu_percent",
+            "original_value": 5.2,
+            "new_value": 9.29
+        },
+        "previous_event_hash": "bc2c4ab9eff6bf0c8beced6aeebff173882ba01199a50c6fef4369c323140e1b",
+        "event_hash": "0701e5fb793daf059cd2202c2dde928e4c3269b3ce7f1d6a41b84934c80b9740"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.891580Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "0701e5fb793daf059cd2202c2dde928e4c3269b3ce7f1d6a41b84934c80b9740",
+        "event_hash": "a88091ee8f4ec75e2a6cf54b31d3a967787519e3a46510243f6ed845e15c0b7b"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.892380Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "a88091ee8f4ec75e2a6cf54b31d3a967787519e3a46510243f6ed845e15c0b7b",
+        "event_hash": "fdbecbf1216af81dbb0a076549de0add95ad97aa13ec082f12fe0d49963586b7"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.893185Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "fdbecbf1216af81dbb0a076549de0add95ad97aa13ec082f12fe0d49963586b7",
+        "event_hash": "0646c48262ba9cf0c15c02cb5a629401ac7b0a2b94755690fa691b69cac80640"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.900984Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "0646c48262ba9cf0c15c02cb5a629401ac7b0a2b94755690fa691b69cac80640",
+        "event_hash": "a92923f898ba76141c36ecaa0a24f8b880832e57d2c01c88cf538dcc922f399b"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.903293Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "a92923f898ba76141c36ecaa0a24f8b880832e57d2c01c88cf538dcc922f399b",
+        "event_hash": "77f612d30768ca1e3aca45d3447feb2a8e58e199f0ee3e6f032a9df2ffdc8500"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:14.907956Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "77f612d30768ca1e3aca45d3447feb2a8e58e199f0ee3e6f032a9df2ffdc8500",
+        "event_hash": "501ba8d216c46c6a07fabc0827c0b370b5a358a403ca36161c2bfac2a6c58127"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.688878Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "501ba8d216c46c6a07fabc0827c0b370b5a358a403ca36161c2bfac2a6c58127",
+        "event_hash": "ebf82bfb037b4b1c817148a818c93837924711a1a9bed212cf21a2ef362a8cf0"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.689004Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "ebf82bfb037b4b1c817148a818c93837924711a1a9bed212cf21a2ef362a8cf0",
+        "event_hash": "effe1d690ca9f476d6cc2736ebc9756a89411c952623937e8b2288255c626f33"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.723148Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "effe1d690ca9f476d6cc2736ebc9756a89411c952623937e8b2288255c626f33",
+        "event_hash": "40f9e7e80058a8618e96e3e7b67cd4d746c2527004b7969e69fb7301a7bbba85"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.724064Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 6
+        },
+        "previous_event_hash": "40f9e7e80058a8618e96e3e7b67cd4d746c2527004b7969e69fb7301a7bbba85",
+        "event_hash": "70ee5f2854e8c6fac9651dd1b10c2c7e4c50fa7b57142203f3ceba38d3002e8c"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.862034Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "70ee5f2854e8c6fac9651dd1b10c2c7e4c50fa7b57142203f3ceba38d3002e8c",
+        "event_hash": "a1ea87ac9cfc4880290fe54e2f18131c372a03cf717ef820c07a253f786dd53a"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.862181Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 1
+        },
+        "previous_event_hash": "a1ea87ac9cfc4880290fe54e2f18131c372a03cf717ef820c07a253f786dd53a",
+        "event_hash": "a185e32217b9d0b2d780846048b7a8ab82cadb610780a77a955953de3e6484db"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.867720Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "a185e32217b9d0b2d780846048b7a8ab82cadb610780a77a955953de3e6484db",
+        "event_hash": "8f8a2dc6a20f561b12c649fcb5393f62f72160a4307337ecb1e1228a95feff91"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.867818Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_START",
+        "details": {
+            "gid": 0
+        },
+        "previous_event_hash": "8f8a2dc6a20f561b12c649fcb5393f62f72160a4307337ecb1e1228a95feff91",
+        "event_hash": "70db8bf31f7fd9e38b91986bbe7442f514bbcf0d820ae4be57654787ee7514fa"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.899020Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "70db8bf31f7fd9e38b91986bbe7442f514bbcf0d820ae4be57654787ee7514fa",
+        "event_hash": "8f7d4d63c5ef187023989ff1696d513731a63c8be25993116f5a05feb380b75e"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:26.899437Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "8f7d4d63c5ef187023989ff1696d513731a63c8be25993116f5a05feb380b75e",
+        "event_hash": "8f25c83e084c089045f49b5d4b035642a1c3ffb8777d50d999659e9ded37ef12"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:38.044371Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "8f25c83e084c089045f49b5d4b035642a1c3ffb8777d50d999659e9ded37ef12",
+        "event_hash": "c1b7d5710b5c959c9c96fe82ad3e8cb2ab00e2d299089f03dd134a03d1ab7d32"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:38.045092Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 6,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "c1b7d5710b5c959c9c96fe82ad3e8cb2ab00e2d299089f03dd134a03d1ab7d32",
+        "event_hash": "f0163fb656236d857596f17b854dba454cf7c4d59758ec437fd1e0b99db00d0b"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:38.196057Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 0,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "f0163fb656236d857596f17b854dba454cf7c4d59758ec437fd1e0b99db00d0b",
+        "event_hash": "c50a375a88c47025bf37ba3642b18be9ec19351567bef633f38aaf27925e0c71"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:38.197666Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_END",
+        "details": {
+            "gid": 1,
+            "fitness": -1002.0
+        },
+        "previous_event_hash": "c50a375a88c47025bf37ba3642b18be9ec19351567bef633f38aaf27925e0c71",
+        "event_hash": "ea72bc3e14693145f681b70280c7d7a641b8342b42d3067efdf865ce23a09e29"
+    },
+    {
+        "timestamp": "2025-09-30T14:12:38.199568Z",
+        "epoch": 10,
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "num_genomes": 10
+        },
+        "previous_event_hash": "ea72bc3e14693145f681b70280c7d7a641b8342b42d3067efdf865ce23a09e29",
+        "event_hash": "e8ad3f4fbc580571ef36cc8600a13931896e987443abfee6e677da9fba65337d"
+    }
+]

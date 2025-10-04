@@ -1,0 +1,643 @@
+[
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 0,
+        "nonce": "b59fb610",
+        "timestamp": "2025-10-01T14:12:35.290787Z",
+        "event_type": "GENESIS",
+        "details": {
+            "run_id": "bad54fb5da4b1a8c",
+            "detail": "Cryptographic chain initiated."
+        },
+        "previous_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "event_hash": "aff1c99d1cb3fbfa3d2a8ede900351241a795a45c017c366496a99b49712a3e5"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 0,
+        "nonce": "5c14d08c",
+        "timestamp": "2025-10-01T14:12:35.353035Z",
+        "event_type": "INITIAL_POPULATION_CREATED",
+        "details": {
+            "population": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 13.761808267047723
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.13033151897818
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 36.91433252410479
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 2
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 45.4607835941866
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 3
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 31.295010521990275
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 4
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 25.951465198150274
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 5
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.94866867789585
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 6
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 42.2819763716585
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 7
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 22.663092651674305
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 8
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 20.542029663003447
+                    },
+                    "fitness": -9999,
+                    "breakdown": {},
+                    "id": 9
+                }
+            ]
+        },
+        "previous_event_hash": "aff1c99d1cb3fbfa3d2a8ede900351241a795a45c017c366496a99b49712a3e5",
+        "event_hash": "0f190d0ba08e1fcfff75feb35903fbc82dbaefe82ff0da38d0b91936a2f2bd74"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 1,
+        "nonce": "54ca0e7a",
+        "timestamp": "2025-10-01T14:12:37.813262Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 0,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "0f190d0ba08e1fcfff75feb35903fbc82dbaefe82ff0da38d0b91936a2f2bd74",
+        "event_hash": "0c9ceae0744e59ee095837b12e46330268a81c7382a2fda89b89a483c1368ee9"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 1,
+        "nonce": "8a376d59",
+        "timestamp": "2025-10-01T14:12:37.830115Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 0,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 13.761808267047723
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "0c9ceae0744e59ee095837b12e46330268a81c7382a2fda89b89a483c1368ee9",
+        "event_hash": "54a65e1c50b6ec4eab805f35118947d473267751597aabde9580a68f8632655c"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 2,
+        "nonce": "18fc593e",
+        "timestamp": "2025-10-01T14:12:40.450251Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 1,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "54a65e1c50b6ec4eab805f35118947d473267751597aabde9580a68f8632655c",
+        "event_hash": "7c01bbbfd088ee48efb7315fcd92f66c7ac2cf5f737a7417a57253db549b7a0c"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 2,
+        "nonce": "d3199830",
+        "timestamp": "2025-10-01T14:12:40.461523Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 1,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 13.761808267047723
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "7c01bbbfd088ee48efb7315fcd92f66c7ac2cf5f737a7417a57253db549b7a0c",
+        "event_hash": "9fe2f03b8d098dbcf7da10c8a7f1aec3b38bafa70dc54d8a8c0a170ee5956367"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 3,
+        "nonce": "dcc5475b",
+        "timestamp": "2025-10-01T14:12:43.117990Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 2,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "9fe2f03b8d098dbcf7da10c8a7f1aec3b38bafa70dc54d8a8c0a170ee5956367",
+        "event_hash": "cb2b0c7c7e1f79c99e79b1d9bf37a6f4cabd0754cc2ff69a3018d81e390e963c"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 3,
+        "nonce": "8f27ee65",
+        "timestamp": "2025-10-01T14:12:43.127131Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 2,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 13.761808267047723
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "cb2b0c7c7e1f79c99e79b1d9bf37a6f4cabd0754cc2ff69a3018d81e390e963c",
+        "event_hash": "0afff08716c301f61b68bcfa4be2481b50ac3869a62db8671f8df9beea64e361"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 4,
+        "nonce": "02043f19",
+        "timestamp": "2025-10-01T14:12:45.775902Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 3,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "0afff08716c301f61b68bcfa4be2481b50ac3869a62db8671f8df9beea64e361",
+        "event_hash": "91a9aa9f4fe583936c69dd8007c822446e07530c3365cdcbee1f40102aa8b2d4"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 4,
+        "nonce": "4304105d",
+        "timestamp": "2025-10-01T14:12:45.786152Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 3,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 14.167869776063256
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "91a9aa9f4fe583936c69dd8007c822446e07530c3365cdcbee1f40102aa8b2d4",
+        "event_hash": "b996edbe73add1565b19ac05038f4e157fc3a8d59d7572a61d9ac008450cdfbb"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 5,
+        "nonce": "ae55f4a8",
+        "timestamp": "2025-10-01T14:12:48.415931Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 4,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "b996edbe73add1565b19ac05038f4e157fc3a8d59d7572a61d9ac008450cdfbb",
+        "event_hash": "42516b177845d390f38e26447f0a256539bf8d5685e1b4e70490633235cdaec3"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 5,
+        "nonce": "0921d45f",
+        "timestamp": "2025-10-01T14:12:48.430369Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 4,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 10.691047069901671
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "42516b177845d390f38e26447f0a256539bf8d5685e1b4e70490633235cdaec3",
+        "event_hash": "4981eaae4b2b2772e1b54d5a90123e93eaa3c355da8e18b5e0af0e11d54bd51f"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 6,
+        "nonce": "0ea3eefd",
+        "timestamp": "2025-10-01T14:12:51.068619Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 5,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "4981eaae4b2b2772e1b54d5a90123e93eaa3c355da8e18b5e0af0e11d54bd51f",
+        "event_hash": "1ef2f9b1ec0011a6015452aa6d62a2da5decd8c237924f7f0402cd3ec1262c89"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 6,
+        "nonce": "862d2db8",
+        "timestamp": "2025-10-01T14:12:51.084619Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 5,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 10.901873763087176
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "1ef2f9b1ec0011a6015452aa6d62a2da5decd8c237924f7f0402cd3ec1262c89",
+        "event_hash": "45213a66dc9ae40f8e7d7c35f6ba06e16ace101246c6ebd7f9fd34160ec6f133"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 7,
+        "nonce": "3a81dbf6",
+        "timestamp": "2025-10-01T14:12:53.741295Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 6,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "45213a66dc9ae40f8e7d7c35f6ba06e16ace101246c6ebd7f9fd34160ec6f133",
+        "event_hash": "27c269eef86f00998e7c0b3d8d37a751a30cbc023eceb72619c4e25eee02d9c2"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 7,
+        "nonce": "b1210c29",
+        "timestamp": "2025-10-01T14:12:53.755231Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 6,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 10.901873763087176
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "27c269eef86f00998e7c0b3d8d37a751a30cbc023eceb72619c4e25eee02d9c2",
+        "event_hash": "f511bacbe85bf8c21a28b018adc196023f9ee1ddf78657c19edf00a87ee1b87b"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 8,
+        "nonce": "03c05587",
+        "timestamp": "2025-10-01T14:12:56.288241Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 7,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "f511bacbe85bf8c21a28b018adc196023f9ee1ddf78657c19edf00a87ee1b87b",
+        "event_hash": "0ae20f16bde575f7e27933912e370bff1eecdcaca93b3328c22371ddc7483282"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 8,
+        "nonce": "5afd1804",
+        "timestamp": "2025-10-01T14:12:56.314339Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 7,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 8.889847115300213
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "0ae20f16bde575f7e27933912e370bff1eecdcaca93b3328c22371ddc7483282",
+        "event_hash": "2eef2b940fcc5ad769aacb560ee06ac450632614307be5ad344d5ee7ed6fef87"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 9,
+        "nonce": "2cc798b1",
+        "timestamp": "2025-10-01T14:12:58.994460Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 8,
+            "evaluation_results": []
+        },
+        "previous_event_hash": "2eef2b940fcc5ad769aacb560ee06ac450632614307be5ad344d5ee7ed6fef87",
+        "event_hash": "4d96623490f55818ece28754f73bf3bf40f4c6105e24f8c512d4c8929ba2e1d4"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 9,
+        "nonce": "6be4c9f6",
+        "timestamp": "2025-10-01T14:12:59.005890Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 8,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 7.785535849890672
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "4d96623490f55818ece28754f73bf3bf40f4c6105e24f8c512d4c8929ba2e1d4",
+        "event_hash": "45a73e97fd715aebe417bd3a8e0aec3f594256596c21a3221d58b44064a04c7b"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 10,
+        "nonce": "7f11fe7e",
+        "timestamp": "2025-10-01T14:13:01.547294Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 9,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 7.785535849890672
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 34.21611898928641
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 9.263372311107316
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 36.29130759812257
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 30.15262135891939
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 49.16913410996253
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 29.26431482257927
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.450808121731576
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 32.00071704677445
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 10.422897672841234
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0
+                }
+            ]
+        },
+        "previous_event_hash": "45a73e97fd715aebe417bd3a8e0aec3f594256596c21a3221d58b44064a04c7b",
+        "event_hash": "214eae51cbe9344774e8e17d950122347ee8508fcd99fd5b20c19a4610e11d43"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 10,
+        "nonce": "e89ac0a4",
+        "timestamp": "2025-10-01T14:13:01.580288Z",
+        "event_type": "CHAMPION_UPDATED",
+        "details": {
+            "generation": 9,
+            "champion": {
+                "genome": {
+                    "max_cpu_percent": 10.422897672841234
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "214eae51cbe9344774e8e17d950122347ee8508fcd99fd5b20c19a4610e11d43",
+        "event_hash": "38e708c2670feca7991a09ab39d7797700980a2355122f5e87c7ae9af306924e"
+    },
+    {
+        "run_id": "bad54fb5da4b1a8c",
+        "block_height": 11,
+        "nonce": "ff7fee89",
+        "timestamp": "2025-10-01T14:13:01.649507Z",
+        "event_type": "FINAL_CHAMPION_SYNTHESIZED",
+        "details": {
+            "final_champion": {
+                "genome": {
+                    "max_cpu_percent": 10.422897672841234
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0
+            }
+        },
+        "previous_event_hash": "38e708c2670feca7991a09ab39d7797700980a2355122f5e87c7ae9af306924e",
+        "event_hash": "dfb612e2cdebcffec83c84e9a0758013fc27d5033d17087ed8e937738b9a784e"
+    }
+]

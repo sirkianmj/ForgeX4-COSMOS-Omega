@@ -1,0 +1,12 @@
+{
+  "schema_version": "6.2",
+  "runs_attempted": 1410,
+  "successful_runs": 1410,
+  "transient_failures": 0,
+  "hard_failures": 0,
+  "timestamp": 1759522647.215461,
+  "params": {
+    "runs": 1400,
+    "workers": 0
+  }
+}

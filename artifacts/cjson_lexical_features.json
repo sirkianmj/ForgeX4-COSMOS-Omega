@@ -1,0 +1,22 @@
+{
+    "line_count": 3191,
+    "char_count": 80399,
+    "if_count": 286,
+    "for_count": 18,
+    "while_count": 14,
+    "switch_count": 8,
+    "goto_count": 0,
+    "pointer_count": 953,
+    "reference_count": 192,
+    "dereference_count": 400,
+    "include_count": 9,
+    "define_count": 16,
+    "add_op_count": 205,
+    "sub_op_count": 466,
+    "mul_op_count": 953,
+    "div_op_count": 459,
+    "assign_op_count": 925,
+    "equality_op_count": 166,
+    "inequality_op_count": 74,
+    "func_def_count": 123
+}

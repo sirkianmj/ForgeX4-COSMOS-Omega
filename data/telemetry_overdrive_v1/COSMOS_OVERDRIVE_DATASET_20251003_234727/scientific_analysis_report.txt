@@ -1,0 +1,106 @@
+================================================================================
+COSMOS-Ω: Scientific Analysis Report
+Generated on: 2025-10-03 23:55:01
+Dataset Version: 6.2
+================================================================================
+
+### SECTION 1: DATASET OVERVIEW ###
+- Total Successful Runs Analyzed: 1410
+- Total Time-Series Datapoints: 240,030
+- Discovered Workload Archetypes (5): cpu_burst_compile, memory_stress, disk_io_write, disk_io_read, cpu_sustained
+
+--------------------------------------------------------------------------------
+
+### SECTION 2: ARCHETYPE STATISTICAL PROFILES ###
+Detailed statistical breakdown of the physical fingerprint for each workload archetype.
+
+
+--- Archetype: cpu_burst_compile ---
+       cpu_percent_total  memory_rss_bytes  io_read_bytes  io_write_bytes   num_threads  memory_rss_mb
+count       10414.000000      1.041400e+04   1.041400e+04    10414.000000  10414.000000   10414.000000
+mean            1.566305      1.717457e+07   8.977768e+05   165873.447283      2.735740      16.378951
+std             9.020036      6.672886e+06   2.159810e+06   110135.775720      0.993726       6.363760
+min             0.000000      0.000000e+00   0.000000e+00        0.000000      0.000000       0.000000
+25%             0.000000      1.140326e+07   4.096000e+03    73728.000000      2.000000      10.875000
+50%             0.000000      1.798758e+07   7.782400e+04   155648.000000      3.000000      17.154297
+75%             0.000000      2.298266e+07   8.765440e+05   253952.000000      3.000000      21.917969
+max           113.500000      3.368550e+07   2.398208e+07   389120.000000      4.000000      32.125000
+
+
+
+--- Archetype: memory_stress ---
+       cpu_percent_total  memory_rss_bytes  io_read_bytes  io_write_bytes   num_threads  memory_rss_mb
+count       43522.000000      4.352200e+04   4.352200e+04         43522.0  43522.000000   43522.000000
+mean            6.125787      2.503890e+08   6.885811e+04             0.0      0.997450     238.789520
+std            20.518195      6.075340e+07   2.700445e+05             0.0      0.050438      57.938959
+min             0.000000      0.000000e+00   0.000000e+00             0.0      0.000000       0.000000
+25%             0.000000      2.687345e+08   0.000000e+00             0.0      1.000000     256.285156
+50%             0.000000      2.692137e+08   0.000000e+00             0.0      1.000000     256.742188
+75%             0.000000      2.693652e+08   0.000000e+00             0.0      1.000000     256.886719
+max           116.800000      2.695332e+08   2.932736e+06             0.0      1.000000     257.046875
+
+
+
+--- Archetype: disk_io_write ---
+       cpu_percent_total  memory_rss_bytes  io_read_bytes  io_write_bytes   num_threads  memory_rss_mb
+count        56621.00000      5.662100e+04   5.662100e+04    5.662100e+04  56621.000000   56621.000000
+mean            34.50260      1.744559e+07   8.721693e+04    7.133614e+08      0.998340      16.637416
+std             33.90762      1.423831e+06   6.935039e+05    7.069629e+08      0.040712       1.357871
+min              0.00000      0.000000e+00   0.000000e+00    0.000000e+00      0.000000       0.000000
+25%              0.00000      1.731789e+07   0.000000e+00    2.888335e+08      1.000000      16.515625
+50%             28.50000      1.785856e+07   0.000000e+00    5.873828e+08      1.000000      17.031250
+75%             59.70000      1.801421e+07   0.000000e+00    9.322004e+08      1.000000      17.179688
+max            249.30000      1.824358e+07   2.250342e+07    7.214723e+09      1.000000      17.398438
+
+
+
+--- Archetype: disk_io_read ---
+       cpu_percent_total  memory_rss_bytes  io_read_bytes  io_write_bytes   num_threads  memory_rss_mb
+count       61557.000000      6.155700e+04   6.155700e+04         61557.0  61557.000000   61557.000000
+mean           83.458793      3.560604e+09   6.097793e+05             0.0      0.998603    3395.656973
+std            23.720453      2.223603e+09   1.834624e+06             0.0      0.037352    2120.593064
+min             0.000000      0.000000e+00   0.000000e+00             0.0      0.000000       0.000000
+25%            73.800000      1.874481e+09   0.000000e+00             0.0      1.000000    1787.644531
+50%            92.200000      3.411153e+09   0.000000e+00             0.0      1.000000    3253.128906
+75%            99.800000      4.949983e+09   2.252800e+05             0.0      1.000000    4720.671875
+max           227.400000      1.486871e+10   1.794867e+07             0.0      1.000000   14179.910156
+
+
+
+--- Archetype: cpu_sustained ---
+       cpu_percent_total  memory_rss_bytes  io_read_bytes  io_write_bytes   num_threads  memory_rss_mb
+count       67916.000000      6.791600e+04   6.791600e+04         67916.0  67916.000000   67916.000000
+mean           83.139837      1.653750e+08   1.441582e+06             0.0      0.998380     157.713845
+std            24.897115      9.214006e+07   6.701035e+06             0.0      0.040213      87.871610
+min             0.000000      0.000000e+00   0.000000e+00             0.0      0.000000       0.000000
+25%            71.500000      9.179750e+07   0.000000e+00             0.0      1.000000      87.544922
+50%            90.900000      1.651384e+08   0.000000e+00             0.0      1.000000     157.488281
+75%           100.400000      2.287862e+08   0.000000e+00             0.0      1.000000     218.187500
+max           268.700000      5.246484e+08   1.248051e+08             0.0      1.000000     500.343750
+
+
+
+--------------------------------------------------------------------------------
+
+### SECTION 3: KEY DIFFERENTIATOR ANALYSIS ###
+Analysis of inter-workload variance to identify the most powerful predictive features.
+
+Top 3 Metrics with Highest Variance Across Archetypes (Best for Classification):
+  1. memory_rss_bytes (Avg Variance: 9.91e+17)
+  2. io_write_bytes (Avg Variance: 1.00e+17)
+  3. io_read_bytes (Avg Variance: 1.07e+13)
+
+
+### SECTION 4: FEATURE CORRELATION MATRIX ###
+Shows the linear relationship between telemetry metrics. Values close to 1.0 or -1.0 are highly correlated.
+
+                   cpu_percent_total  memory_rss_bytes  io_read_bytes  io_write_bytes  num_threads  memory_rss_mb
+cpu_percent_total           1.000000          0.316485      -0.010281       -0.128422    -0.235283       0.316485
+memory_rss_bytes            0.316485          1.000000       0.024078       -0.194479    -0.094256       1.000000
+io_read_bytes              -0.010281          0.024078       1.000000       -0.050572     0.017176       0.024078
+io_write_bytes             -0.128422         -0.194479      -0.050572        1.000000    -0.065616      -0.194479
+num_threads                -0.235283         -0.094256       0.017176       -0.065616     1.000000      -0.094256
+memory_rss_mb               0.316485          1.000000       0.024078       -0.194479    -0.094256       1.000000
+
+
+================================================================================

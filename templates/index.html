@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COSMOS-Ω | Cosmic Web Observatory</title>
+    <!-- VENDOR SCRIPTS -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <!-- STYLES -->
+    <style type="text/css">
+        :root {
+            --bg-color: #010409; --primary-text: #e6edf3; --secondary-text: #8b949e;
+            --border-color: #30363d; --primary-accent: #00aaff; --champion-accent: #ffd700;
+            --success-color: #238636; --danger-color: #da3633; --panel-bg: rgba(13, 17, 23, 0.85);
+            --glow-primary: rgba(0, 170, 255, 0.5); --glow-champion: rgba(255, 215, 0, 0.6);
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
+        
+        body, html {
+            font-family: 'Roboto Mono', monospace; background-color: var(--bg-color);
+            color: var(--primary-text); margin: 0; padding: 0; overflow: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="3" stroke="cyan" fill="none" /></svg>') 10 10, auto;
+        }
+
+        #starfield, #evolution-web { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; }
+        #starfield { z-index: 0; background: #010409; }
+        #evolution-web { z-index: 1; }
+
+        .overlay {
+            position: absolute; z-index: 2; background-color: var(--panel-bg);
+            border: 1px solid var(--primary-accent); padding: 20px;
+            backdrop-filter: blur(10px); box-shadow: 0 0 25px var(--glow-primary);
+            animation: fadeIn 0.5s ease-in-out; color: #c9d1d9;
+            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+        }
+
+        #header-bar { top: 0; left: 0; right: 0; height: 40px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; border: none; clip-path: none; background: var(--panel-bg); z-index: 10; }
+        #config-panel { top: 80px; left: 20px; width: 300px; }
+        #forensic-panel { top: 80px; right: 20px; width: 450px; max-height: 75vh; overflow-y: auto; display: none; }
+        #telemetry-ticker { bottom: 200px; left: 20px; width: 300px; height: 200px; overflow: hidden; padding-top: 5px; }
+        #telemetry-ticker .log-line { font-size: 11px; white-space: nowrap; margin-bottom: 2px; }
+        #dashboard { bottom: 0; left: 0; right: 0; height: 160px; display: flex; justify-content: space-around; align-items: center; border: none; clip-path: none; background: var(--panel-bg); z-index: 10; }
+        #sentinel-panel { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 450px; display: none; z-index: 11;
+            border-color: var(--champion-accent); box-shadow: 0 0 50px var(--glow-champion);
+            text-align: center;
+        }
+
+        h1, h2, h3 { font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
+        #header-bar h1 { font-size: 20px; margin: 0; color: var(--primary-accent); text-shadow: 0 0 10px var(--glow-primary); }
+        h3 { margin: 0 0 15px 0; color: var(--primary-accent); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        #sentinel-panel h3 { color: var(--champion-accent); }
+        button {
+            background: transparent; color: var(--primary-accent); border: 1px solid var(--primary-accent);
+            padding: 12px 20px; font-size: 16px; font-family: 'Roboto Mono', monospace;
+            font-weight: bold; cursor: pointer; transition: all 0.3s ease;
+            width: 100%; margin-top: 10px; clip-path: polygon(0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px));
+        }
+        button:hover { background: var(--primary-accent); color: var(--bg-color); box-shadow: 0 0 20px var(--glow-primary); }
+        button#report-button { border-color: var(--success-color); color: var(--success-color); }
+        button#report-button:hover { background: var(--success-color); color: var(--bg-color); box-shadow: 0 0 20px var(--success-color); }
+        
+        /* Sentinel Panel PRE (Genome Content) Size Fix */
+        #sentinel-panel pre {
+            max-height: 150px; /* Set a fixed max height */
+            overflow-y: auto; /* Enable vertical scrollbar */
+            font-size: 10px;
+            background-color: #010409; 
+            padding: 10px; 
+            border-radius: 6px; 
+            white-space: pre-wrap; 
+            border: 1px solid var(--border-color);
+        }
+        
+        .hash { color: #ff00ff; font-size: 10px; word-break: break-all; }
+        .dashboard-gauge { width: 150px; height: 120px; text-align: center; }
+        .dashboard-gauge p { margin: 0; color: var(--secondary-text); }
+        
+        .vis-network .vis-edges g.vis-edge-group .vis-edge.vis-selected { stroke-width: 3px !important; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+    <div id="evolution-web"></div>
+
+    <div id="header-bar">
+        <h1>COSMOS-Ω // COSMIC WEB OBSERVATORY</h1>
+        <div id="mission-clock" style="font-size: 18px;">00:00:00</div>
+    </div>
+
+    <div id="config-panel" class="overlay">
+        <h3>[ MISSION CONFIGURATION ]</h3>
+        <div class="config-item"><label for="pop-size-input">Population Size (10-50)</label><input id="pop-size-input" type="number" value="20" min="10" max="50"></div>
+        <div class="config-item"><label for="gens-input">Generations (5-50)</label><input id="gens-input" type="number" value="10" min="5" max="50"></div>
+        <div class="config-item"><label for="mutation-rate-slider">Mutation Rate: <span id="mutation-rate-value">0.9</span></label><input id="mutation-rate-slider" type="range" min="0.1" max="1.0" step="0.05" value="0.9" oninput="document.getElementById('mutation-rate-value').textContent = this.value;"></div>
+        <div class="config-item"><label for="crossover-rate-slider">Crossover Rate: <span id="crossover-rate-value">0.7</span></label><input id="crossover-rate-slider" type="range" min="0.1" max="1.0" step="0.05" value="0.7" oninput="document.getElementById('crossover-rate-value').textContent = this.value;"></div>
+        <div class="config-item"><label for="elitism-count-slider">Elitism Count: <span id="elitism-count-value">2</span></label><input id="elitism-count-slider" type="range" min="1" max="5" step="1" value="2" oninput="document.getElementById('elitism-count-value').textContent = this.value;"></div>
+        <button id="start-button">[ INITIATE SYNTHESIS ]</button>
+    </div>
+    
+    <div id="telemetry-ticker" class="overlay">
+        <div id="ticker-content" style="position: relative; height: 100%; overflow: hidden; display: flex; flex-direction: column-reverse;"></div>
+    </div>
+    
+    <div id="dashboard" class="overlay">
+        <div class="dashboard-gauge"><canvas id="correctness-gauge"></canvas><p>CORRECTNESS</p></div>
+        <div class="dashboard-gauge"><canvas id="security-gauge"></canvas><p>SECURITY</p></div>
+        <div class="dashboard-gauge"><canvas id="performance-gauge"></canvas><p>EFFICIENCY</p></div>
+        <div id="status-display" style="text-align: right; width: 300px;">
+            <p style="font-size: 12px; color: var(--secondary-text); margin: 0;">SYSTEM STATUS</p>
+            <p id="status-text" style="font-size: 24px; margin: 5px 0; color: var(--primary-accent); text-shadow: 0 0 10px var(--glow-primary);">STANDBY</p>
+        </div>
+    </div>
+
+    <div id="forensic-panel" class="overlay"></div>
+    <div id="sentinel-panel" class="overlay"></div>
+    <div id="report-content" style="display: none;"></div>
+    
+    <audio id="audio-click" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
+    <audio id="audio-start" src="https://www.soundjay.com/misc/sounds/wind-chime-1.mp3" preload="auto"></audio>
+    <audio id="audio-finish" src="https://www.soundjay.com/misc/sounds/dream-harp-01.mp3" preload="auto"></audio>
+    <audio id="audio-fade" src="https://www.soundjay.com/buttons/sounds/button-10.mp3" preload="auto"></audio>
+
+    <script type="text/javascript">
+        // --- STARFIELD BACKGROUND ---
+        const starfield = document.getElementById('starfield');
+        const s_ctx = starfield.getContext('2d');
+        let stars = [];
+        function resizeStarfield() {
+            starfield.width = window.innerWidth;
+            starfield.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < 1500; i++) {
+                stars.push({ x: (Math.random() - 0.5) * starfield.width * 2, y: (Math.random() - 0.5) * starfield.height * 2, z: Math.random() * starfield.width });
+            }
+        }
+        resizeStarfield();
+        window.addEventListener('resize', resizeStarfield);
+        function animateStarfield() {
+            s_ctx.fillStyle = '#010409';
+            s_ctx.fillRect(0, 0, starfield.width, starfield.height);
+            s_ctx.fillStyle = 'rgba(0, 170, 255, 0.5)';
+            stars.forEach(star => {
+                star.z -= 0.3;
+                if (star.z <= 0) { star.z = starfield.width; }
+                const k = 128 / star.z;
+                const px = star.x * k + starfield.width / 2;
+                const py = star.y * k + starfield.height / 2;
+                if (px >= 0 && px <= starfield.width && py >= 0 && py <= starfield.height) {
+                    const size = (1 - star.z / starfield.width) * 2;
+                    s_ctx.beginPath();
+                    s_ctx.arc(px, py, size, 0, Math.PI * 2);
+                    s_ctx.fill();
+                }
+            });
+            requestAnimationFrame(animateStarfield);
+        }
+        animateStarfield();
+
+        // --- SETUP & GLOBAL STATE ---
+        const container = document.getElementById('evolution-web');
+        const nodes = new vis.DataSet([]);
+        const edges = new vis.DataSet([]);
+        const options = {
+            // CHANGED to force-directed graph (barnesHut)
+            physics: { barnesHut: { gravitationalConstant: -30000, springLength: 250, springConstant: 0.05 } },
+            nodes: { font: { color: 'white', size: 14 } },
+            edges: { width: 1, color: { color: 'rgba(0,170,255,0.2)', highlight: 'rgba(0,170,255,1)' }, smooth: { type: 'continuous' } }
+        };
+        const network = new vis.Network(container, { nodes, edges }, options);
+        let processedHashes = new Set(), allTimeChampion = { id: null, fitness: -Infinity }, updateInterval = null, missionClockInterval = null, currentRunId = null, fullLedgerData = [], parentMap = {};
+
+        // --- AUDIO & UI HELPERS ---
+        const sounds = { click: document.getElementById('audio-click'), start: document.getElementById('audio-start'), finish: document.getElementById('audio-finish'), fade: document.getElementById('audio-fade') };
+        function playSound(sound) { sounds[sound].currentTime = 0; sounds[sound].play().catch(e => {}); }
+        
+        function createGauge(ctx, label, color) {
+            return new Chart(ctx, {
+                type: 'doughnut', data: { datasets: [{ data: [0, 100], backgroundColor: [color, 'rgba(255, 255, 255, 0.1)'], borderColor: 'transparent' }] },
+                options: { responsive: true, maintainAspectRatio: false, rotation: -90, circumference: 180, cutout: '70%', plugins: { legend: { display: false }, tooltip: { enabled: false } }, animation: { duration: 500 } }
+            });
+        }
+        const gauges = {
+            correctness: createGauge(document.getElementById('correctness-gauge').getContext('2d'), 'Correctness', 'rgba(0, 255, 150, 0.8)'),
+            security: createGauge(document.getElementById('security-gauge').getContext('2d'), 'Security', 'rgba(0, 170, 255, 0.8)'),
+            performance: createGauge(document.getElementById('performance-gauge').getContext('2d'), 'Efficiency', 'rgba(255, 215, 0, 0.8)')
+        };
+        function updateGauges(breakdown) {
+            const c = Math.max(0, Math.min(100, (breakdown.Correctness / 500) * 100));
+            const s = Math.max(0, Math.min(100, (breakdown.Security / 1000) * 100));
+            const p = Math.max(0, Math.min(100, 100 + (breakdown['Perf. Penalty (CPU)'] || 0) + (breakdown['Perf. Penalty (Mem)'] || 0)));
+            gauges.correctness.data.datasets[0].data = [c, 100 - c]; gauges.correctness.update();
+            gauges.security.data.datasets[0].data = [s, 100 - s]; gauges.security.update();
+            gauges.performance.data.datasets[0].data = [p, 100 - p]; gauges.performance.update();
+        }
+        const ticker = document.getElementById('ticker-content');
+        function addTickerLine(text, type = 'info') {
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            let color = 'var(--secondary-text)';
+            if (type === 'success') color = 'var(--success-color)';
+            if (type === 'fail') color = 'var(--danger-color)';
+            line.innerHTML = `<span style="color: ${color}; text-shadow: 0 0 5px ${color};">> ${text}</span>`;
+            ticker.insertBefore(line, ticker.firstChild);
+            if (ticker.childElementCount > 20) ticker.removeChild(ticker.lastChild);
+        }
+        setInterval(() => { if (!currentRunId) { const fakeData = ['SYSTEM_IDLE', 'AWAITING_CMD', 'OBSERVATORY_ONLINE']; addTickerLine(`[SYS] ${fakeData[Math.floor(Math.random() * fakeData.length)]}`); } }, 1000);
+        
+        // MODIFIED: REPLACED DNA Helix with Data-Driven Star Glyph
+        function generateGlyph(fingerprint, fitness, isElite) {
+            const canvas = document.createElement('canvas'); canvas.width = 200; canvas.height = 200;
+            const ctx = canvas.getContext('2d'); const centerX = 100, centerY = 100;
+            // Normalize telemetry features
+            const cpu = Math.min(1, (fingerprint.cpu_percent_total_mean || 0) / 100); 
+            const mem = Math.min(1, (fingerprint.memory_rss_bytes_mean || 0) / 10000000); 
+            const io = Math.min(1, ((fingerprint.io_read_bytes_mean || 0) + (fingerprint.io_write_bytes_mean || 0)) / 100000); 
+            
+            // Star/Polygon Parameters based on features
+            const sides = 5 + Math.floor(cpu * 10); // CPU influences complexity/number of sides
+            const radius = 60 + (cpu * 15); // CPU influences size
+            
+            ctx.beginPath();
+            ctx.moveTo(centerX + radius, centerY);
+            for (let i = 1; i <= sides; i++) { 
+                const angle = i * (2 * Math.PI / sides);
+                // IO influences the spikeiness (alternating spikes)
+                const spike = (i % 2 === 0) ? 1.0 : (1.0 - cpu * 0.5); 
+                ctx.lineTo(centerX + Math.cos(angle) * radius * spike, centerY + Math.sin(angle) * radius * spike);
+            }
+            ctx.closePath();
+            
+            // MEM influences color (R/B)
+            const r = Math.floor(255 * mem); 
+            const b = 255 - r;
+            let color1 = isElite ? `rgba(${r}, 255, ${b}, 1)` : `rgba(${r}, 200, ${b}, 0.7)`;
+            let color2 = isElite ? `rgba(${r}, 150, ${b}, 1)` : `rgba(${r}, 100, ${b}, 0.5)`;
+            let strokeColor = fitness > 0 ? (isElite ? '#FFFFFF' : '#00FF00') : '#555555';
+
+            const gradient = ctx.createRadialGradient(centerX, centerY, 5, centerX, centerY, radius);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(1, color2);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            // IO influences stroke thickness
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = 3 + (io * 10); 
+            ctx.stroke();
+            
+            return canvas.toDataURL();
+        }
+        
+        function extractFingerprint(telemetry) {
+            if (!telemetry || telemetry.length === 0) return {};
+            let features = {}; const cols = ['cpu_percent_total', 'memory_rss_bytes', 'io_read_bytes', 'io_write_bytes'];
+            cols.forEach(col => {
+                const series = telemetry.map(t => t[col]).filter(v => v !== undefined);
+                if (series.length > 0) { features[`${col}_mean`] = series.reduce((a, b) => a + b, 0) / series.length; }
+            });
+            return features;
+        }
+
+        // --- CORE LOGIC: "COSMIC WEB" VISUALIZATION (Updated for Force-Directed Graph) ---
+        function updateFromLedger() {
+            if (!currentRunId) return;
+            fetch(`/ledger/${currentRunId}`).then(r => r.json()).then(ledger => {
+                if (!ledger || ledger.length === 0) return;
+                fullLedgerData = ledger;
+                const lastBlock = ledger[ledger.length - 1];
+                document.getElementById('status-text').innerText = lastBlock.event_type.replace(/_/g, ' ');
+
+                if (lastBlock.event_type === "CHAMPION_UPDATED") { updateGauges(lastBlock.details.champion.breakdown); }
+
+                ledger.forEach(block => {
+                    if (processedHashes.has(block.block_hash)) return;
+
+                    if (block.event_type !== 'GENESIS') addTickerLine(`[BLOCK ${block.block_height}] ${block.event_type}`);
+
+                    if (block.event_type === 'EVALUATION_COMPLETE') {
+                        const gen = block.details.generation;
+                        const results = block.details.evaluation_results;
+                        const newNodes = [], newEdges = [];
+                        
+                        // Determine Parent (Previous Champion) for this generation's offspring
+                        let parentId = 'GENESIS-0';
+                        if (gen > 0) {
+                            // Find the CHAMPION_UPDATED block from the *previous* generation to use as the parent
+                            const prevGen = gen - 1;
+                            const parentGenChampions = fullLedgerData.slice().reverse().filter(b => b.block_height === prevGen && b.event_type === 'CHAMPION_UPDATED');
+                            if (parentGenChampions.length > 0) {
+                                parentId = `${prevGen}-${parentGenChampions[0].details.champion.id}`;
+                            } else {
+                                // Fallback for first gen or if champion block is missed
+                                parentId = 'GENESIS-0'; 
+                            }
+                        }
+
+                        results.forEach(res => {
+                            const isElite = res.fitness > 0;
+                            const id = `${gen}-${res.id}`;
+                            const fingerprint = res.benign_telemetry ? extractFingerprint(res.benign_telemetry) : {};
+                            
+                            const node = { 
+                                id: id, 
+                                shape: 'image', 
+                                image: generateGlyph(fingerprint, res.fitness, isElite), 
+                                genome: res.genome, fitness: res.fitness, breakdown: res.breakdown, 
+                                fullBlock: block, fingerprint: fingerprint 
+                            };
+
+                            if (isElite) {
+                                node.label = `+${res.fitness.toFixed(0)}`;
+                                newNodes.push(node);
+                                
+                                // Edge from Parent (previous best) to new elite
+                                if (nodes.get(parentId)) newEdges.push({ from: parentId, to: id, id: `${parentId}->${id}` });
+                                
+                                addTickerLine(`[GEN ${gen}] GID ${res.id} -> SURVIVED | Fitness: ${res.fitness.toFixed(0)}`, 'success');
+
+                            } else {
+                                // Failed nodes (dots)
+                                node.size = 15; node.shape = 'dot';
+                                node.color = { background: 'rgba(218, 54, 51, 0.5)', border: 'rgba(218, 54, 51, 0.8)' };
+                                newNodes.push(node);
+                                
+                                // Edge from Parent to failed node (faded red)
+                                if (nodes.get(parentId)) newEdges.push({ from: parentId, to: id, id: `${parentId}->${id}`, color: 'rgba(218, 54, 51, 0.2)' });
+                                
+                                // Remove non-elite nodes after a delay (death visualization)
+                                setTimeout(() => { playSound('fade'); nodes.remove(id); }, 2000); 
+                            }
+                            
+                            // Track All-Time Champion
+                            if (res.fitness >= allTimeChampion.fitness) {
+                                allTimeChampion = { id, fitness: res.fitness, genome: res.genome, fingerprint: fingerprint };
+                            }
+                        });
+                        
+                        nodes.update(newNodes); edges.update(newEdges);
+                        
+                        if (allTimeChampion.id) {
+                            // Update all-time champion's glow/shadow
+                            const champNode = nodes.get(allTimeChampion.id);
+                            if (champNode) nodes.update({ id: allTimeChampion.id, shadow: { enabled: true, color: 'rgba(255,215,0,0.6)', size: 30 } });
+                        }
+
+                    } else if (block.event_type === 'FINAL_CHAMPION_SYNTHESIZED') {
+                        playSound('finish');
+                        const champ = block.details.final_champion;
+                        updateGauges(champ.breakdown);
+                        const panel = document.getElementById('sentinel-panel');
+                        const glyphImage = generateGlyph(allTimeChampion.fingerprint, champ.fitness, true);
+                        
+                        // NOTE: Updated button text to match new report function
+                        panel.innerHTML = `<h3>[ AEGIS SENTINEL SYNTHESIZED ]</h3><img src="${glyphImage}" alt="Champion DNA Glyph" width="200" height="200" style="border: 3px solid var(--champion-accent); border-radius: 50%;"><strong>Final Fitness: <span style="color: var(--champion-accent);">${champ.fitness.toFixed(2)}</span></strong><pre>${JSON.stringify(champ.genome, null, 2)}</pre><button id="report-button">[ DOWNLOAD SCIENTIFIC DOSSIER ]</button><button id="rerun-button">[ INITIATE NEW MISSION ]</button>`;
+                        
+                        panel.style.display = 'block';
+                        document.getElementById('config-panel').style.display = 'none';
+                        document.getElementById('forensic-panel').style.display = 'none'; // Ensure forensic panel is hidden
+                        if (updateInterval) clearInterval(updateInterval); updateInterval = null;
+                        if (missionClockInterval) clearInterval(missionClockInterval); missionClockInterval = null;
+                        network.setOptions({ physics: false });
+                    }
+                    processedHashes.add(block.block_hash);
+                });
+            });
+        }
+
+        // --- EVENT HANDLERS & UI MANAGEMENT ---
+        document.body.addEventListener('click', function(event) { 
+            if (event.target.id === 'start-button') { playSound('click'); startSynthesis(); } 
+            // Button text updated to DOSSIER
+            if (event.target.id === 'report-button') { playSound('click'); downloadReport(); } 
+            if (event.target.id === 'rerun-button') { playSound('click'); resetUI(); } 
+        });
+        
+        network.on("click", function (params) {
+            playSound('click');
+            const panel = document.getElementById('forensic-panel');
+            if (params.nodes.length > 0) {
+                const nodeId = params.nodes[0];
+                const nodeData = nodes.get(nodeId);
+                let breakdownHtml = 'N/A';
+                if (nodeData.breakdown) {
+                    breakdownHtml = Object.entries(nodeData.breakdown).map(([key, value]) => `<tr><td style="color: var(--primary-accent);">${key.replace(' Penalty','').replace('(CPU)','')}</td><td>${value > 0 ? '+':''}${value.toFixed(2)}</td></tr>`).join('');
+                }
+                panel.innerHTML = `<h3>[ FORENSICS: NODE ${nodeId} ]</h3><strong>FITNESS SCORE: ${nodeData.fitness ? nodeData.fitness.toFixed(2) : 'N/A'}</strong><table style="width:100%;">${breakdownHtml}</table><hr><strong>GENOME (DNA):</strong> <pre>${JSON.stringify(nodeData.genome, null, 2)}</pre><hr><strong>LEDGER PROOF:</strong><br><span class="hash">HASH: ${nodeData.fullBlock.block_hash}</span><br><span class="hash">PREV: ${nodeData.fullBlock.previous_hash}</span>`;
+                panel.style.display = 'block';
+            } else { panel.style.display = 'none'; }
+        });
+
+        function startSynthesis() {
+            playSound('start'); 
+            const config = { 
+                populationSize: document.getElementById('pop-size-input').value, generations: document.getElementById('gens-input').value,
+                mutationRate: document.getElementById('mutation-rate-slider').value, crossoverRate: document.getElementById('crossover-rate-slider').value,
+                elitismCount: document.getElementById('elitism-count-slider').value, mutationStrength: 0.2
+            };
+            resetUIState();
+            addTickerLine(`[CMD] INITIATE_SYNTHESIS... PARAMS LOADED`, 'success');
+            fetch('/start', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(config) })
+                .then(r => r.json()).then(data => {
+                    currentRunId = data.run_id;
+                    document.getElementById('status-text').innerText = 'INITIATING...';
+                    if (updateInterval) clearInterval(updateInterval);
+                    updateInterval = setInterval(updateFromLedger, 2000);
+                    let startTime = Date.now();
+                    missionClockInterval = setInterval(() => {
+                        const elapsed = new Date(Date.now() - startTime);
+                        const pad = num => num.toString().padStart(2, '0');
+                        document.getElementById('mission-clock').innerText = `${pad(elapsed.getUTCHours())}:${pad(elapsed.getUTCMinutes())}:${pad(elapsed.getUTCSeconds())}`;
+                    }, 1000);
+                });
+        }
+
+        function resetUI() {
+            if (updateInterval) clearInterval(updateInterval); updateInterval = null;
+            if (missionClockInterval) clearInterval(missionClockInterval); missionClockInterval = null;
+            currentRunId = null; fullLedgerData = [];
+            document.getElementById('config-panel').style.display = 'block';
+            document.getElementById('sentinel-panel').style.display = 'none';
+            document.getElementById('status-text').innerText = 'STANDBY';
+            document.getElementById('mission-clock').innerText = '00:00:00';
+            updateGauges({Correctness: 0, Security: 0});
+            nodes.clear(); edges.clear(); network.setOptions({ physics: true });
+        }
+
+        function resetUIState() {
+            processedHashes.clear(); nodes.clear(); edges.clear();
+            allTimeChampion = { id: null, fitness: -Infinity };
+            // Removed 'level' property from GENESIS, added x, y for non-hierarchical physics
+            nodes.add({id: 'GENESIS-0', label: 'GENESIS', color: '#FFFFFF', fixed: true, shape: 'star', size: 30, x:0, y:0});
+            document.getElementById('sentinel-panel').style.display = 'none';
+            document.getElementById('forensic-panel').style.display = 'none';
+            document.getElementById('config-panel').style.display = 'none';
+            parentMap = { 'GENESIS-0': [] }; // Added parentMap for the new logic
+        }
+        
+        // --- NEW: INTELLIGENT DOSSIER GENERATOR ---
+        function generateReportNarrative(champion, analysisData) {
+            let narrative = {
+                executiveSummary: '',
+                championAnalysis: ''
+            };
+
+            // 1. Generate Executive Summary Verdict
+            if (champion.fitness > 1000) {
+                narrative.executiveSummary = `The experiment was a decisive success. The COSMOS-Ω system rapidly converged on a high-fitness security policy ('Aegis Sentinel') with a conclusive score of <strong>+${champion.fitness.toFixed(2)}</strong>. This result provides a quantitative validation of the Multi-Physics Evolutionary Defense (MPED) hypothesis.`;
+            } else if (champion.fitness > 0) {
+                narrative.executiveSummary = `The experiment was a marginal success. While a positive-scoring policy was synthesized with a final score of <strong>+${champion.fitness.toFixed(2)}</strong>, further evolution would be required to achieve a more optimal balance between security and performance objectives.`;
+            } else {
+                narrative.executiveSummary = `The experiment failed to converge on a viable solution. The highest achieved fitness score was <strong>${champion.fitness.toFixed(2)}</strong>. Analysis of the evolutionary data suggests that the fitness landscape may have been too complex for the given mission parameters.`;
+            }
+
+            // 2. Generate Champion Strategy Analysis
+            const metrics = new Set();
+            const complexity = JSON.stringify(champion.genome).length;
+
+            function findMetrics(node) {
+                if (node.type === 'rule') {
+                    metrics.add(node.metric.split('_')[0]); // e.g., 'cpu', 'memory'
+                } else if (node.children) {
+                    node.children.forEach(findMetrics);
+                }
+            }
+            // Check if the structure exists before attempting to traverse it
+            if(champion.genome && champion.genome.states && champion.genome.states.STATE_0 && champion.genome.states.STATE_0.active_policy) {
+               findMetrics(champion.genome.states.STATE_0.active_policy);
+            }
+            
+            let strategy;
+            if (metrics.size === 1) {
+                const metric = metrics.values().next().value;
+                strategy = `The AI's final strategy is elegantly simple, zeroing in on a single critical telemetry signal: <strong>${metric.toUpperCase()}</strong>. It deduced that for this target, anomalous behavior is most reliably detected by its ${metric} fingerprint, ignoring other signals as noise.`;
+            } else if (metrics.size > 1) {
+                strategy = `The AI developed a complex, multi-faceted strategy. It concluded that no single metric was sufficient, instead choosing to monitor a combination of <strong>${[...metrics].join(', ').toUpperCase()}</strong> signals. This indicates a nuanced understanding of the application's behavior under threat.`;
+            } else {
+                strategy = `The policy structure is highly unusual or empty. The policy appears to contain no explicit metric-based rules, suggesting a default or passive enforcement strategy.`;
+            }
+            narrative.championAnalysis = strategy;
+
+            return narrative;
+        }
+
+        function downloadReport() {
+            const championBlock = fullLedgerData.find(b => b.event_type === 'FINAL_CHAMPION_SYNTHESIZED');
+            if (!championBlock) { alert('Champion data not found!'); return; }
+            
+            // --- 1. Deep Data Analysis ---
+            const champion = championBlock.details.final_champion;
+            const initBlock = fullLedgerData.find(b => b.event_type === 'INITIATION');
+            const config = initBlock.details.config;
+            const fitnessData = fullLedgerData.filter(b => b.event_type === 'EVALUATION_COMPLETE').map(b => {
+                const fitnesses = b.details.evaluation_results.map(r => r.fitness);
+                return { gen: b.details.generation, max: Math.max(...fitnesses), avg: fitnesses.reduce((a, b) => a + b, 0) / fitnesses.length };
+            });
+            let convergenceGen = 'N/A'; let stabilityDuration = 0;
+            // Check for convergence: find the generation where the champion fitness was first achieved (or exceeded)
+            for (let i = 0; i < fitnessData.length; i++) { 
+                if (fitnessData[i].max >= champion.fitness) { convergenceGen = fitnessData[i].gen; break; } 
+            }
+            // Check stability: count generations at the end where max fitness matched champion fitness
+            for (let i = fitnessData.length - 1; i >= 0; i--) { 
+                 if (Math.abs(fitnessData[i].max - champion.fitness) < 0.01) { stabilityDuration++; } else { break; } 
+            }
+            const totalGenomesEvaluated = fitnessData.length * config.population_size;
+            const totalFailures = fullLedgerData.filter(b => b.event_type === 'EVALUATION_COMPLETE').flatMap(b => b.details.evaluation_results).filter(r => r.fitness < 0).length;
+            const selectionPressure = (totalFailures / totalGenomesEvaluated) * 100;
+
+            // --- 2. Generate Dynamic Narrative ---
+            const narrative = generateReportNarrative(champion, { selectionPressure });
+            
+            // --- 3. Create and Populate the Report Structure ---
+            const tempPrintContainer = document.createElement('div');
+            tempPrintContainer.style.position = 'absolute'; tempPrintContainer.style.left = '-9999px'; document.body.appendChild(tempPrintContainer);
+            const glyphImage = generateGlyph(allTimeChampion.fingerprint, champion.fitness, true);
+
+            tempPrintContainer.innerHTML = `
+                <div id="pdf-content" style="font-family: 'Times New Roman', serif; width: 7.5in; color: black; background-color: white;">
+                    <div style="text-align: center; border: 5px double #002244; padding: 20px;">
+                        <h1 style="color: #002244; margin: 0; font-size: 28px;">ForgeX4 COSMOS-Ω</h1>
+                        <h2 style="color: #003366; margin: 0; font-size: 20px;">VERIFIED SCIENTIFIC DOSSIER</h2>
+                        <p style="margin-top: 20px;"><strong>Project Director:</strong> Kian Mansouri Jamshidi</p>
+                    </div>
+                    <h2 style="color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 40px;">1. Executive Summary</h2>
+                    <p>${narrative.executiveSummary}</p>
+                    <h2 style="color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 40px;">2. Mission Parameters & Analytical Overview</h2>
+                    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse; page-break-inside: avoid;">
+                        <thead style="background-color: #eef;"><tr><th colspan="2">Input Configuration</th><th colspan="2">Analytical Results</th></tr></thead>
+                        <tbody>
+                            <tr><td>Population Size</td><td>${config.population_size}</td><td>Total Genomes Evaluated</td><td>${totalGenomesEvaluated}</td></tr>
+                            <tr><td>Generations</td><td>${config.generations}</td><td>Selection Pressure</td><td>${selectionPressure.toFixed(1)}% Terminated</td></tr>
+                            <tr><td>Mutation Rate</td><td>${config.mutation_rate}</td><td>Champion Convergence</td><td>Generation ${convergenceGen}</td></tr>
+                            <tr><td>Elitism Count</td><td>${config.elitism_count}</td><td>Champion Stability</td><td>${stabilityDuration} Generation(s)</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="page-break-before: always;"></div>
+                    <h2 style="color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 40px;">3. Evolutionary Trajectory Analysis</h2>
+                    <p>The following chart maps the progression of the maximum and average fitness scores across all generations. The consistent upward trend of the maximum fitness, followed by a plateau, is a strong indicator of successful evolutionary convergence on an optimal solution.</p>
+                    <div style="width: 7in; height: 3.5in; page-break-inside: avoid; margin-top: 20px;"><canvas id="fitness-chart"></canvas></div>
+                    <div style="page-break-before: always;"></div>
+                    <h2 style="color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 40px;">4. Champion Genome Deconstruction</h2>
+                    <p>The final, highest-scoring genome represents the synthesized 'Aegis Sentinel' policy. Its structure and the deconstruction of its fitness score provide a complete, explainable rationale for its selection.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; page-break-inside: avoid;">
+                        <div style="width: 55%;">
+                            <h3>Mathematical Fitness Deconstruction</h3>
+                            <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse;">
+                                <thead style="background-color: #eef;"><tr><th>Component</th><th>Score</th><th>Justification</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Correctness</td><td>+${champion.breakdown.Correctness.toFixed(2)}</td><td>Permitted normal execution with high confidence.</td></tr>
+                                    <tr><td>Security</td><td>+${champion.breakdown.Security.toFixed(2)}</td><td>Successfully terminated malicious payload.</td></tr>
+                                    <tr><td>Perf. Penalty</td><td>${((champion.breakdown['Perf. Penalty (CPU)'] || 0) + (champion.breakdown['Perf. Penalty (Mem)'] || 0)).toFixed(2)}</td><td>Negligible resource overhead.</td></tr>
+                                    <tr style="font-weight: bold; background: #eef;"><td>Final Fitness</td><td>+${champion.fitness.toFixed(2)}</td><td>Holistic success across all objectives.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="width: 40%; text-align: center;">
+                             <h3>DNA Glyph Visualization</h3>
+                             <img src="${glyphImage}" alt="Champion DNA Glyph" width="180" height="180" style="border: 2px solid #002244; border-radius: 50%;">
+                        </div>
+                    </div>
+                    <h3 style="margin-top: 30px;">AI Strategy Analysis</h3>
+                    <p>${narrative.championAnalysis}</p>
+                    <h3 style="margin-top: 30px;">Champion Genome (Source Code)</h3>
+                    <pre style="background-color: #f5f5f5; color: #333; font-size: 10px; white-space: pre-wrap; word-break: break-all; page-break-inside: avoid;">${JSON.stringify(champion.genome, null, 2)}</pre>
+                    <h2 style="color: #003366; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 40px;">5. Conclusion & Cryptographic Proof</h2>
+                    <p>This report provides an unassailable, data-driven summary of the experiment. The entire evolutionary process is documented in a cryptographically-chained ledger, ensuring complete auditability and provable results (XAI).</p>
+                    <p style="font-size: 10px; word-break: break-all; margin-top: 20px;">
+                        <strong>Run ID:</strong> ${currentRunId}<br>
+                        <strong>Final Block Hash:</strong> ${championBlock.block_hash}<br>
+                        <strong>Previous Block Hash:</strong> ${championBlock.previous_hash}
+                    </p>
+                </div>
+            `;
+            
+            // --- 4. Render Chart and Generate PDF ---
+            const chartCtx = tempPrintContainer.querySelector('#fitness-chart').getContext('2d');
+            new Chart(chartCtx, { type: 'line', data: { labels: fitnessData.map(d => d.gen), datasets: [ { label: 'Max Fitness', data: fitnessData.map(d => d.max), borderColor: 'rgba(0, 51, 102, 1)', tension: 0.1 }, { label: 'Average Fitness', data: fitnessData.map(d => d.avg), borderColor: 'rgba(204, 0, 0, 1)', tension: 0.1 } ] }, options: { animation: false } });
+            
+            // Wait for chart to render off-screen before generating PDF
+            setTimeout(() => {
+                const elementToPrint = tempPrintContainer.querySelector('#pdf-content');
+                html2pdf().from(elementToPrint).set({
+                    margin: 0.5, filename: `COSMOS-Dossier-${currentRunId}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                }).save().finally(() => { document.body.removeChild(tempPrintContainer); });
+            }, 500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C compilation artifacts
+*.out
+*.o
+*.elf
+
+# Our project-specific temporary files
+temp/
+hello
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Conda environment files (just in case)
+.conda/
+env/
+venv/
+ENV/
+
+# Editor directories and files
+.vscode/
+.idea/
+.project
+.pydevproject
+.settings/
+*.swp
+
+# Notebook checkpoints
+.ipynb_checkpoints
+
+# Project-specific ignores
+clear/
+
+# Telemetry data storage
+data/telemetry/
+
+# PLY (pycparser dependency) cache files
+lextab.py
+yacctab.py

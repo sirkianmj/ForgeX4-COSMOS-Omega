@@ -1,0 +1,7 @@
+{
+  "0": "memory_stress",
+  "1": "disk_io_write",
+  "2": "cpu_burst_compile",
+  "3": "disk_io_read",
+  "4": "cpu_sustained"
+}

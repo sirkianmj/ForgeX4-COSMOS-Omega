@@ -1,0 +1,7 @@
+{
+    "genome": {
+        "max_total_syscalls": 87,
+        "max_cpu_percent": 5.0
+    },
+    "fitness": -1002.0
+}

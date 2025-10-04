@@ -1,0 +1,15 @@
+[
+  {
+    "run_id": "5690f4775e9342d8",
+    "block_height": 0,
+    "nonce": "51b84477",
+    "timestamp": "2025-10-04T08:42:48.463052Z",
+    "event_type": "GENESIS",
+    "details": {
+      "run_id": "5690f4775e9342d8",
+      "detail": "Cryptographic chain initiated."
+    },
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "block_hash": "cd4059b78c13f2ff625723b3e356acb10dfbbd214c04560abb9f898a7cbce555"
+  }
+]

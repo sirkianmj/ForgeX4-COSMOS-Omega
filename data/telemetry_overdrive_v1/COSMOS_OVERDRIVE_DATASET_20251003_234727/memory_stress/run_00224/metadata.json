@@ -1,0 +1,17 @@
+{
+  "workload": {
+    "command_list": [
+      "/home/devkian/miniconda3/envs/cosmos/bin/python",
+      "/tmp/cosmos_overdrive_11795/_temp_workload_files/_workload_mem.py"
+    ],
+    "type": "memory"
+  },
+  "result": {
+    "outcome": "survived",
+    "exit_code": 0,
+    "duration_ms": 10499.652656999842
+  },
+  "citadel_flags": [
+    "FLAG_RESOURCE_CONTENTION"
+  ]
+}

@@ -1,0 +1,1592 @@
+[
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 0,
+        "nonce": "2ddd1170",
+        "timestamp": "2025-10-01T20:33:36.977271Z",
+        "event_type": "GENESIS",
+        "details": {
+            "run_id": "8b46895c3292faf8",
+            "detail": "Cryptographic chain initiated."
+        },
+        "previous_event_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "event_hash": "67125c434310bd9406cb52686321e91bd9cff81265842a912172052aae287335"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 0,
+        "nonce": "a6d4cd5f",
+        "timestamp": "2025-10-01T20:33:37.018540Z",
+        "event_type": "CALIBRATION_COMPLETE",
+        "details": {
+            "normal_profile_id": 0
+        },
+        "previous_event_hash": "67125c434310bd9406cb52686321e91bd9cff81265842a912172052aae287335",
+        "event_hash": "e0bb17d4fbe37d94611e5a6f801916628423cf3979fe8d57ec73983d16d52267"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 0,
+        "nonce": "d0831546",
+        "timestamp": "2025-10-01T20:33:39.101977Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 0,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 20.35718059314747
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 2,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 33.86232317815435
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 3,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 12.802408561298737
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 4,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 5.63371926105687
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 5,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 19.100776230306423
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 6,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.05748850019558
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 7,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.93340618953686
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 8,
+                    "parent": "GENESIS"
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 27.656036433389033
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 9,
+                    "parent": "GENESIS"
+                }
+            ]
+        },
+        "previous_event_hash": "e0bb17d4fbe37d94611e5a6f801916628423cf3979fe8d57ec73983d16d52267",
+        "event_hash": "83cc98e94b6b6f86cd29c357726e88e8611d5494fa500237b0b99e6488161a9a"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 1,
+        "nonce": "d975155e",
+        "timestamp": "2025-10-01T20:33:41.322002Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 1,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 45.003476500645924
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 7,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.719620547792736
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 3,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.61002194321472
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 7,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 5.63371926105687
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 5,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 19.100776230306423
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 6,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 47.25063417131124
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 7,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 33.99081033956875
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "83cc98e94b6b6f86cd29c357726e88e8611d5494fa500237b0b99e6488161a9a",
+        "event_hash": "b870e993414430ffa031f676d9e988539277216ea2158f1dda4b28ddb381ed28"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 2,
+        "nonce": "bb3c86f9",
+        "timestamp": "2025-10-01T20:33:46.021259Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 2,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 15.931152034089992
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 6,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 33.99081033956875
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.712094082850975
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.719620547792736
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 3,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 33.99081033956875
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.00907963908563
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 46.36906436070937
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 7,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "b870e993414430ffa031f676d9e988539277216ea2158f1dda4b28ddb381ed28",
+        "event_hash": "4a3da5a0c2fd9a374c600189b5b8e7fd16d2c9162e4c252ea6794f15037acc0d"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 3,
+        "nonce": "7ac25e1d",
+        "timestamp": "2025-10-01T20:33:50.747570Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 3,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.00907963908563
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 33.99081033956875
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.65277144073072
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 3,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 34.310032706203764
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.11075612678472
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 15.931152034089992
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 6,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.51589070402432
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 27.581018405488614
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "4a3da5a0c2fd9a374c600189b5b8e7fd16d2c9162e4c252ea6794f15037acc0d",
+        "event_hash": "a0e6c1acd7b3133f28a7752be844790568bd4e02aeeb627f552bc673804522dd"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 4,
+        "nonce": "c2037676",
+        "timestamp": "2025-10-01T20:33:55.628744Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 4,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 28.928096965060664
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 37.14970481997238
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 15.12110216662666
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 6,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 18.70043809930406
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 6,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 47.270598142707826
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 45.35666478579755
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 44.17006750179022
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "a0e6c1acd7b3133f28a7752be844790568bd4e02aeeb627f552bc673804522dd",
+        "event_hash": "b47e86d2278f47b9d96dac39556ee1cf1950235a6e835b77bf9899515257f120"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 5,
+        "nonce": "60b4e661",
+        "timestamp": "2025-10-01T20:34:00.412761Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 5,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 33.75618383806452
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 45.462507360495984
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.27463009079639
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.042214281968086
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.45876072636793
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 28.928096965060664
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 47.270598142707826
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "b47e86d2278f47b9d96dac39556ee1cf1950235a6e835b77bf9899515257f120",
+        "event_hash": "115e02e568edae4ab98348338ca3865250366f4c75785d31a6432471c02bb7c2"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 6,
+        "nonce": "38c02857",
+        "timestamp": "2025-10-01T20:34:05.479374Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 6,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.431585774164255
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 24.04493240047234
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 41.046617244568615
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 36.68540080046405
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 33.75618383806452
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 31.868500642473528
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 33.57728298756563
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.042214281968086
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "115e02e568edae4ab98348338ca3865250366f4c75785d31a6432471c02bb7c2",
+        "event_hash": "6e119ebc00b54596a171c43baafccffa6a05fdf960b16f66305139760cb07667"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 7,
+        "nonce": "1ff0b605",
+        "timestamp": "2025-10-01T20:34:10.360447Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 7,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 24.04493240047234
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.01043673105863
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 32.212263757775716
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 32.017595689954504
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.5287075957482
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 36.70715544639043
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 32.24930018891027
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "6e119ebc00b54596a171c43baafccffa6a05fdf960b16f66305139760cb07667",
+        "event_hash": "8051aede9c7187f77aaf0622fcef2752aea6a153f57ddcc9a29cd025ea72906a"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 8,
+        "nonce": "f3bfe62e",
+        "timestamp": "2025-10-01T20:34:15.310826Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 8,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 23.95142259753358
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 31.07412032082733
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 25.56963725326114
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 30.487786882647452
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.5287075957482
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.908500410247264
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 24.04493240047234
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 31.38543491226485
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "8051aede9c7187f77aaf0622fcef2752aea6a153f57ddcc9a29cd025ea72906a",
+        "event_hash": "57ed1f1783a87f77497841aff3c92df4ff5e88a72441ab3de312b64f5d8e1c79"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 9,
+        "nonce": "2884b37a",
+        "timestamp": "2025-10-01T20:34:20.215035Z",
+        "event_type": "EVALUATION_COMPLETE",
+        "details": {
+            "generation": 9,
+            "evaluation_results": [
+                {
+                    "genome": {
+                        "max_cpu_percent": 38.929253193209505
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 39.41288686213951
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 1,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 40.5287075957482
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 36.19681006374702
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 29.014767911296758
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.14434110971182
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 32.9136906708186
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.908500410247264
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 35.21292342521616
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 0
+                },
+                {
+                    "genome": {
+                        "max_cpu_percent": 25.77961891405775
+                    },
+                    "fitness": 1490.0,
+                    "breakdown": {
+                        "Correctness": 500.0,
+                        "Security": 1000.0,
+                        "Performance Penalty": -0.0,
+                        "Elegance Penalty": -10
+                    },
+                    "id": 0,
+                    "parent": 1
+                }
+            ]
+        },
+        "previous_event_hash": "57ed1f1783a87f77497841aff3c92df4ff5e88a72441ab3de312b64f5d8e1c79",
+        "event_hash": "43579b8faf09548c6ef025571c957973e3864f3a3ff9a0b1235d82a8f40592a3"
+    },
+    {
+        "run_id": "8b46895c3292faf8",
+        "block_height": 10,
+        "nonce": "feeb9290",
+        "timestamp": "2025-10-01T20:34:22.218846Z",
+        "event_type": "FINAL_CHAMPION_SYNTHESIZED",
+        "details": {
+            "final_champion": {
+                "genome": {
+                    "max_cpu_percent": 38.929253193209505
+                },
+                "fitness": 1490.0,
+                "breakdown": {
+                    "Correctness": 500.0,
+                    "Security": 1000.0,
+                    "Performance Penalty": -0.0,
+                    "Elegance Penalty": -10
+                },
+                "id": 0,
+                "parent": 0
+            }
+        },
+        "previous_event_hash": "43579b8faf09548c6ef025571c957973e3864f3a3ff9a0b1235d82a8f40592a3",
+        "event_hash": "1de2fa04c69b63bf00a142b52af00bc570f438b9944751496339356a0d57b8fa"
+    }
+]

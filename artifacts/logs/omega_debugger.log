@@ -1,0 +1,102 @@
+2025-10-04 12:08:35,439 - CRITICAL - --- OMEGA DEBUGGER: CRITICAL EVENT ---
+EVENT TYPE: LIVE DISPLAY FAILURE
+CONTEXT: A critical error occurred.
+EXCEPTION: RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+STACK TRACE:
+Traceback (most recent call last):
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/scripts/run_pathfinder_experiment.py", line 133, in run_evolution
+    self.foundry.calibrate(); self.foundry._initialize_population()
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/foundry_pathfinder.py", line 45, in calibrate
+    raise RuntimeError("FATAL: Calibration failed! Digital Twin could not identify a normal profile.")
+RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+
+--- END OF EVENT ---
+
+2025-10-04 12:11:30,922 - CRITICAL - --- OMEGA DEBUGGER: CRITICAL EVENT ---
+EVENT TYPE: LIVE DISPLAY FAILURE
+CONTEXT: A critical error occurred.
+EXCEPTION: RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+STACK TRACE:
+Traceback (most recent call last):
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/scripts/run_pathfinder_experiment.py", line 128, in run_evolution
+    self.foundry.calibrate(); self.foundry._initialize_population()
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/foundry_pathfinder.py", line 45, in calibrate
+    raise RuntimeError("FATAL: Calibration failed! Digital Twin could not identify a normal profile.")
+RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+
+--- END OF EVENT ---
+
+2025-10-04 12:12:48,599 - CRITICAL - --- OMEGA DEBUGGER: CRITICAL EVENT ---
+EVENT TYPE: LIVE DISPLAY FAILURE
+CONTEXT: A critical error occurred.
+EXCEPTION: RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+STACK TRACE:
+Traceback (most recent call last):
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/scripts/run_pathfinder_experiment.py", line 128, in run_evolution
+    self.foundry.calibrate(); self.foundry._initialize_population()
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/foundry_pathfinder.py", line 45, in calibrate
+    raise RuntimeError("FATAL: Calibration failed! Digital Twin could not identify a normal profile.")
+RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+
+--- END OF EVENT ---
+
+2025-10-04 12:15:51,867 - CRITICAL - --- OMEGA DEBUGGER: CRITICAL EVENT ---
+EVENT TYPE: LIVE DISPLAY FAILURE
+CONTEXT: A critical error occurred.
+EXCEPTION: RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+STACK TRACE:
+Traceback (most recent call last):
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/scripts/run_pathfinder_experiment.py", line 123, in run_evolution
+    self.foundry.calibrate(); self.foundry._initialize_population()
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/foundry_pathfinder.py", line 41, in calibrate
+    raise RuntimeError("FATAL: Calibration failed! Digital Twin could not identify a normal profile.")
+RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+
+--- END OF EVENT ---
+
+2025-10-04 17:39:06,641 - CRITICAL - --- OMEGA DEBUGGER: CRITICAL EVENT ---
+EVENT TYPE: LIVE DISPLAY FAILURE
+CONTEXT: A critical error occurred.
+EXCEPTION: RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+STACK TRACE:
+Traceback (most recent call last):
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/scripts/run_pathfinder_experiment.py", line 123, in run_evolution
+    self.foundry.calibrate(); self.foundry._initialize_population()
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/foundry_pathfinder.py", line 41, in calibrate
+    raise RuntimeError("FATAL: Calibration failed! Digital Twin could not identify a normal profile.")
+RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+
+--- END OF EVENT ---
+
+2025-10-04 17:39:40,121 - CRITICAL - --- OMEGA DEBUGGER: CRITICAL EVENT ---
+EVENT TYPE: LIVE DISPLAY FAILURE
+CONTEXT: A critical error occurred.
+EXCEPTION: RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+STACK TRACE:
+Traceback (most recent call last):
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/scripts/run_pathfinder_experiment.py", line 123, in run_evolution
+    self.foundry.calibrate(); self.foundry._initialize_population()
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/foundry_pathfinder.py", line 41, in calibrate
+    raise RuntimeError("FATAL: Calibration failed! Digital Twin could not identify a normal profile.")
+RuntimeError: FATAL: Calibration failed! Digital Twin could not identify a normal profile.
+
+--- END OF EVENT ---
+
+2025-10-04 17:51:14,489 - CRITICAL - --- OMEGA DEBUGGER: CRITICAL EVENT ---
+EVENT TYPE: INITIALIZATION FAILURE
+CONTEXT: Failed to create SentinelFoundry instance
+EXCEPTION: FileNotFoundError: No 'COSMOS_OVERDRIVE_DATASET_' directory found in /home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/data/telemetry_overdrive_v1
+STACK TRACE:
+Traceback (most recent call last):
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/scripts/run_pathfinder_experiment.py", line 254, in main
+    foundry = SentinelFoundry(config=config)
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/foundry_pathfinder.py", line 31, in __init__
+    self.performance_titan = PerformanceTitan()
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/titans_pathfinder.py", line 148, in __init__
+    raise e
+  File "/home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/cosmos/foundry/titans_pathfinder.py", line 131, in __init__
+    raise FileNotFoundError(f"No 'COSMOS_OVERDRIVE_DATASET_' directory found in {base_data_dir}")
+FileNotFoundError: No 'COSMOS_OVERDRIVE_DATASET_' directory found in /home/devkian/Desktop/Projects/ForgeX4-COSMOS-Omega/data/telemetry_overdrive_v1
+
+--- END OF EVENT ---
+
