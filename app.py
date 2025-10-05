@@ -97,7 +97,10 @@ def run_foundry_background(run_id, config):
     with run_states_lock:
         run_states[run_id] = {'status': 'Initializing', 'events': ledger.events, 'is_running': True}
 
-    ledger.record_event(block_height=0, event_type="INITIATION", details={"config": config, "target": "NGINX Web Server (Daemon Sentry Mode)"})
+    ledger.record_event(
+    block_height=0, 
+    event_type="INITIATION", 
+    details={"config": config, "target": "Vulnerable C Program (Buffer Overflow Test)"})
 
     # --- Step 1: Calibration (Now learns NGINX's normal behavior) ---
     with run_states_lock: run_states[run_id]['status'] = 'Calibrating'
