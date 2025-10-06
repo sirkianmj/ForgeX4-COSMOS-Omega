@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it as below."
+authors:
+  - family-names: "Mansouri Jamshidi"
+    given-names: "Kian"
+    email: "sirkianmj@gmail.com"
+    affiliation: "Independent Researcher, Tehran, Iran"
+title: "ForgeX4 COSMOS-Ω: An Autonomous Foundry for Generative Cyber Defense"
+version: 1.0.0 
+date-released: 2025-10-06 
+repository-code: "https://github.com/sirkianmj/ForgeX4-COSMOS-Omega"
+license: "GPL-3.0-only"
+keywords:
+  - "cybersecurity"
+  - "artificial intelligence"
+  - "evolutionary computation"
+  - "explainable ai"
+  - "automated program repair"
+  - "digital immune system"
+  - "generative defense"
+abstract: >-
+  This repository contains the official research code for ForgeX4 COSMOS-Ω, an autonomous 
+  foundry designed to synthesize novel, provably accountable security policies. The project 
+  introduces Multi-Physics Evolutionary Defense (MPED), a new science for guiding automated 
+  security discovery using a program’s physical side-effects (CPU, memory, I/O) as a 
+  high-fidelity information channel. It functions as a practical Digital Immune System, 
+  treating target applications as opaque black boxes to overcome the limitations of 
+  traditional Automated Program Repair (APR). The system also implements a tamper-evident, 
+  cryptographically chained "Ledger" to establish a new standard for Provable Governance and 
+  Algorithmic Accountability in autonomous security systems.
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Mansouri Jamshidi"
+    given-names: "Kian"
+    email: "sirkianmj@gmail.com"
+    affiliation: "Independent Researcher, Tehran, Iran"
+  title: "ForgeX4 COSMOS-Ω: A New Methodology for Generative Cyber Defense"
+  journal: "TechXiv preprint" 
+  year: 2025
