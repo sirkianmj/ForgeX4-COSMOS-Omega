@@ -16,7 +16,7 @@ When you are ready, you can add these links back in:
 
 ---
 
-![Evolutionary Trajectory Analysis](assets/evolutionary_trajectory.png)
+![Evolutionary Trajectory Analysis](evolutionary_trajectory.png)
 *Figure 1: The system's evolutionary trajectory, showing immediate convergence to a high-fitness security policy in Generation 0.*
 
 ---
