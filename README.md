@@ -30,6 +30,14 @@ This project has successfully introduced and validated three primary contributio
 2.  **The First Practical Digital Immune System:** We present the successful implementation of a bio-inspired security model. The system's core is a behavioral classifier achieving **99.3% ± 0.6% (95% CI) accuracy** in identifying a program's operational state from its physical telemetry. By treating the target application as an opaque black box, this parser-free architecture overcomes the fundamental brittleness of traditional Automated Program Repair (APR).
 
 3.  **Provable Governance & Algorithmic Accountability:** We establish a new standard for trustworthy AI in security. The system implements a tamper-evident, SHA-256 chained **"Ledger"** that provides an immutable and mathematically verifiable audit trail of the AI's entire decision-making process. This satisfies core tenets of frameworks like DARPA's Responsible AI and the NIST AI Risk Management Framework.
+## 2.5 Published Research Article
+This repository serves as the official implementation of the research detailed in the following article:
+```Bibtex
+Title: ForgeX4 COSMOS-Ω: A Foundational Validation of a Multi-Physics Digital Immune System
+DOI: 10.36227/techrxiv.176055396.69060312/v1
+Published: TechRxiv
+```
+The paper provides an in-depth validation of the system's architecture and the scientific principles it is built upon. It establishes that physical side-channel data from a program's execution can be used as a universal medium for an AI to autonomously generate security policies, without needing to parse or understand the source code.
 
 ---
 
@@ -68,12 +76,25 @@ python scripts/run_pathfinder_experiment.py
 Upon completion, the final champion policy and the full, cryptographically-chained ledger will be generated in the artifacts/gui_runs/ directory. The ledger.json file contains the final champion and the mathematical breakdown of its fitness score.
 The accompanying Jupyter Notebook, notebooks/14_digital_twin_v8_overdrive_classifier.ipynb, provides the complete, documented process for training the behavioral classifier from the raw telemetry data located in the data/ directory.
 
-**5. License**
+## 5. License
 ```bash
 This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0). This is a strong copyleft license intended to ensure that derivative works contributing to public network services also remain open source. Please see the LICENSE file for full terms.
 ```
-**6. Citation**
+## 6. Citation
 If you use this research or code in your work, please cite it as follows:
+ 
+ ## Article
+```Bibtex
+@article{jamshidi2024forge,
+  title={ForgeX4 COSMOS-$\Omega$: A Foundational Validation of a Multi-Physics Digital Immune System},
+  author={Jamshidi, Kian Mansouri},
+  journal={TechRxiv},
+  year={2025},
+  publisher={IEEE},
+  doi={10.36227/techrxiv.176055396.69060312/v1}
+}
+```
+## Software
 ```Bibtex
 @misc{jamshidi2025cosmos,
   author       = {Kian Mansouri Jamshidi},
@@ -84,3 +105,4 @@ If you use this research or code in your work, please cite it as follows:
   howpublished = {\url{https://github.com/sirkianmj/ForgeX4-COSMOS-Omega}}
 }
 ```
+
