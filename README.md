@@ -163,6 +163,14 @@ when the benign peak spikes. Genomes at the upper boundary (~8.9%) sacrifice
 
 The TechRxiv preprint *"COSMOS-Ω: Autonomous Generative Security via Multi-Physics Evolutionary Defense"* describes the **Pathfinder** variant (`cosmos/foundry/foundry_pathfinder.py` + `cosmos/foundry/titans_pathfinder.py`), not the Sentinel demo variant hardened in this session.
 
+### Pathfinder verification (this session)
+
+- **Pathfinder runs end-to-end on Apple M5** (after fixing `oneshot()` CPU bug + executable path collision)
+- **Produced**: multi-state genome with `STATE_0`/`STATE_1`, `EQ`/`GT` rules on `avg_cpu_percent`/`max_num_threads`
+- **Fitness breakdown**: Correctness +499.97, Security +1000.00, Elegance −13.32 → **+1486.65**
+- **Paper's +1499.97**: valid — same components, smaller elegance penalty (genome happened to be shorter)
+- **Range across runs**: ~1480-1500 (varies with champion complexity)
+
 ### Canonical Pathfinder artifacts (paper)
 
 - **Target**: cJSON (Pathfinder Default)

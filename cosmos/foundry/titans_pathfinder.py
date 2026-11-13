@@ -50,7 +50,7 @@ class ExecutionTitan:
     """[ARCHITECT ENFORCER & VM] Runs the target, enforces the stateful policy, and collects raw evidence."""
     def __init__(self):
         project_root = Path(__file__).resolve().parent.parent.parent
-        self.executable_path = project_root / "data/temp/sentinel_target.out"
+        self.executable_path = project_root / "data/temp/pathfinder_target.out"
         if not self.executable_path.exists():
             self.app_source_path = str(project_root / "data/genomes/cjson/cJSON.c")
             self.harness_path = str(project_root / "data/genomes/uranus/cjson_harness.c")
@@ -97,9 +97,8 @@ class ExecutionTitan:
                 try:
                     p.cpu_percent(interval=None); time.sleep(0.01)
                     while not stop_monitoring.is_set():
-                        with p.oneshot():
-                            reading = {'cpu_percent_total': p.cpu_percent(interval=0.05), 'memory_rss_bytes': p.memory_info().rss, 'io_read_bytes': p.io_counters().read_bytes, 'io_write_bytes': p.io_counters().write_bytes, 'num_threads': p.num_threads()}
-                            telemetry.append(reading)
+                        reading = {'cpu_percent_total': p.cpu_percent(interval=0.05), 'memory_rss_bytes': p.memory_info().rss, 'io_read_bytes': p.io_counters().read_bytes, 'io_write_bytes': p.io_counters().write_bytes, 'num_threads': p.num_threads()}
+                        telemetry.append(reading)
                         state_config = genome.get('states', {}).get(current_state, {})
                         if self._evaluate_policy_node(state_config.get('active_policy', {}), reading): 
                             p.kill(); outcome = 'policy_violation'
