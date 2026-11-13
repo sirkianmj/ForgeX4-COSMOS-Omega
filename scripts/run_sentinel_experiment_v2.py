@@ -35,7 +35,8 @@ def profile_target() -> dict:
     normal_payload = b'{"name": "COSMOS", "version": 1}'
     
     # Use the sustained workload run for accurate profiling
-    result = titan.instrumented_run(normal_payload, duration=5)
+    permissive_genome = {'max_cpu_percent': 100.0}
+    result = titan.instrumented_run(normal_payload, genome=permissive_genome, timeout=5)
     
     # --- The Final Fix: Check for a successful outcome ---
     if result.get('outcome') not in ['survived', 'crashed']: 

@@ -23,29 +23,31 @@ from cosmos.foundry.titans_sentinel import ExecutionTitan
 app = typer.Typer(name="COSMOS-Ω Sentinel Experiment")
 console = Console()
 
-def profile_target() -> int:
+def profile_target() -> dict:
     """
     Profiles the target to find the baseline number of system calls.
     Includes robust error reporting.
     """
     console.print("\n[bold]Phase 1: Profiling Target Behavior...[/bold]")
     titan = ExecutionTitan()
-    normal_payload = b'{"name": "COSMOS", "version": 1}'
+    normal_payload = b'1'  # mode 1 = benign I/O
     
-    result = titan.instrumented_run(normal_payload)
-    if result['outcome'] != 'executed':
+    permissive_genome = {'max_cpu_percent': 500.0}  # M5 P-cores can exceed 100%
+    result = titan.instrumented_run(normal_payload, genome=permissive_genome, timeout=5)
+    if result['outcome'] != 'survived':
         # --- FORENSIC REPORTING ---
         error_panel = Panel(
-            result['strace_log'],
+            str(result),
             title="[bold red]Compiler/Execution Error[/bold red]",
             border_style="red"
         )
         console.print(error_panel)
         raise RuntimeError(f"Profiling failed! The target could not be compiled or executed normally. Outcome: {result['outcome']}")
         
-    syscall_count = len(re.findall(r'^\w+\(.*\)\s*=', result['strace_log'], re.MULTILINE))
-    console.print(f"[green]  ✓ Profiling Complete:[/green] Baseline system calls is [bold yellow]{syscall_count}[/bold yellow].")
-    return syscall_count
+    snapshot = result.get('telemetry_snapshot', {})
+    baseline_cpu = snapshot.get('max_cpu_percent', 0.0)
+    console.print(f"[green]  ✓ Profiling Complete:[/green] Peak CPU: [bold yellow]{baseline_cpu:.2f}%[/bold yellow].")
+    return {'max_cpu': baseline_cpu}
 
 @app.command()
 def run():
@@ -54,18 +56,25 @@ def run():
     try:
         baseline_syscalls = profile_target()
         
-        initial_sentinel_genome = {'max_total_syscalls': int(baseline_syscalls * 1.5)}
+        initial_sentinel_genome = {'max_cpu_percent': max(baseline_syscalls['max_cpu'] * 2.5, 25.0)}
         console.print(f"\n[bold]Phase 2: Seeding Initial Population...[/bold]")
         console.print(f"  [green]✓ Seed Genome created:[/green] [cyan]{initial_sentinel_genome}[/cyan]")
         
         console.print("\n[bold]Phase 3: Launching Sentinel Foundry...[/bold]")
         foundry_config = {
-            "population_size": 10, "generations": 10,
-            "mutation_rate": 0.8, "elitism_count": 2,
+            "population_size": 20, "generations": 40,
+            "mutation_rate": 0.5, "elitism_count": 2,
         }
         
-        foundry = SentinelFoundry(initial_sentinel_genome, foundry_config)
+        foundry = SentinelFoundry(foundry_config)
         champion = foundry.run_evolution()
+
+        # Save the champion artifact
+        import json
+        from pathlib import Path as _P
+        (_P("artifacts") / "aegis_sentinel_champion.json").write_text(
+            json.dumps({"genome": champion["genome"], "fitness": champion["fitness"]}, indent=2)
+        )
         console.print("\n[green]✅ Foundry run complete.[/green]")
 
         console.rule("[bold green]Experiment Complete: Aegis Sentinel Champion[/bold green]")

@@ -79,10 +79,10 @@ def report():
     table.add_row("Entry Point", "scripts/run_assurance_benchmark.py", check_path(project_root / "scripts/run_assurance_benchmark.py"))
     
     # Core Library
-    table.add_row("Core Library", "cosmos/parser/parser.py", check_path(project_root / "cosmos/parser/parser.py"))
-    table.add_row("Core Library", "cosmos/foundry/foundry.py", check_path(project_root / "cosmos/foundry/foundry.py"))
-    table.add_row("Core Library", "cosmos/foundry/titans.py", check_path(project_root / "cosmos/foundry/titans.py"))
-    table.add_row("Core Library", "cosmos/foundry/fitness.py", check_path(project_root / "cosmos/foundry/fitness.py"))
+    table.add_row("Core Library", "cosmos/foundry/foundry_pathfinder.py", check_path(project_root / "cosmos/foundry/foundry_pathfinder.py"))
+    table.add_row("Core Library", "cosmos/foundry/foundry_sentinel.py", check_path(project_root / "cosmos/foundry/foundry_sentinel.py"))
+    table.add_row("Core Library", "cosmos/foundry/titans_sentinel.py", check_path(project_root / "cosmos/foundry/titans_sentinel.py"))
+    table.add_row("Core Library", "cosmos/foundry/foundry_sentinel.py", check_path(project_root / "cosmos/foundry/foundry_sentinel.py"))
 
     console.print(table)
 
@@ -96,7 +96,7 @@ def report():
     # Genomes
     genomes_dir = project_root / "data/genomes"
     data_table.add_row("Target Genome", "cJSON", check_path(genomes_dir / "cjson", is_dir=True))
-    data_table.add_row("Target Genome", "Gaia (Simple)", check_path(genomes_dir / "gaia", is_dir=True))
+    data_table.add_row("Target Genome", "Gaia (Simple) [not yet released]", check_path(genomes_dir / "gaia", is_dir=True))
     data_table.add_row("Attacker Genome", "Uranus", check_path(genomes_dir / "uranus", is_dir=True))
     # Telemetry
     data_table.add_row("Telemetry Data", "telemetry_v2", check_path(project_root / "data/telemetry_v2", is_dir=True))
@@ -113,7 +113,7 @@ def report():
     artifacts_dir = project_root / "artifacts"
     artifacts_table.add_row("Phase 1 Output", "Phase 1 Champion", check_path(artifacts_dir / "phase1/champion_v0.1.c"))
     artifacts_table.add_row("Phase 2 Output", "Digital Twin Model", check_path(artifacts_dir / "phase2/digital_twin_v5.3_hybrid_ensemble", is_dir=True))
-    artifacts_table.add_row("Latest Champion", "Aegis Sentinel v1", check_path(artifacts_dir / "aegis_sentinel_v1.c"))
+    artifacts_table.add_row("Latest Champion", "Aegis Sentinel Champion", check_path(artifacts_dir / "aegis_sentinel_champion.json"))
 
     console.print(artifacts_table)
     console.rule("[bold blue]Analysis Complete[/bold blue]")

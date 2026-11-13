@@ -26,9 +26,9 @@ class ExecutionTitan:
     """[SENTINEL ENFORCER] Runs the target, enforces the policy, collects the evidence."""
     def __init__(self):
         project_root = Path(__file__).resolve().parent.parent.parent
-        self.app_source_path = str(project_root / "data/genomes/cjson/cJSON.c")
-        self.harness_path = str(project_root / "data/genomes/uranus/cjson_harness.c")
-        self.header_dir = str(project_root / "data/genomes/cjson")
+        self.app_source_path = str(project_root / "data/targets/mixed_workload.c")
+        self.harness_path = str(project_root / "data/targets/mixed_workload_harness.c")
+        self.header_dir = str(project_root / "data/targets")
         self.compiler = "gcc"
         self.executable_path = project_root / "data/temp/sentinel_target.out"
         self.executable_path.parent.mkdir(exist_ok=True)
@@ -42,6 +42,7 @@ class ExecutionTitan:
     def instrumented_run(self, payload: bytes, genome: Dict[str, float], timeout: int = 5) -> Dict[str, Any]:
         """Runs the pre-compiled target under observation and policy enforcement."""
         telemetry: List[Dict[str, Any]] = []
+        policy_killed = [False]
         stop_monitoring = threading.Event()
         proc = None
         mon_thread = None
@@ -52,24 +53,30 @@ class ExecutionTitan:
 
             def monitor_thread():
                 try:
-                    # --- REFLEX FIX 1: PRIME THE SENSOR ---
-                    # The first call to cpu_percent with interval=None returns 0.0.
-                    # We "prime the sensor" by making one call and discarding the result.
-                    p.cpu_percent(interval=None) 
-                    time.sleep(0.01) # A tiny sleep to establish a time delta for the next reading
+                    # Prime the sensor (first call returns 0.0 by psutil design)
+                    p.cpu_percent(interval=None)
+                    time.sleep(0.02)
 
                     while not stop_monitoring.is_set():
-                        with p.oneshot():
+                        try:
+                            # NOTE: Do NOT wrap cpu_percent(interval=...) in oneshot().
+                            # oneshot() caches cpu_times(), so the interval-diff
+                            # always returns 0. This was the "Peak CPU: 0.00%" bug.
                             cpu = p.cpu_percent(interval=0.05)
-                            mem = p.memory_info()
-                            telemetry.append({'cpu_percent': cpu, 'resident_memory_bytes': mem.rss})
-                        # --- SENTINEL POLICY ENFORCEMENT ---
-                        if telemetry and genome.get('max_cpu_percent', 100) < telemetry[-1]['cpu_percent']:
-                             p.kill()
-                except (psutil.NoSuchProcess, psutil.AccessDenied):
-                    pass # Process finished, which is normal.
+                            mem = p.memory_info().rss
+                            telemetry.append({'cpu_percent': cpu, 'resident_memory_bytes': mem})
+                        except psutil.NoSuchProcess:
+                            break
+
+                        # Policy enforcement
+                        if genome.get('max_cpu_percent', 100) < cpu:
+                            p.kill()
+                            policy_killed[0] = True
+                            break
+                except psutil.NoSuchProcess:
+                    pass
                 except Exception:
-                    pass # Suppress other potential errors during monitoring.
+                    pass
 
             mon_thread = threading.Thread(target=monitor_thread)
             mon_thread.start()
@@ -77,7 +84,9 @@ class ExecutionTitan:
             stdout, stderr = proc.communicate(input=payload, timeout=timeout)
             
             outcome = 'survived'
-            if proc.returncode != 0:
+            if policy_killed[0]:
+                outcome = 'policy_killed'
+            elif proc.returncode != 0:
                 outcome = 'crashed'
 
         except subprocess.TimeoutExpired:

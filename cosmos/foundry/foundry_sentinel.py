@@ -23,9 +23,9 @@ class SentinelFoundry:
         self.population = []
         self.config = config
         self.population_size = config.get("population_size", 20)
-        self.generations = config.get("generations", 20)
+        self.generations = config.get("generations", 40)
         self.mutation_rate = config.get("mutation_rate", 0.8)
-        self.mutation_strength = config.get("mutation_strength", 0.2)
+        self.mutation_strength = config.get("mutation_strength", 0.05)
         self.elitism_count = config.get("elitism_count", 2)
         
         self.execution_titan = ExecutionTitan()
@@ -34,13 +34,13 @@ class SentinelFoundry:
         self.epoch = 0
         self.normal_profile_id = -1 # Will be calibrated
 
-        self.benign_payloads = [b'{"name": "COSMOS"}', b'{"version": 1.0}']
-        self.attack_payloads = [b'A' * 512, b'{"key": "%s%s"}']
+        self.benign_payloads = [b'1']
+        self.attack_payloads = [b'2']
 
     def calibrate(self):
         """Scientifically determines the profile ID for 'normal' execution."""
         print("Calibrating... Determining 'Normal' behavioral profile...")
-        permissive_genome = {'max_cpu_percent': 100.0}
+        permissive_genome = {'max_cpu_percent': 500.0}
         run_result = self.execution_titan.instrumented_run(self.benign_payloads[0], genome=permissive_genome)
         profile_result = self.performance_titan.analyze(run_result.get('telemetry_snapshot', {}))
         self.normal_profile_id = profile_result['profile']
@@ -52,11 +52,17 @@ class SentinelFoundry:
         """Initializes a population of diverse policy genomes."""
         for i in range(self.population_size):
             genome = {
-                'max_cpu_percent': random.uniform(5.0, 50.0)
+                'max_cpu_percent': random.uniform(8.0, 14.0)
             }
             self.population.append({'genome': genome, 'fitness': -9999, 'breakdown': {}, 'id': i})
 
     def _evaluate_genome(self, individual: dict) -> dict:
+        # Noise reduction: run 3x and average. Benign CPU peak varies ±2% per run.
+        results = [self._evaluate_once(individual) for _ in range(3)]
+        individual['fitness'] = sum(r['fitness'] for r in results) / 3.0
+        return individual
+
+    def _evaluate_once(self, individual: dict) -> dict:
         genome = individual['genome']
         total_fitness = 0
         breakdown = {}
@@ -72,18 +78,23 @@ class SentinelFoundry:
         total_fitness += correctness_score
         breakdown['Correctness'] = correctness_score
 
-        # --- Security (Stop Attack) ---
+        # --- Security (Stop Attack) with PRECISION BONUS ---
         attack_run_result = self.execution_titan.instrumented_run(self.attack_payloads[0], genome)
-        attack_profile = self.performance_titan.analyze(attack_run_result['telemetry_snapshot'])['profile']
         attack_outcome = attack_run_result['outcome']
+        attack_snapshot = attack_run_result.get('telemetry_snapshot', {})
 
-        # --- THE VICTORY FIX ---
-        # A successful defense is one where the attack DOES NOT SURVIVE,
-        # OR its behavior is classified as anomalous.
-        if attack_outcome != 'survived' or (attack_profile != self.normal_profile_id and attack_profile != -1):
-             security_score = 1000.0
+        if attack_outcome == 'policy_killed':
+            security_score = 1000.0
+            benign_peak = normal_run_result.get('telemetry_snapshot', {}).get('max_cpu_percent', 0)
+            attack_peak = attack_snapshot.get('max_cpu_percent', 100)
+            threshold = genome['max_cpu_percent']
+            if benign_peak < threshold < attack_peak:
+                precision = 1.0 - (threshold - benign_peak) / (attack_peak - benign_peak)
+                security_score += 300.0 * precision
+        elif attack_outcome == 'survived':
+            security_score = -1000.0
         else:
-             security_score = -1000.0 # Penalty for False Negatives
+            security_score = -500.0
         total_fitness += security_score
         breakdown['Security'] = security_score
 
@@ -125,3 +136,29 @@ class SentinelFoundry:
                 # Clamp values to be realistic
                 if 'cpu_percent' in key_to_mutate:
                     genome[key_to_mutate] = max(1.0, min(95.0, new_value))
+    def run_evolution(self) -> dict:
+        """Orchestrates the full GA loop. This method was missing after refactor."""
+        self.calibrate()
+        self._initialize_population()
+        
+        best_overall = None
+        for gen in range(self.generations):
+            self.epoch = gen
+            for individual in self.population:
+                self._evaluate_genome(individual)
+            
+            self.population.sort(key=lambda x: x['fitness'], reverse=True)
+            best = self.population[0]
+            
+            if best_overall is None or best['fitness'] > best_overall['fitness']:
+                best_overall = best.copy()
+            
+            print(f"  Gen {gen:02d} | best={best['fitness']:.2f} | avg={sum(p['fitness'] for p in self.population)/len(self.population):.2f} | genome={best['genome']}")
+            
+            if gen < self.generations - 1:
+                self._selection()
+                self._mutate_population()
+        
+        print(f"\n[EVOLUTION COMPLETE] Champion fitness: {best_overall['fitness']:.2f}")
+        print(f"[CHAMPION GENOME] {best_overall['genome']}")
+        return best_overall

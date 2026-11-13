@@ -1,3 +1,14 @@
+# GitHub Linguist exclusions (original — keeps repo language stats clean)
 *_dashboard.html linguist-generated=true
 *_report.json linguist-generated=true
 *.joblib linguist-generated=true
+
+# Cross-platform line ending enforcement (new)
+* text=auto eol=lf
+
+# Binary file handling (new — prevents git diff/merge issues)
+*.png binary
+*.jpg binary
+*.joblib binary
+*.parquet binary
+*.tar.gz binary
