@@ -1,6 +1,11 @@
 {
   "genome": {
-    "max_cpu_percent": 7.137212829992511
+    "max_cpu_percent": 36.074609362551925,
+    "max_resident_memory_bytes": 79524325.30097532
   },
-  "fitness": 1769.67
+  "fitness": 1631.0078678097295,
+  "production_genome_10pct_margin": {
+    "max_cpu_percent": 39.6821,
+    "max_resident_memory_bytes": 87476757
+  }
 }

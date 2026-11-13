@@ -72,8 +72,14 @@ def run():
         # Save the champion artifact
         import json
         from pathlib import Path as _P
+        prod = {}
+        if "max_cpu_percent" in champion["genome"]:
+            prod["max_cpu_percent"] = round(champion["genome"]["max_cpu_percent"] * 1.10, 4)
+        if "max_resident_memory_bytes" in champion["genome"]:
+            prod["max_resident_memory_bytes"] = int(champion["genome"]["max_resident_memory_bytes"] * 1.10)
         (_P("artifacts") / "aegis_sentinel_champion.json").write_text(
-            json.dumps({"genome": champion["genome"], "fitness": champion["fitness"]}, indent=2)
+            json.dumps({"genome": champion["genome"], "fitness": champion["fitness"],
+                        "production_genome_10pct_margin": prod}, indent=2)
         )
         console.print("\n[green]✅ Foundry run complete.[/green]")
 

@@ -35,12 +35,12 @@ class SentinelFoundry:
         self.normal_profile_id = -1 # Will be calibrated
 
         self.benign_payloads = [b'1']
-        self.attack_payloads = [b'2']
+        self.attack_payloads = [b'2', b'3']  # 2=CPU exhaustion, 3=memory exhaustion
 
     def calibrate(self):
         """Scientifically determines the profile ID for 'normal' execution."""
         print("Calibrating... Determining 'Normal' behavioral profile...")
-        permissive_genome = {'max_cpu_percent': 500.0}
+        permissive_genome = {'max_cpu_percent': 500.0, 'max_resident_memory_bytes': float('inf')}
         run_result = self.execution_titan.instrumented_run(self.benign_payloads[0], genome=permissive_genome)
         profile_result = self.performance_titan.analyze(run_result.get('telemetry_snapshot', {}))
         self.normal_profile_id = profile_result['profile']
@@ -52,7 +52,8 @@ class SentinelFoundry:
         """Initializes a population of diverse policy genomes."""
         for i in range(self.population_size):
             genome = {
-                'max_cpu_percent': random.uniform(8.0, 14.0)
+                'max_cpu_percent': random.uniform(30.0, 60.0),
+                'max_resident_memory_bytes': random.uniform(30_000_000, 100_000_000)
             }
             self.population.append({'genome': genome, 'fitness': -9999, 'breakdown': {}, 'id': i})
 
@@ -78,23 +79,33 @@ class SentinelFoundry:
         total_fitness += correctness_score
         breakdown['Correctness'] = correctness_score
 
-        # --- Security (Stop Attack) with PRECISION BONUS ---
-        attack_run_result = self.execution_titan.instrumented_run(self.attack_payloads[0], genome)
-        attack_outcome = attack_run_result['outcome']
-        attack_snapshot = attack_run_result.get('telemetry_snapshot', {})
-
-        if attack_outcome == 'policy_killed':
-            security_score = 1000.0
-            benign_peak = normal_run_result.get('telemetry_snapshot', {}).get('max_cpu_percent', 0)
-            attack_peak = attack_snapshot.get('max_cpu_percent', 100)
-            threshold = genome['max_cpu_percent']
-            if benign_peak < threshold < attack_peak:
-                precision = 1.0 - (threshold - benign_peak) / (attack_peak - benign_peak)
-                security_score += 300.0 * precision
-        elif attack_outcome == 'survived':
-            security_score = -1000.0
-        else:
-            security_score = -500.0
+        # --- Security: multi-attack (CPU + memory) with per-class precision ---
+        n_atk = len(self.attack_payloads)
+        per_atk = 1000.0 / n_atk
+        security_score = 0.0
+        benign_snap = normal_run_result.get('telemetry_snapshot', {})
+        for payload in self.attack_payloads:
+            ar = self.execution_titan.instrumented_run(payload, genome)
+            ao = ar['outcome']
+            asnap = ar.get('telemetry_snapshot', {})
+            if ao == 'policy_killed':
+                security_score += per_atk
+                if payload == b'2':
+                    bp, ap, th = (benign_snap.get('max_cpu_percent', 0),
+                                  asnap.get('max_cpu_percent', 100),
+                                  genome['max_cpu_percent'])
+                    if bp < th < ap:
+                        security_score += 150.0 * (1.0 - (th - bp) / (ap - bp))
+                elif payload == b'3':
+                    bp = benign_snap.get('max_resident_memory_bytes', 0)
+                    ap = asnap.get('max_resident_memory_bytes', 200e6)
+                    th = genome['max_resident_memory_bytes']
+                    if bp < th < ap:
+                        security_score += 150.0 * (1.0 - (th - bp) / (ap - bp))
+            elif ao == 'survived':
+                security_score -= per_atk
+            else:
+                security_score -= per_atk * 0.5
         total_fitness += security_score
         breakdown['Security'] = security_score
 

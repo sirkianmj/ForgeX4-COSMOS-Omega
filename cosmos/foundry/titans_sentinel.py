@@ -73,6 +73,10 @@ class ExecutionTitan:
                             p.kill()
                             policy_killed[0] = True
                             break
+                        if genome.get('max_resident_memory_bytes', float('inf')) < mem:
+                            p.kill()
+                            policy_killed[0] = True
+                            break
                 except psutil.NoSuchProcess:
                     pass
                 except Exception:
