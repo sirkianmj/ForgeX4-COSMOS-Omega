@@ -133,15 +133,26 @@ Benign workload peak CPU varies ±2% between runs. Genomes at the lower boundary
 when the benign peak spikes. Genomes at the upper boundary (~8.9%) sacrifice
 ~30 fitness points for robustness. The GA naturally oscillates between these regimes.
 
-**Limitations (honest):**
-- Single-attack-class validation (CPU exhaustion only); memory-corruption
-  defense is deferred to Phase 4
-- Fitness landscape is discontinuous near the optimum due to
-  non-stationary benign signatures
-- Hardware-specific: results measured on Apple M5; cross-platform
-  verification pending
+**Phase 3.1 update — resolved since initial Phase 3:**
+- ✅ **Multi-attack-class validation**: genome now carries both
+  `max_cpu_percent` and `max_resident_memory_bytes`. Attack set is
+  `[CPU-exhaustion, memory-exhaustion]`; both are enforced by the Titan.
+- ✅ **Memory-based policy primitives**: `max_resident_memory_bytes` added
+  to genome (init range 30-100MB), enforced alongside CPU threshold.
+- ✅ **Production deployment margin**: champion JSON now stores
+  `production_genome_10pct_margin` with both thresholds scaled ×1.10
+  for deployment safety headroom.
+
+**Remaining limitations (honest):**
+- **Non-stationary benign signatures**: fitness landscape is discontinuous
+  near the optimum because benign peak CPU varies ±2% between runs.
+  Mitigated by 3× evaluation averaging, but not eliminated. This is a
+  property of real hardware, not a bug.
+- **Hardware-specific**: results measured on Apple M5. Cross-platform
+  verification (Intel, AMD, ARM server) is pending and requires physical
+  access to non-M5 hardware.
 
 **Deferred to Phase 4:**
-- Memory-based policy primitives (`max_resident_memory_bytes`)
-- Cross-target transfer (Gaia genome)
-- Production deployment with 10% safety margin
+- Cross-target transfer (Gaia genome): requires a second target with a
+  distinct benign signature to validate that the Digital Twin classifier
+  generalizes rather than overfits to cJSON/mixed_workload patterns.
