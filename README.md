@@ -156,3 +156,33 @@ when the benign peak spikes. Genomes at the upper boundary (~8.9%) sacrifice
 - Cross-target transfer (Gaia genome): requires a second target with a
   distinct benign signature to validate that the Digital Twin classifier
   generalizes rather than overfits to cJSON/mixed_workload patterns.
+
+---
+
+## Paper Correspondence (TechRxiv v1)
+
+The TechRxiv preprint *"COSMOS-Ω: Autonomous Generative Security via Multi-Physics Evolutionary Defense"* describes the **Pathfinder** variant (`cosmos/foundry/foundry_pathfinder.py` + `cosmos/foundry/titans_pathfinder.py`), not the Sentinel demo variant hardened in this session.
+
+### Canonical Pathfinder artifacts (paper)
+
+- **Target**: cJSON (Pathfinder Default)
+- **Champion fitness**: +1499.97
+- **Ledger file**: `artifacts/gui_runs/run_1759572140/ledger_20251004_100220_114877e883156cb6.json`
+- **Terminal block hash**: `08ed2f9ab17b5cc12caa2bd7730f8c75085fb7959e993849e4057a76cd050598`
+- **Blocks**: 25 (SHA-256 chained)
+
+### Erratum
+
+TechRxiv v1 Section 5.4 cites terminal hash `a758580fafbca63779424e24db3bfded302fcf7dd775475cc1923cf7f189c53a`. That hash belongs to a separate **NGINX Daemon Sentry run** (`artifacts/gui_runs/run_1759597962/`). The correct hash for the cJSON Pathfinder experiment is:
+08ed2f9ab17b5cc12caa2bd7730f8c75085fb7959e993849e4057a76cd050598
+
+text
+
+### Sentinel vs Pathfinder
+
+| Variant | Genome | Target | Champion | Status |
+|---|---|---|---|---|
+| **Pathfinder** (paper) | 11 metrics × 5 operators (AND/OR/XOR/NAND/NOR) | cJSON | +1499.97 | Original paper experiment |
+| **Sentinel** (demo) | 2-gene (`max_cpu_percent`, `max_resident_memory_bytes`) | mixed_workload.c | +1631.01 | Hardened this session |
+
+Both variants share the SHA-256 ledger architecture and the Digital Intelligence System classifier (`digital_twin_v7.1_The_Fusion_Model.joblib`). The paper specifically validates Pathfinder.
