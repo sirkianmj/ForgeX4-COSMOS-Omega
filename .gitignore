@@ -57,3 +57,8 @@ data/telemetry/
 # PLY (pycparser dependency) cache files
 lextab.py
 yacctab.py
+*.pyc
+.pytest_cache/
+data/temp/
+*.tmp
+_review/

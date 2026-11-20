@@ -58,9 +58,13 @@ class SentinelFoundry:
             self.population.append({'genome': genome, 'fitness': -9999, 'breakdown': {}, 'id': i})
 
     def _evaluate_genome(self, individual: dict) -> dict:
-        # Noise reduction: run 3x and average. Benign CPU peak varies ±2% per run.
-        results = [self._evaluate_once(individual) for _ in range(3)]
-        individual['fitness'] = sum(r['fitness'] for r in results) / 3.0
+        # Noise reduction: run 5x and average. Benign CPU peak varies ±10% per run
+        # because each run yields only 1 telemetry sample. 5x averaging + the
+        # M-of-N kill rule in titans_sentinel drops effective noise by ~4x.
+        N_REPS = 5
+        results = [self._evaluate_once(individual) for _ in range(N_REPS)]
+        individual['fitness'] = sum(r['fitness'] for r in results) / N_REPS
+        individual['breakdown'] = results[0]['breakdown']  # last rep's breakdown for display
         return individual
 
     def _evaluate_once(self, individual: dict) -> dict:
@@ -147,6 +151,11 @@ class SentinelFoundry:
                 # Clamp values to be realistic
                 if 'cpu_percent' in key_to_mutate:
                     genome[key_to_mutate] = max(1.0, min(95.0, new_value))
+                elif 'memory' in key_to_mutate:
+                    genome[key_to_mutate] = max(1_000_000.0, min(500_000_000.0, new_value))
+                else:
+                    import warnings
+                    warnings.warn(f"Mutation not implemented for key '{key_to_mutate}'")
     def run_evolution(self) -> dict:
         """Orchestrates the full GA loop. This method was missing after refactor."""
         self.calibrate()

@@ -1,24 +1,22 @@
 # Web UI
 flask>=3.0.0
 flask-cors>=4.0.0
-
 # CLI & Formatting
 typer>=0.9.0
 rich>=13.0.0
-
 # Core Data Science & ML
 numpy>=1.26.0
 pandas>=2.1.0
 scikit-learn>=1.4.0
 lightgbm>=4.0.0
 joblib>=1.3.0
-
 # System Telemetry
 psutil>=5.9.0
 pyarrow>=14.0.0
-
 # Jupyter Environment
 jupyterlab>=4.0.0
 notebook>=7.0.0
 seaborn>=0.13.0
 matplotlib>=3.8.0
+z3-solver>=4.12.0
+pyyaml>=6.0

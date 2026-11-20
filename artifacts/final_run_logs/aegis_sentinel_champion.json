@@ -1,0 +1,14 @@
+{
+    "genome": {
+        "max_cpu_percent": 32.49201829905983,
+        "max_resident_memory_bytes": 35688017.82200327
+    },
+    "fitness": 1684.4060299353237,
+    "breakdown": {
+        "Correctness": 500.0,
+        "Security": 1252.1597903607144,
+        "Performance Penalty": -47.75376042539085,
+        "Elegance Penalty": -20
+    },
+    "id": 4
+}

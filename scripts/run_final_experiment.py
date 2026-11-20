@@ -38,10 +38,6 @@ def main():
         "elitism_count": 2,
     }
 
-    initial_genome = {
-        'max_total_syscalls': 100,
-    }
-
     # --- Setup Artifacts Directory & Ledger ---
     artifacts_dir = PROJECT_ROOT / "artifacts" / "final_run_logs"
     artifacts_dir.mkdir(exist_ok=True)
@@ -53,7 +49,7 @@ def main():
         # THE CORE EXECUTION
         # ---
         console.print("Initializing Sentinel Foundry with Hybrid Execution Titans...")
-        foundry = SentinelFoundry(initial_genome=initial_genome, config=config)
+        foundry = SentinelFoundry(config=config)
         
         console.print("\nStarting evolution...")
         champion = foundry.run_evolution()

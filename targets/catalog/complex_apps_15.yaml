@@ -1,0 +1,424 @@
+targets:
+- id: nginx_multiprocess_cluster
+  archetype: daemon
+  requires_network: true
+  requires_fork: true
+  requires_priv_ops: true
+  cmd:
+  - nginx
+  - -e
+  - '{WORKDIR}/boot.log'
+  - -p
+  - '{WORKDIR}'
+  - -c
+  - '{WORKDIR}/nginx.conf'
+  base_files:
+    html/index.html: NGINX_CLUSTER_OK
+    nginx.conf: "user root;\ndaemon off;\nmaster_process on;\nworker_processes 2;\n\
+      pid {WORKDIR}/nginx.pid;\nerror_log {WORKDIR}/error.log;\nevents { worker_connections\
+      \ 64; }\nhttp {\n    access_log off;\n    client_max_body_size 32m;\n    client_body_temp_path\
+      \ {WORKDIR}/tmp_body;\n    proxy_temp_path {WORKDIR}/tmp_proxy;\n    fastcgi_temp_path\
+      \ {WORKDIR}/tmp_fcgi;\n    uwsgi_temp_path {WORKDIR}/tmp_uwsgi;\n    scgi_temp_path\
+      \ {WORKDIR}/tmp_scgi;\n    server {\n        listen 127.0.0.1:{PORT};\n    \
+      \    location / { root {WORKDIR}/html; index index.html; }\n    }\n}\n"
+  benign_probes:
+  - name: get_cluster
+    http_probes:
+    - method: GET
+      path: /
+    expect_http_status: 200
+    expect_http_contains: NGINX_CLUSTER_OK
+  attack_probes:
+  - name: flood_60x
+    threat_class: cpu_dos
+    http_probes:
+    - method: POST
+      path: /
+      body_kb: 64
+      repeat: 60
+- id: gunicorn_flask_cluster
+  archetype: daemon
+  requires_network: true
+  requires_fork: true
+  requires_priv_ops: true
+  cmd:
+  - gunicorn
+  - -w
+  - '2'
+  - --worker-tmp-dir
+  - '{WORKDIR}'
+  - -b
+  - 127.0.0.1:{PORT}
+  - --chdir
+  - '{WORKDIR}'
+  - webapp:app
+  base_files:
+    webapp.py: "import os, sqlite3, socket\nfrom flask import Flask, jsonify\napp\
+      \ = Flask(__name__)\nDB = os.path.join(os.getcwd(), \"app.db\")\ncon = sqlite3.connect(DB)\n\
+      con.execute(\"CREATE TABLE IF NOT EXISTS items(name TEXT)\")\ncon.execute(\"\
+      INSERT INTO items VALUES('cosmos')\")\ncon.commit(); con.close()\n@app.get(\"\
+      /items\")\ndef items():\n    c = sqlite3.connect(DB)\n    rows = [r[0] for r\
+      \ in c.execute(\"SELECT name FROM items\").fetchall()]\n    c.close()\n    return\
+      \ jsonify({\"items\": rows})\n@app.get(\"/diag\")\ndef diag():\n    os.system(\"\
+      id\"); return \"ok\"\n@app.get(\"/ssrf\")\ndef ssrf():\n    socket.socket(2,\
+      \ 1).connect((\"127.0.0.1\", 9)); return \"ok\"\n@app.get(\"/write_etc\")\n\
+      def write_etc():\n    open(\"/etc/pwned_guni\", \"w\").write(\"x\"); return\
+      \ \"ok\"\n"
+  benign_probes:
+  - name: flask_sqlite_items
+    http_probes:
+    - method: GET
+      path: /items
+    expect_http_status: 200
+    expect_http_contains: cosmos
+  attack_probes:
+  - name: worker_cmd_injection
+    threat_class: capability_execve
+    http_probes:
+    - method: GET
+      path: /diag
+  - name: worker_ssrf_c2
+    threat_class: mimicry_exfil
+    http_probes:
+    - method: GET
+      path: /ssrf
+  - name: worker_fs_escape
+    threat_class: fs_escape
+    http_probes:
+    - method: GET
+      path: /write_etc
+- id: flask_ssti_app
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/app.py'
+  - '{PORT}'
+  base_files:
+    app.py: "import sys\nfrom flask import Flask, request, render_template_string\n\
+      app = Flask(__name__)\n@app.post(\"/greet\")\ndef greet():\n    tpl = \"Hello\
+      \ \" + request.get_data(as_text=True)\n    return render_template_string(tpl)\n\
+      app.run(host=\"127.0.0.1\", port=int(sys.argv[1]), use_reloader=False)\n"
+  benign_probes:
+  - name: safe_greet
+    http_probes:
+    - method: POST
+      path: /greet
+      body: COSMOS
+    expect_http_status: 200
+    expect_http_contains: Hello COSMOS
+  attack_probes:
+  - name: jinja_ssti_rce
+    threat_class: capability_execve
+    http_probes:
+    - method: POST
+      path: /greet
+      body: '{{ cycler.__init__.__globals__.os.system(''id'') }}'
+- id: flask_ssrf_webhook_app
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/app.py'
+  - '{PORT}'
+  base_files:
+    app.py: "import sys, urllib.request\nfrom flask import Flask, request\napp = Flask(__name__)\n\
+      @app.get(\"/health\")\ndef health(): return \"FLASK_SSRF_OK\"\n@app.get(\"/fetch\"\
+      )\ndef fetch():\n    return urllib.request.urlopen(request.args[\"url\"], timeout=1).read()\n\
+      app.run(host=\"127.0.0.1\", port=int(sys.argv[1]), use_reloader=False)\n"
+  benign_probes:
+  - name: health
+    http_probes:
+    - method: GET
+      path: /health
+    expect_http_status: 200
+    expect_http_contains: FLASK_SSRF_OK
+  attack_probes:
+  - name: ssrf_outbound
+    threat_class: mimicry_exfil
+    http_probes:
+    - method: GET
+      path: /fetch?url=http://127.0.0.1:9/
+- id: git_vcs_cli
+  archetype: cli
+  cmd:
+  - git
+  benign_probes:
+  - name: git_init_local
+    args:
+    - -C
+    - '{WORKDIR}'
+    - init
+    - -q
+  attack_probes:
+  - name: git_alias_rce
+    threat_class: capability_execve
+    args:
+    - -C
+    - '{WORKDIR}'
+    - -c
+    - alias.pwn=!id
+    - pwn
+  - name: git_etc_escape
+    threat_class: fs_escape
+    args:
+    - init
+    - -q
+    - /etc/pwned_git
+  requires_priv_ops: true
+- id: ghostscript_ps_engine
+  archetype: cli
+  cmd:
+  - gs
+  benign_probes:
+  - name: safe_ps_eval
+    args:
+    - -dSAFER
+    - -dBATCH
+    - -dNOPAUSE
+    - -sDEVICE=txtwrite
+    - -sOutputFile=-
+    - -c
+    - (GS_OK) = quit
+    expect_stdout_contains: GS_OK
+  attack_probes:
+  - name: gs_pipe_rce
+    threat_class: capability_execve
+    args:
+    - -dNOSAFER
+    - -dBATCH
+    - -dNOPAUSE
+    - -sDEVICE=nullpage
+    - -c
+    - (%pipe%id) (r) file closefile quit
+  - name: gs_etc_write_escape
+    threat_class: fs_escape
+    args:
+    - -dNOSAFER
+    - -dBATCH
+    - -dNOPAUSE
+    - -sDEVICE=nullpage
+    - -c
+    - (/etc/pwned_gs) (w) file dup (x) writestring closefile quit
+- id: poppler_pdftotext
+  archetype: cli
+  cmd:
+  - pdftotext
+  benign_probes:
+  - name: extract_pdf_text
+    args:
+    - '{WORKDIR}/doc.pdf'
+    - '-'
+    file_generators:
+      doc.pdf: pdf_tiny_valid
+    expect_stdout_contains: COSMOS_PDF_OK
+  attack_probes:
+  - name: pdf_out_etc_escape
+    threat_class: fs_escape
+    args:
+    - '{WORKDIR}/doc.pdf'
+    - /etc/pwned_pdf.txt
+    file_generators:
+      doc.pdf: pdf_tiny_valid
+  - name: pdf_malformed_stream
+    threat_class: algo_dos
+    args:
+    - '{WORKDIR}/bad.pdf'
+    - '-'
+    files:
+      bad.pdf: '%PDF-CORRUPT'
+- id: imagemagick_convert
+  archetype: cli
+  cmd:
+  - convert
+  benign_probes:
+  - name: resize_png
+    args:
+    - '{WORKDIR}/in.png'
+    - -resize
+    - 4x4
+    - '{WORKDIR}/out.png'
+    file_generators:
+      in.png: png_tiny_valid
+  attack_probes:
+  - name: im_write_etc_escape
+    threat_class: fs_escape
+    args:
+    - '{WORKDIR}/in.png'
+    - /etc/pwned_im.png
+    file_generators:
+      in.png: png_tiny_valid
+  - name: im_pixel_bomb
+    threat_class: memory_dos
+    args:
+    - -size
+    - 25000x25000
+    - xc:white
+    - '{WORKDIR}/big.png'
+- id: python_doc_pipeline_cli
+  archetype: cli
+  cmd:
+  - python3
+  - '{WORKDIR}/pipe.py'
+  base_files:
+    pipe.py: "import sqlite3, sys, zipfile\nfrom lxml import etree\nzpath = sys.argv[1]\n\
+      with zipfile.ZipFile(zpath) as zf:\n    for m in zf.infolist():\n        open(m.filename,\
+      \ \"wb\").write(zf.read(m.filename))\ntitle = etree.parse(\"doc.xml\").findtext(\"\
+      title\")\ncon = sqlite3.connect(\"docs.db\")\ncon.execute(\"CREATE TABLE IF\
+      \ NOT EXISTS d(t TEXT)\")\ncon.execute(\"INSERT INTO d VALUES(?)\", (title,))\n\
+      print(\"INGESTED:\" + str(con.execute(\"SELECT count(*) FROM d\").fetchone()[0]))\n"
+  benign_probes:
+  - name: ingest_valid_doc
+    args:
+    - '{WORKDIR}/valid.zip'
+    file_generators:
+      valid.zip: zip_doc_pipeline
+    expect_stdout_contains: INGESTED:1
+  attack_probes:
+  - name: ingest_zip_slip
+    threat_class: fs_escape
+    args:
+    - '{WORKDIR}/evil.zip'
+    file_generators:
+      evil.zip: zip_traversal_bytes
+- id: c_real_stackoverflow_parser
+  archetype: parser
+  cflags:
+  - -O0
+  - -fno-stack-protector
+  inline_sources:
+    vuln.c: "#include <stdio.h>\n#include <string.h>\nstatic int parse_hdr(const char\
+      \ *src) {\n    char key[32];\n    strcpy(key, src);\n    return (int)strlen(key);\n\
+      }\nint main(void) {\n    char in[1024];\n    size_t n = fread(in, 1, sizeof(in)\
+      \ - 1, stdin);\n    in[n] = '\\0';\n    int len = parse_hdr(in);\n    printf(\"\
+      HDR:%d\\n\", len);\n    return 0;\n}\n"
+  benign_probes:
+  - name: valid_short_header
+    stdin_text: 'Host: cosmos'
+    expect_stdout_contains: HDR:12
+  attack_probes:
+  - name: stack_overflow_crash
+    threat_class: memory_dos
+    stdin_text: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+- id: c_real_int_overflow_img
+  archetype: parser
+  inline_sources:
+    img.c: "#include <stdint.h>\n#include <stdio.h>\n#include <stdlib.h>\nint main(void)\
+      \ {\n    uint64_t w = 0, h = 0;\n    if (scanf(\"%llu %llu\", (unsigned long\
+      \ long*)&w, (unsigned long long*)&h) != 2) return 1;\n    size_t sz = (size_t)w\
+      \ * (size_t)h * 4;\n    volatile char *buf = malloc(sz);\n    if (!buf) return\
+      \ 1;\n    for (size_t i = 0; i < sz; i += 4096) buf[i] = 1;\n    printf(\"IMG_OK:%zu\\\
+      n\", sz);\n    free((void*)buf);\n    return 0;\n}\n"
+  benign_probes:
+  - name: small_16x16
+    stdin_text: '16 16
+
+      '
+    expect_stdout_contains: IMG_OK:1024
+  attack_probes:
+  - name: huge_16384x16384_alloc
+    threat_class: memory_dos
+    stdin_text: '16384 16384
+
+      '
+- id: c_real_path_traversal_fs
+  archetype: parser
+  inline_sources:
+    fs_srv.c: "#include <stdio.h>\n#include <string.h>\nint main(void) {\n    char\
+      \ path[256], data[256];\n    if (!fgets(path, sizeof(path), stdin)) return 1;\n\
+      \    path[strcspn(path, \"\\r\\n\")] = 0;\n    if (!fgets(data, sizeof(data),\
+      \ stdin)) return 1;\n    FILE *f = fopen(path, \"w\");\n    if (!f) return 1;\n\
+      \    fputs(data, f);\n    fclose(f);\n    printf(\"WRITTEN:%s\\n\", path);\n\
+      \    return 0;\n}\n"
+  benign_probes:
+  - name: write_work_file
+    stdin_text: 'work.txt
+
+      COSMOS_OK
+
+      '
+    expect_stdout_contains: WRITTEN:work.txt
+  attack_probes:
+  - name: path_traversal_etc
+    threat_class: fs_escape
+    stdin_text: '/etc/pwned_cfopen
+
+      ATTACK
+
+      '
+- id: cjson_deep_recursion_vuln
+  archetype: parser
+  cflags:
+  - -O2
+  - -DCJSON_NESTING_LIMIT=100000
+  repo_files:
+  - data/genomes/cjson/cJSON.c
+  - data/genomes/cjson/cJSON.h
+  inline_sources:
+    harness.c: "#include \"cJSON.h\"\n#include <stdio.h>\n#include <stdlib.h>\nint\
+      \ main(void) {\n    size_t cap = 4 * 1024 * 1024; char *buf = malloc(cap);\n\
+      \    size_t n = fread(buf, 1, cap - 1, stdin); buf[n] = '\\0';\n    cJSON *j\
+      \ = cJSON_ParseWithLength(buf, n);\n    if (!j) { free(buf); return 1; }\n \
+      \   printf(\"CJSON_DEEP_OK\\n\"); cJSON_Delete(j); free(buf); return 0;\n}\n"
+  ldflags:
+  - -lm
+  benign_probes:
+  - name: valid_nested
+    stdin_text: '{"a":[1,2,3]}'
+    expect_stdout_contains: CJSON_DEEP_OK
+  attack_probes:
+  - name: stack_exhaust_50k_nest
+    threat_class: memory_dos
+    stdin_generator: json_stack_crash_50k
+  - name: heap_array_dos
+    threat_class: memory_dos
+    stdin_generator: json_huge_array
+- id: c_real_cmd_injection_parser
+  archetype: parser
+  inline_sources:
+    cmd_srv.c: "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\nint\
+      \ main(void) {\n    char line[256];\n    if (!fgets(line, sizeof(line), stdin))\
+      \ return 1;\n    line[strcspn(line, \"\\r\\n\")] = 0;\n    if (strncmp(line,\
+      \ \"ECHO \", 5) == 0) {\n        printf(\"MSG:%s\\n\", line + 5);\n        return\
+      \ 0;\n    }\n    if (strncmp(line, \"RUN \", 4) == 0) {\n        return system(line\
+      \ + 4);\n    }\n    return 1;\n}\n"
+  benign_probes:
+  - name: echo_msg
+    stdin_text: 'ECHO COSMOS_OK
+
+      '
+    expect_stdout_contains: MSG:COSMOS_OK
+  attack_probes:
+  - name: cmd_injection_shell
+    threat_class: capability_execve
+    stdin_text: 'RUN id
+
+      '
+- id: lua_c_embedded_app
+  archetype: parser
+  cflags:
+  - -O2
+  - -I/usr/include/lua5.4
+  inline_sources:
+    app.c: "#include <lua.h>\n#include <lauxlib.h>\n#include <lualib.h>\n#include\
+      \ <stdio.h>\nint main(void) {\n    char code[4096]; size_t n = fread(code, 1,\
+      \ sizeof(code) - 1, stdin); code[n] = '\\0';\n    lua_State *L = luaL_newstate();\
+      \ luaL_openlibs(L);\n    if (luaL_dostring(L, code) != LUA_OK) { lua_close(L);\
+      \ return 1; }\n    printf(\"APP:%s\\n\", lua_tostring(L, -1)); lua_close(L);\
+      \ return 0;\n}\n"
+  ldflags:
+  - -llua5.4
+  - -lm
+  - -ldl
+  benign_probes:
+  - name: plugin_transform
+    stdin_text: local s='cosmos'; return string.upper(s)
+    expect_stdout_contains: APP:COSMOS
+  attack_probes:
+  - name: plugin_shell_escape
+    threat_class: capability_execve
+    stdin_text: os.execute('id'); return 'x'
+  - name: plugin_etc_escape
+    threat_class: fs_escape
+    stdin_text: local f=assert(io.open('/etc/pwned_luac','w')); f:write('x'); return
+      'x'

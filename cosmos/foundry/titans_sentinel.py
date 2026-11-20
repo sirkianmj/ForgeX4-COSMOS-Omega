@@ -57,26 +57,44 @@ class ExecutionTitan:
                     p.cpu_percent(interval=None)
                     time.sleep(0.02)
 
+                    # --- Robust kill rule (PR #7b) ---
+                    # > 2x threshold on any single sample  -> immediate kill (obvious attack)
+                    # > 1x threshold on 2 consecutive samples -> kill (sustained violation)
+                    # Single transient over-threshold      -> forgiven (measurement noise)
+                    HARD_MULT = 2.0
+                    SOFT_CONSEC = 2
+                    cpu_thr = float(genome.get('max_cpu_percent', 100.0))
+                    mem_thr = float(genome.get('max_resident_memory_bytes', float('inf')))
+                    cpu_viol = 0
+                    mem_viol = 0
+
                     while not stop_monitoring.is_set():
                         try:
-                            # NOTE: Do NOT wrap cpu_percent(interval=...) in oneshot().
-                            # oneshot() caches cpu_times(), so the interval-diff
-                            # always returns 0. This was the "Peak CPU: 0.00%" bug.
                             cpu = p.cpu_percent(interval=0.05)
                             mem = p.memory_info().rss
                             telemetry.append({'cpu_percent': cpu, 'resident_memory_bytes': mem})
                         except psutil.NoSuchProcess:
                             break
 
-                        # Policy enforcement
-                        if genome.get('max_cpu_percent', 100) < cpu:
-                            p.kill()
-                            policy_killed[0] = True
-                            break
-                        if genome.get('max_resident_memory_bytes', float('inf')) < mem:
-                            p.kill()
-                            policy_killed[0] = True
-                            break
+                        # CPU policy
+                        if cpu > cpu_thr * HARD_MULT:
+                            p.kill(); policy_killed[0] = True; break
+                        elif cpu > cpu_thr:
+                            cpu_viol += 1
+                            if cpu_viol >= SOFT_CONSEC:
+                                p.kill(); policy_killed[0] = True; break
+                        else:
+                            cpu_viol = 0
+
+                        # Memory policy
+                        if mem > mem_thr * HARD_MULT:
+                            p.kill(); policy_killed[0] = True; break
+                        elif mem > mem_thr:
+                            mem_viol += 1
+                            if mem_viol >= SOFT_CONSEC:
+                                p.kill(); policy_killed[0] = True; break
+                        else:
+                            mem_viol = 0
                 except psutil.NoSuchProcess:
                     pass
                 except Exception:

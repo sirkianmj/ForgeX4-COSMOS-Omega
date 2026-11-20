@@ -1,0 +1,1101 @@
+{
+  "run_id": "8a7301ff558d4ce7",
+  "events": [
+    {
+      "seq": 0,
+      "timestamp_utc": "2026-11-20T07:31:11.265525+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "cjson_parser",
+        "archetype": "parser",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 2,
+            "mem_mb": 96,
+            "fsize_mb": 128,
+            "nofile": 32,
+            "wall_ms": 300,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 50.0,
+            "max_rss_kb_budget": 14829
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "b29b9254a006755b",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0286,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "execve_rop_gadget",
+              "threat_class": "capability_execve",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "c2_socket_gadget",
+              "threat_class": "mimicry_exfil",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "huge_json_alloc",
+              "threat_class": "memory_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2001.43,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0224,
+          "fitness": -2001.12
+        },
+        "z3_pre_exec_rejects": 15
+      },
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "88a678a2398c8c65ae1f352c3dda7fe89373e667a35653ffd751d9d1aaab2b59"
+    },
+    {
+      "seq": 1,
+      "timestamp_utc": "2026-11-20T07:31:14.278180+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "expat_xml_parser",
+        "archetype": "parser",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 19,
+            "fsize_mb": 16,
+            "nofile": 32,
+            "wall_ms": 204,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 1000.0,
+            "max_rss_kb_budget": 8192
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "cf0adfcfa8216f29",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0151,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "billion_laughs_xml_bomb",
+              "threat_class": "algo_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2000.755,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0575,
+          "fitness": -2002.875
+        },
+        "z3_pre_exec_rejects": 11
+      },
+      "prev_hash": "88a678a2398c8c65ae1f352c3dda7fe89373e667a35653ffd751d9d1aaab2b59",
+      "hash": "840d5506ba49df7c5fbf92025989ff9a5729c2afa815468c1cb3f9a2a5aa1ed7"
+    },
+    {
+      "seq": 2,
+      "timestamp_utc": "2026-11-20T07:31:28.652466+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "zlib_inflate_parser",
+        "archetype": "parser",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 16,
+            "fsize_mb": 16,
+            "nofile": 64,
+            "wall_ms": 250,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 10.0,
+            "max_rss_kb_budget": 7533
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "2c391ef550c0ea97",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0216,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "zip_bomb_128mb",
+              "threat_class": "memory_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2001.08,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0872,
+          "fitness": -2004.36
+        },
+        "z3_pre_exec_rejects": 15
+      },
+      "prev_hash": "840d5506ba49df7c5fbf92025989ff9a5729c2afa815468c1cb3f9a2a5aa1ed7",
+      "hash": "209e7f5ac82a40894510f0eaf6d717cdf5d4ba176c2dd648635b047364baa235"
+    },
+    {
+      "seq": 3,
+      "timestamp_utc": "2026-11-20T07:31:32.786422+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "pcre2_regex_parser",
+        "archetype": "parser",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 17,
+            "fsize_mb": 32,
+            "nofile": 32,
+            "wall_ms": 726,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 500.0,
+            "max_rss_kb_budget": 4096
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "421cf3411c50f467",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0202,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "redos_catastrophic",
+              "threat_class": "algo_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2001.01,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0705,
+          "fitness": -2003.525
+        },
+        "z3_pre_exec_rejects": 8
+      },
+      "prev_hash": "209e7f5ac82a40894510f0eaf6d717cdf5d4ba176c2dd648635b047364baa235",
+      "hash": "f6e3bdec68bc357533dcc6688d263f2d3ea584bfd8a82acd02d862db9486561d"
+    },
+    {
+      "seq": 4,
+      "timestamp_utc": "2026-11-20T07:31:39.072015+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "jq_cli",
+        "archetype": "cli",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 20,
+            "fsize_mb": 16,
+            "nofile": 24,
+            "wall_ms": 600,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 53.9,
+            "max_rss_kb_budget": 16384
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "1bc56a451194a465",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0176,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "recurse_memory_bomb",
+              "threat_class": "memory_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2000.88,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0775,
+          "fitness": -2003.875
+        },
+        "z3_pre_exec_rejects": 12
+      },
+      "prev_hash": "f6e3bdec68bc357533dcc6688d263f2d3ea584bfd8a82acd02d862db9486561d",
+      "hash": "faced7cde866c4ced5fafd6cdbd174d3f88c89c2f50dd6b405c4dfcbd7d7f69a"
+    },
+    {
+      "seq": 5,
+      "timestamp_utc": "2026-11-20T07:31:40.130866+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "tar_cli",
+        "archetype": "cli",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 96,
+            "fsize_mb": 16,
+            "nofile": 48,
+            "wall_ms": 211,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 10.0,
+            "max_rss_kb_budget": 4096
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "923dcd38d06189fc",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0259,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "checkpoint_exec_rce",
+              "threat_class": "capability_execve",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2001.295,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0349,
+          "fitness": -2001.745
+        },
+        "z3_pre_exec_rejects": 14
+      },
+      "prev_hash": "faced7cde866c4ced5fafd6cdbd174d3f88c89c2f50dd6b405c4dfcbd7d7f69a",
+      "hash": "61a10642fa921c1119299bd918966423aa7cecee7dbb173b968674d8de4867e3"
+    },
+    {
+      "seq": 6,
+      "timestamp_utc": "2026-11-20T07:32:17.497211+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "sqlite3_cli",
+        "archetype": "cli",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 128,
+            "fsize_mb": 4,
+            "nofile": 32,
+            "wall_ms": 2500,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 25.0,
+            "max_rss_kb_budget": 32768
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "cb1ff5fdd7243bf5",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0488,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "dot_shell_escape",
+              "threat_class": "capability_execve",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "recursive_cte_cpu_dos",
+              "threat_class": "cpu_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2002.44,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.083,
+          "fitness": -2004.15
+        },
+        "z3_pre_exec_rejects": 16
+      },
+      "prev_hash": "61a10642fa921c1119299bd918966423aa7cecee7dbb173b968674d8de4867e3",
+      "hash": "dc82c25db3221e8ce5d0a8e39bf35581cdffb4a8517350078dfc4b62133d831d"
+    },
+    {
+      "seq": 7,
+      "timestamp_utc": "2026-11-20T07:32:19.113525+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "gawk_cli",
+        "archetype": "cli",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 21,
+            "fsize_mb": 32,
+            "nofile": 32,
+            "wall_ms": 300,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 9.9,
+            "max_rss_kb_budget": 131072
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "50af59665353f5cb",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0163,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "awk_system_rce",
+              "threat_class": "capability_execve",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "awk_inet_exfil",
+              "threat_class": "mimicry_exfil",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2000.815,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0409,
+          "fitness": -2002.045
+        },
+        "z3_pre_exec_rejects": 9
+      },
+      "prev_hash": "dc82c25db3221e8ce5d0a8e39bf35581cdffb4a8517350078dfc4b62133d831d",
+      "hash": "34e0d5438f31fb0922b5d7da16ee5b083c7cc15a3d2203fa5bc04fba75fb656b"
+    },
+    {
+      "seq": 8,
+      "timestamp_utc": "2026-11-20T07:32:20.020458+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "unzip_cli",
+        "archetype": "cli",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 24,
+            "fsize_mb": 64,
+            "nofile": 32,
+            "wall_ms": 600,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 10.7,
+            "max_rss_kb_budget": 8192
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "2e3cdeeebab576ae",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0196,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "zip_traversal_write",
+              "threat_class": "fs_escape",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2000.98,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0269,
+          "fitness": -2001.345
+        },
+        "z3_pre_exec_rejects": 19
+      },
+      "prev_hash": "34e0d5438f31fb0922b5d7da16ee5b083c7cc15a3d2203fa5bc04fba75fb656b",
+      "hash": "415f19af4011774d49dad38ba0230872883eaf214ae969702d0a0805d56514f6"
+    },
+    {
+      "seq": 9,
+      "timestamp_utc": "2026-11-20T07:32:21.719690+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "curl_cli",
+        "archetype": "cli",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 64,
+            "fsize_mb": 16,
+            "nofile": 32,
+            "wall_ms": 232,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 369.2,
+            "max_rss_kb_budget": 8054
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "3abc80a87a8a5dfb",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0198,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "outbound_c2_connect",
+              "threat_class": "mimicry_exfil",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "write_etc_escape",
+              "threat_class": "fs_escape",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2000.99,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0988,
+          "fitness": -2004.94
+        },
+        "z3_pre_exec_rejects": 15
+      },
+      "prev_hash": "415f19af4011774d49dad38ba0230872883eaf214ae969702d0a0805d56514f6",
+      "hash": "2b7c94cc8a81387e20525d911725502010bd26b4e5aa696ab4ecdb0c338a3487"
+    },
+    {
+      "seq": 10,
+      "timestamp_utc": "2026-11-20T07:32:25.951181+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "nginx_daemon",
+        "archetype": "daemon",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 23,
+            "fsize_mb": 64,
+            "nofile": 32,
+            "wall_ms": 1493,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 25.0,
+            "max_rss_kb_budget": 144436
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "e46b695e5653958d",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0284,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "oversized_body_flood",
+              "threat_class": "cpu_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2001.42,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.1203,
+          "fitness": -2006.015
+        },
+        "z3_pre_exec_rejects": 6
+      },
+      "prev_hash": "2b7c94cc8a81387e20525d911725502010bd26b4e5aa696ab4ecdb0c338a3487",
+      "hash": "2b4587862190e52dac5f071a742f2914e57f64b5b910ad1b9bd974a4244f39c6"
+    },
+    {
+      "seq": 11,
+      "timestamp_utc": "2026-11-20T07:32:32.904575+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "python_http_service",
+        "archetype": "daemon",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 2,
+            "mem_mb": 48,
+            "fsize_mb": 16,
+            "nofile": 24,
+            "wall_ms": 600,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 25.0,
+            "max_rss_kb_budget": 24991
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "05c6087d1b5b0130",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0254,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "handler_rce",
+              "threat_class": "capability_execve",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "handler_fs_escape",
+              "threat_class": "fs_escape",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "handler_mem_bomb",
+              "threat_class": "memory_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2001.27,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0725,
+          "fitness": -2003.625
+        },
+        "z3_pre_exec_rejects": 10
+      },
+      "prev_hash": "2b4587862190e52dac5f071a742f2914e57f64b5b910ad1b9bd974a4244f39c6",
+      "hash": "57359c7d7a6d1ab38f05fa72ed8fe4d7e79659459f56e3d3ebc6f0c418707e79"
+    },
+    {
+      "seq": 12,
+      "timestamp_utc": "2026-11-20T07:32:35.187538+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "agent_yaml_tool",
+        "archetype": "agent",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 2,
+            "mem_mb": 24,
+            "fsize_mb": 4,
+            "nofile": 24,
+            "wall_ms": 725,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 500.0,
+            "max_rss_kb_budget": 131072
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "114edf1dd5e70cd4",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0243,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "yaml_rce_gadget",
+              "threat_class": "capability_execve",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2001.215,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0648,
+          "fitness": -2003.24
+        },
+        "z3_pre_exec_rejects": 5
+      },
+      "prev_hash": "57359c7d7a6d1ab38f05fa72ed8fe4d7e79659459f56e3d3ebc6f0c418707e79",
+      "hash": "cdfe93c43a0db57a885bec350fd90c1676c39d6e9665d3a8c10d8a5914741976"
+    },
+    {
+      "seq": 13,
+      "timestamp_utc": "2026-11-20T07:32:36.604232+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "agent_file_tool",
+        "archetype": "agent",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 26,
+            "fsize_mb": 16,
+            "nofile": 32,
+            "wall_ms": 193,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 10.0,
+            "max_rss_kb_budget": 65536
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "64b093c2fc82411e",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0157,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "write_etc_escape",
+              "threat_class": "fs_escape",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2000.785,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.065,
+          "fitness": -2003.25
+        },
+        "z3_pre_exec_rejects": 8
+      },
+      "prev_hash": "cdfe93c43a0db57a885bec350fd90c1676c39d6e9665d3a8c10d8a5914741976",
+      "hash": "c6245a6b328705e45c68800c3688eeac404d698552f6ccc34eb5576ecac8757d"
+    },
+    {
+      "seq": 14,
+      "timestamp_utc": "2026-11-20T07:33:15.941350+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "agent_sql_tool",
+        "archetype": "agent",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 64,
+            "fsize_mb": 4,
+            "nofile": 24,
+            "wall_ms": 1983,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 100.0,
+            "max_rss_kb_budget": 17614
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "a3250829c75041ed",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0358,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "cte_cpu_exhaustion",
+              "threat_class": "cpu_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2001.79,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0875,
+          "fitness": -2004.375
+        },
+        "z3_pre_exec_rejects": 11
+      },
+      "prev_hash": "c6245a6b328705e45c68800c3688eeac404d698552f6ccc34eb5576ecac8757d",
+      "hash": "17d02d39d96141c2a6679f5f81c2e7cc89e3d926308c4ec99e8d730c269f29ab"
+    },
+    {
+      "seq": 15,
+      "timestamp_utc": "2026-11-20T07:33:38.045803+00:00",
+      "run_id": "8a7301ff558d4ce7",
+      "event_type": "target_synthesis",
+      "data": {
+        "target_id": "agent_calc_tool",
+        "archetype": "agent",
+        "calibration": {
+          "benign_wall_ms": 1.0,
+          "benign_cpu_ms": 0.0,
+          "benign_rss_kb": 4096.0
+        },
+        "cosmos_omega": {
+          "policy": {
+            "cpu_sec": 1,
+            "mem_mb": 26,
+            "fsize_mb": 32,
+            "nofile": 24,
+            "wall_ms": 250,
+            "allow_execve": false,
+            "allow_network": false,
+            "allow_fork": false,
+            "fs_mode": "readonly",
+            "kill_on_violation": true,
+            "max_cpu_ms_budget": 10.0,
+            "max_rss_kb_budget": 8192
+          },
+          "z3_verified": true,
+          "violated_invariants": [],
+          "proof_hash": "aca05a1d78412a59",
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0147,
+          "mean_benign_wall_ms": 0.0,
+          "attack_details": [
+            {
+              "probe": "eval_shell_escape",
+              "threat_class": "capability_execve",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "eval_c2_mimicry",
+              "threat_class": "mimicry_exfil",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            },
+            {
+              "probe": "eval_cpu_bomb",
+              "threat_class": "cpu_dos",
+              "blocked": false,
+              "outcome": null,
+              "violations": "",
+              "wall_ms": 0
+            }
+          ],
+          "fitness": -2000.735,
+          "from_cache": false
+        },
+        "baseline_quantile_2float": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.8346
+        },
+        "baseline_random_search": {
+          "benign_pass_rate": 0.0,
+          "attack_block_rate": 0.0,
+          "privilege_surface": 0.0985,
+          "fitness": -2004.925
+        },
+        "z3_pre_exec_rejects": 9
+      },
+      "prev_hash": "17d02d39d96141c2a6679f5f81c2e7cc89e3d926308c4ec99e8d730c269f29ab",
+      "hash": "82a6b4754dce47accd7ce545813d55b1563c3d944c571533aa58c11eefccc18e"
+    }
+  ]
+}

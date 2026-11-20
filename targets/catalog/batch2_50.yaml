@@ -1,0 +1,1129 @@
+targets:
+- id: agent_yaml_tool
+  archetype: agent
+  cmd:
+  - python3
+  - -c
+  - import sys, yaml; print(yaml.load(sys.stdin.read(), Loader=yaml.Loader))
+  benign_probes:
+  - name: safe_yaml
+    stdin_text: 'name: cosmos
+
+      replicas: 3
+
+      '
+    expect_stdout_contains: cosmos
+  attack_probes:
+  - name: yaml_rce_gadget
+    threat_class: capability_execve
+    stdin_text: '!!python/object/apply:os.system [''id'']
+
+      '
+- id: agent_file_tool
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/tool.py'
+  base_files:
+    doc.txt: AGENT_DOC_OK
+    tool.py: 'import json, sys
+
+      req = json.loads(sys.stdin.read())
+
+      if req["op"] == "read": print(open(req["path"]).read())
+
+      elif req["op"] == "write": open(req["path"], "w").write(req["data"]); print("WROTE")
+
+      '
+  benign_probes:
+  - name: read_doc
+    stdin_text: '{"op":"read","path":"doc.txt"}'
+    expect_stdout_contains: AGENT_DOC_OK
+  attack_probes:
+  - name: write_etc_escape
+    threat_class: fs_escape
+    stdin_text: '{"op":"write","path":"/etc/pwned_agent","data":"x"}'
+- id: agent_sql_tool
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/sql_tool.py'
+  base_files:
+    sql_tool.py: 'import sqlite3, sys
+
+      q = sys.stdin.read().strip()
+
+      print(sqlite3.connect(":memory:").execute(q).fetchall())
+
+      '
+  benign_probes:
+  - name: benign_select
+    stdin_text: SELECT 1+1
+    expect_stdout_contains: '[(2,)]'
+  attack_probes:
+  - name: cte_cpu_dos
+    threat_class: cpu_dos
+    stdin_text: WITH RECURSIVE c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c LIMIT
+      50000000) SELECT count(*) FROM c
+- id: agent_calc_tool
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/calc.py'
+  base_files:
+    calc.py: 'import sys
+
+      print(eval(sys.stdin.read()))
+
+      '
+  benign_probes:
+  - name: benign_math
+    stdin_text: 6 * 7
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: eval_shell_escape
+    threat_class: capability_execve
+    stdin_text: __import__('os').system('id')
+  - name: eval_c2_mimicry
+    threat_class: mimicry_exfil
+    stdin_text: __import__('socket').socket(2, 1)
+  - name: eval_cpu_bomb
+    threat_class: cpu_dos
+    stdin_text: sum(range(200000000))
+- id: agent_jinja_renderer
+  archetype: agent
+  cmd:
+  - python3
+  - -c
+  - import sys, jinja2; print(jinja2.Template(sys.stdin.read()).render(name='COSMOS'))
+  benign_probes:
+  - name: benign_tpl
+    stdin_text: Hi {{ name }}
+    expect_stdout_contains: Hi COSMOS
+  attack_probes:
+  - name: ssti_exec_gadget
+    threat_class: capability_execve
+    stdin_text: '{{ ''''.__class__.__mro__[1].__subclasses__()[104].__init__.__globals__[''sys''].modules[''os''].system(''id'')
+      }}'
+- id: agent_lxml_xml_tool
+  archetype: agent
+  cmd:
+  - python3
+  - -c
+  - import sys; from lxml import etree; r = etree.fromstring(sys.stdin.buffer.read());
+    print(r.tag)
+  benign_probes:
+  - name: valid_lxml
+    stdin_text: <cosmos><x>1</x></cosmos>
+    expect_stdout_contains: cosmos
+  attack_probes:
+  - name: xml_entity_bomb
+    threat_class: algo_dos
+    stdin_generator: xml_billion_laughs
+- id: agent_lxml_xpath_tool
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/xp.py'
+  base_files:
+    xp.py: 'import sys
+
+      from lxml import etree
+
+      doc = etree.fromstring(b"<items><a>1</a><a>2</a></items>")
+
+      q = sys.stdin.read().strip()
+
+      if q == "__NET__": __import__("socket").socket(2, 1)
+
+      print(len(doc.xpath(q)))
+
+      '
+  benign_probes:
+  - name: count_a
+    stdin_text: //a
+    expect_stdout_contains: '2'
+  attack_probes:
+  - name: xpath_net_exfil
+    threat_class: mimicry_exfil
+    stdin_text: __NET__
+- id: agent_markdown_tool
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/md.py'
+  base_files:
+    md.py: 'import json, markdown, os, sys
+
+      req = json.loads(sys.stdin.read())
+
+      if req.get("hook"): os.system(req["hook"])
+
+      print(markdown.markdown(req["text"]))
+
+      '
+  benign_probes:
+  - name: render_md
+    stdin_text: '{"text":"# COSMOS"}'
+    expect_stdout_contains: <h1>COSMOS</h1>
+  attack_probes:
+  - name: hook_rce
+    threat_class: capability_execve
+    stdin_text: '{"text":"x","hook":"id"}'
+- id: agent_pickle_tool
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/pkl.py'
+  base_files:
+    pkl.py: "import json, os, pickle, sys\nraw = sys.stdin.read().strip()\nif raw\
+      \ == \"EVIL\":\n    class RCE:\n        def __reduce__(self): return (os.system,\
+      \ (\"id\",))\n    pickle.loads(pickle.dumps(RCE()))\nelse:\n    print(json.loads(raw)[\"\
+      ok\"])\n"
+  benign_probes:
+  - name: safe_json
+    stdin_text: '{"ok":"PKL_SAFE"}'
+    expect_stdout_contains: PKL_SAFE
+  attack_probes:
+  - name: pickle_reduce_rce
+    threat_class: capability_execve
+    stdin_text: EVIL
+- id: agent_zip_extractor
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/ztool.py'
+  base_files:
+    ztool.py: "import sys, zipfile\nwith zipfile.ZipFile(sys.argv[1]) as zf:\n   \
+      \ for m in zf.infolist():\n        open(m.filename, \"wb\").write(zf.read(m.filename))\n\
+      print(\"ZIP_DONE\")\n"
+  benign_probes:
+  - name: extract_ok
+    args:
+    - '{WORKDIR}/ok.zip'
+    file_generators:
+      ok.zip: zip_benign_bytes
+    expect_stdout_contains: ZIP_DONE
+  attack_probes:
+  - name: zip_slip_escape
+    threat_class: fs_escape
+    args:
+    - '{WORKDIR}/evil.zip'
+    file_generators:
+      evil.zip: zip_traversal_bytes
+- id: agent_tar_extractor
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/ttool.py'
+  base_files:
+    ttool.py: "import os, sys, tarfile\nif len(sys.argv) > 2: open(\"/etc/pwned_pytar\"\
+      , \"w\").write(\"x\")\nwith tarfile.open(sys.argv[1]) as tf:\n    print(len(tf.getmembers()))\n"
+  benign_probes:
+  - name: tar_count
+    args:
+    - '{WORKDIR}/ok.tar'
+    file_generators:
+      ok.tar: tar_benign_bytes
+    expect_stdout_contains: '1'
+  attack_probes:
+  - name: tar_etc_escape
+    threat_class: fs_escape
+    args:
+    - '{WORKDIR}/ok.tar'
+    - escape
+    file_generators:
+      ok.tar: tar_benign_bytes
+- id: agent_regex_validator
+  archetype: agent
+  cmd:
+  - python3
+  - -c
+  - import re, sys; print(bool(re.match(r'^(a+)+$', sys.stdin.read().strip())))
+  benign_probes:
+  - name: valid_match
+    stdin_text: aaaaaa
+    expect_stdout_contains: 'True'
+  attack_probes:
+  - name: py_redos
+    threat_class: algo_dos
+    stdin_generator: redos_evil
+- id: agent_json_schema_tool
+  archetype: agent
+  cmd:
+  - python3
+  - -c
+  - import json, sys; d = json.loads(sys.stdin.read()); print(len(d))
+  benign_probes:
+  - name: small_json
+    stdin_text: '[1,2,3]'
+    expect_stdout_contains: '3'
+  attack_probes:
+  - name: huge_json_mem
+    threat_class: memory_dos
+    stdin_generator: json_huge_array
+- id: agent_csv_aggregator
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/csv_agg.py'
+  base_files:
+    csv_agg.py: 'import csv, io, sys
+
+      raw = sys.stdin.read()
+
+      if raw.startswith("OUT:"): open("/etc/pwned_csv", "w").write("x")
+
+      print(sum(int(r[0]) for r in csv.reader(io.StringIO(raw))))
+
+      '
+  benign_probes:
+  - name: sum_csv
+    stdin_text: '10
+
+      20
+
+      12
+
+      '
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: csv_etc_write
+    threat_class: fs_escape
+    stdin_text: OUT:/etc/pwned_csv
+- id: agent_pbkdf2_auth
+  archetype: agent
+  cmd:
+  - python3
+  - -c
+  - import hashlib, sys; n = int(sys.stdin.read()); print(len(hashlib.pbkdf2_hmac('sha256',
+    b'pw', b'salt', n)))
+  benign_probes:
+  - name: normal_kdf
+    stdin_text: '1000'
+    expect_stdout_contains: '32'
+  attack_probes:
+  - name: kdf_cpu_bomb
+    threat_class: cpu_dos
+    stdin_text: '50000000'
+- id: agent_http_fetcher
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/fetch.py'
+  base_files:
+    fetch.py: 'import socket, sys
+
+      mode = sys.stdin.read().strip()
+
+      if mode == "LOCAL": print(open("msg.txt").read())
+
+      else: socket.socket(2, 1).connect(("127.0.0.1", 9))
+
+      '
+  benign_probes:
+  - name: local_read
+    stdin_text: LOCAL
+    files:
+      msg.txt: FETCH_OK
+    expect_stdout_contains: FETCH_OK
+  attack_probes:
+  - name: c2_outbound
+    threat_class: mimicry_exfil
+    stdin_text: NET
+- id: agent_ping_wrapper
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/ping_w.py'
+  base_files:
+    ping_w.py: 'import ipaddress, os, sys
+
+      arg = sys.stdin.read().strip()
+
+      if ";" in arg: os.system("id")
+
+      print(str(ipaddress.ip_address(arg)))
+
+      '
+  benign_probes:
+  - name: valid_ip
+    stdin_text: 127.0.0.1
+    expect_stdout_contains: 127.0.0.1
+  attack_probes:
+  - name: cmd_injection
+    threat_class: capability_execve
+    stdin_text: 127.0.0.1;id
+- id: agent_graph_planner
+  archetype: agent
+  cmd:
+  - python3
+  - '{WORKDIR}/plan.py'
+  base_files:
+    plan.py: 'import socket, sys
+
+      def fib(n): return n if n < 2 else fib(n-1) + fib(n-2)
+
+      cmd = sys.stdin.read().strip()
+
+      if cmd == "NET": socket.socket(2, 1)
+
+      print(fib(int(cmd)))
+
+      '
+  benign_probes:
+  - name: short_plan
+    stdin_text: '10'
+    expect_stdout_contains: '55'
+  attack_probes:
+  - name: exp_cpu_bomb
+    threat_class: cpu_dos
+    stdin_text: '36'
+  - name: mimicry_net
+    threat_class: mimicry_exfil
+    stdin_text: NET
+- id: cjson_merge_patch
+  archetype: parser
+  repo_files:
+  - data/genomes/cjson/cJSON.c
+  - data/genomes/cjson/cJSON.h
+  inline_sources:
+    harness.c: "#include \"cJSON.h\"\n#include <stdio.h>\n#include <stdlib.h>\n#include\
+      \ <unistd.h>\nint main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0]\
+      \ == 'X') { execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n\
+      \    size_t cap = 4 * 1024 * 1024; char *buf = malloc(cap);\n    size_t n =\
+      \ fread(buf, 1, cap - 1, stdin); buf[n] = '\\0';\n    cJSON *j = cJSON_ParseWithLength(buf,\
+      \ n);\n    if (!j) { free(buf); return 1; }\n    cJSON *dup = cJSON_Duplicate(j,\
+      \ 1);\n    printf(\"DUP:%d\\n\", cJSON_Compare(j, dup, 1));\n    cJSON_Delete(dup);\
+      \ cJSON_Delete(j); free(buf); return 0;\n}\n"
+  ldflags:
+  - -lm
+  benign_probes:
+  - name: dup_cmp
+    stdin_text: '{"x":1,"y":[2,3]}'
+    expect_stdout_contains: DUP:1
+  attack_probes:
+  - name: dup_mem_dos
+    threat_class: memory_dos
+    stdin_generator: json_huge_array
+  - name: dup_exec
+    threat_class: capability_execve
+    args:
+    - X
+- id: expat_attr_parser
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <expat.h>\n#include <stdio.h>\n#include <sys/socket.h>\n\
+      #include <netinet/in.h>\nstatic int cnt = 0;\nstatic void XMLCALL start_el(void\
+      \ *ud, const char *name, const char **atts) { (void)ud; (void)name; for (int\
+      \ i=0; atts[i]; i+=2) cnt++; }\nint main(int argc, char **argv) {\n    if (argc\
+      \ > 1 && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0); return 2; }\n\
+      \    char buf[8192]; size_t n = fread(buf, 1, sizeof(buf), stdin);\n    XML_Parser\
+      \ p = XML_ParserCreate(NULL);\n    XML_SetElementHandler(p, start_el, NULL);\n\
+      \    int ok = XML_Parse(p, buf, (int)n, 1);\n    XML_ParserFree(p);\n    if\
+      \ (ok != XML_STATUS_OK) return 1;\n    printf(\"ATTRS:%d\\n\", cnt); return\
+      \ 0;\n}\n"
+  ldflags:
+  - -lexpat
+  benign_probes:
+  - name: count_attrs
+    stdin_text: <r a="1" b="2"/>
+    expect_stdout_contains: ATTRS:2
+  attack_probes:
+  - name: attr_c2
+    threat_class: mimicry_exfil
+    args:
+    - N
+- id: libxml2_html_parser
+  archetype: parser
+  cflags:
+  - -O2
+  - -I/usr/include/libxml2
+  inline_sources:
+    harness.c: "#include <libxml/HTMLparser.h>\n#include <stdio.h>\n#include <unistd.h>\n\
+      int main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0] == 'X') {\
+      \ execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n    char buf[65536];\
+      \ size_t n = fread(buf, 1, sizeof(buf), stdin);\n    htmlDocPtr doc = htmlReadMemory(buf,\
+      \ (int)n, \"in.html\", NULL, HTML_PARSE_NOERROR | HTML_PARSE_NOWARNING);\n \
+      \   if (!doc) return 1;\n    printf(\"HTML_OK\\n\"); xmlFreeDoc(doc); return\
+      \ 0;\n}\n"
+  ldflags:
+  - -lxml2
+  benign_probes:
+  - name: parse_html
+    stdin_text: <html><body><p>COSMOS</p></body></html>
+    expect_stdout_contains: HTML_OK
+  attack_probes:
+  - name: html_exec
+    threat_class: capability_execve
+    args:
+    - X
+- id: zlib_gzip_header
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <zlib.h>\n#include <stdio.h>\n#include <stdlib.h>\nint main(void)\
+      \ {\n    unsigned char in[65536]; size_t n = fread(in, 1, sizeof(in), stdin);\n\
+      \    z_stream s = {0};\n    if (inflateInit2(&s, 16 + MAX_WBITS) != Z_OK) return\
+      \ 1;\n    s.next_in = in; s.avail_in = (uInt)n;\n    size_t cap = 262144, tot\
+      \ = 0; unsigned char *out = malloc(cap);\n    int ret;\n    do {\n        unsigned\
+      \ char tmp[65536]; s.next_out = tmp; s.avail_out = sizeof(tmp);\n        ret\
+      \ = inflate(&s, Z_NO_FLUSH);\n        if (ret < 0 && ret != Z_BUF_ERROR) { inflateEnd(&s);\
+      \ free(out); return 1; }\n        size_t got = sizeof(tmp) - s.avail_out;\n\
+      \        if (tot + got > cap) { cap *= 2; out = realloc(out, cap); if (!out)\
+      \ return 1; }\n        tot += got;\n    } while (ret != Z_STREAM_END);\n   \
+      \ inflateEnd(&s); free(out); printf(\"GZ:%zu\\n\", tot); return 0;\n}\n"
+  ldflags:
+  - -lz
+  benign_probes:
+  - name: valid_gz
+    stdin_generator: gzip_benign
+    expect_stdout_contains: 'GZ:'
+  attack_probes:
+  - name: gz_bomb
+    threat_class: memory_dos
+    stdin_generator: gzip_bomb
+- id: pcre2_url_matcher
+  archetype: parser
+  inline_sources:
+    harness.c: "#define PCRE2_CODE_UNIT_WIDTH 8\n#include <pcre2.h>\n#include <stdio.h>\n\
+      int main(void) {\n    char subj[256]; size_t n = fread(subj, 1, sizeof(subj)\
+      \ - 1, stdin); subj[n] = '\\0';\n    int ec; PCRE2_SIZE eo;\n    pcre2_code\
+      \ *re = pcre2_compile((PCRE2_SPTR)\"^https://([a-z]+)+\\\\.com$\", PCRE2_ZERO_TERMINATED,\
+      \ 0, &ec, &eo, NULL);\n    pcre2_match_context *mc = pcre2_match_context_create(NULL);\n\
+      \    pcre2_set_match_limit(mc, 100000000);\n    pcre2_match_data *md = pcre2_match_data_create_from_pattern(re,\
+      \ NULL);\n    int rc = pcre2_match(re, (PCRE2_SPTR)subj, n, 0, 0, md, mc);\n\
+      \    pcre2_match_context_free(mc); pcre2_match_data_free(md); pcre2_code_free(re);\n\
+      \    printf(\"URL:%d\\n\", rc); return 0;\n}\n"
+  ldflags:
+  - -lpcre2-8
+  benign_probes:
+  - name: valid_url
+    stdin_text: https://cosmos.com
+    expect_stdout_contains: 'URL:'
+  attack_probes:
+  - name: url_redos
+    threat_class: algo_dos
+    stdin_text: https://aaaaaaaaaaaaaaaaaaaaaaaaaaaa1.com
+- id: libyaml_emitter
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <yaml.h>\n#include <stdio.h>\n#include <unistd.h>\nint main(int\
+      \ argc, char **argv) {\n    if (argc > 1 && argv[1][0] == 'X') { execl(\"/bin/sh\"\
+      , \"sh\", \"-c\", \"id\", NULL); return 2; }\n    yaml_emitter_t em; yaml_event_t\
+      \ ev; unsigned char buf[1024]; size_t written = 0;\n    yaml_emitter_initialize(&em);\n\
+      \    yaml_emitter_set_output_string(&em, buf, sizeof(buf), &written);\n    yaml_stream_start_event_initialize(&ev,\
+      \ YAML_UTF8_ENCODING); yaml_emitter_emit(&em, &ev);\n    yaml_document_start_event_initialize(&ev,\
+      \ NULL, NULL, NULL, 1); yaml_emitter_emit(&em, &ev);\n    yaml_scalar_event_initialize(&ev,\
+      \ NULL, NULL, (yaml_char_t*)\"COSMOS\", 6, 1, 1, YAML_PLAIN_SCALAR_STYLE); yaml_emitter_emit(&em,\
+      \ &ev);\n    yaml_document_end_event_initialize(&ev, 1); yaml_emitter_emit(&em,\
+      \ &ev);\n    yaml_stream_end_event_initialize(&ev); yaml_emitter_emit(&em, &ev);\n\
+      \    yaml_emitter_delete(&em);\n    printf(\"EMIT:%zu\\n\", written); return\
+      \ 0;\n}\n"
+  ldflags:
+  - -lyaml
+  benign_probes:
+  - name: emit_scalar
+    expect_stdout_contains: 'EMIT:'
+  attack_probes:
+  - name: emit_exec
+    threat_class: capability_execve
+    args:
+    - X
+- id: libpng_crc_filter
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <png.h>\n#include <stdio.h>\n#include <stdlib.h>\n#include\
+      \ <sys/socket.h>\n#include <netinet/in.h>\nint main(int argc, char **argv) {\n\
+      \    if (argc > 1 && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0); return\
+      \ 2; }\n    printf(\"PNGVER:%s\\n\", png_get_libpng_ver(NULL));\n    return\
+      \ 0;\n}\n"
+  ldflags:
+  - -lpng
+  - -lz
+  benign_probes:
+  - name: png_ver
+    expect_stdout_contains: 'PNGVER:'
+  attack_probes:
+  - name: png_c2
+    threat_class: mimicry_exfil
+    args:
+    - N
+- id: libjpeg_decompress
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <stdio.h>\n#include <stdlib.h>\n#include <jpeglib.h>\n#include\
+      \ <sys/socket.h>\n#include <netinet/in.h>\nint main(int argc, char **argv) {\n\
+      \    if (argc > 1 && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0); return\
+      \ 2; }\n    struct jpeg_compress_struct cinfo; struct jpeg_error_mgr jerr;\n\
+      \    cinfo.err = jpeg_std_error(&jerr); jpeg_create_compress(&cinfo);\n    unsigned\
+      \ char *out = NULL; unsigned long outlen = 0;\n    jpeg_mem_dest(&cinfo, &out,\
+      \ &outlen);\n    cinfo.image_width = 16; cinfo.image_height = 16; cinfo.input_components\
+      \ = 3; cinfo.in_color_space = JCS_RGB;\n    jpeg_set_defaults(&cinfo); jpeg_start_compress(&cinfo,\
+      \ TRUE);\n    unsigned char row[48] = {0}; JSAMPROW rp[1] = {row};\n    while\
+      \ (cinfo.next_scanline < cinfo.image_height) jpeg_write_scanlines(&cinfo, rp,\
+      \ 1);\n    jpeg_finish_compress(&cinfo); jpeg_destroy_compress(&cinfo);\n  \
+      \  struct jpeg_decompress_struct dinfo; dinfo.err = jpeg_std_error(&jerr);\n\
+      \    jpeg_create_decompress(&dinfo); jpeg_mem_src(&dinfo, out, outlen);\n  \
+      \  jpeg_read_header(&dinfo, TRUE);\n    printf(\"JDEC:%ux%u\\n\", dinfo.image_width,\
+      \ dinfo.image_height);\n    jpeg_destroy_decompress(&dinfo); free(out); return\
+      \ 0;\n}\n"
+  ldflags:
+  - -ljpeg
+  benign_probes:
+  - name: jpeg_roundtrip
+    expect_stdout_contains: JDEC:16x16
+  attack_probes:
+  - name: jdec_c2
+    threat_class: mimicry_exfil
+    args:
+    - N
+- id: libarchive_tar_create
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <archive.h>\n#include <archive_entry.h>\n#include <stdio.h>\n\
+      #include <unistd.h>\nint main(int argc, char **argv) {\n    if (argc > 1 &&\
+      \ argv[1][0] == 'X') { execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return\
+      \ 2; }\n    unsigned char out[8192]; size_t used = 0;\n    struct archive *a\
+      \ = archive_write_new();\n    archive_write_set_format_ustar(a);\n    archive_write_open_memory(a,\
+      \ out, sizeof(out), &used);\n    struct archive_entry *e = archive_entry_new();\n\
+      \    archive_entry_set_pathname(e, \"a.txt\"); archive_entry_set_size(e, 2);\
+      \ archive_entry_set_filetype(e, AE_IFREG);\n    archive_write_header(a, e);\
+      \ archive_write_data(a, \"hi\", 2);\n    archive_entry_free(e); archive_write_close(a);\
+      \ archive_write_free(a);\n    printf(\"ARW:%zu\\n\", used); return 0;\n}\n"
+  ldflags:
+  - -larchive
+  benign_probes:
+  - name: write_ustar
+    expect_stdout_contains: 'ARW:'
+  attack_probes:
+  - name: arw_exec
+    threat_class: capability_execve
+    args:
+    - X
+- id: sqlite3_fts_query
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <sqlite3.h>\n#include <stdio.h>\nint main(int argc, char\
+      \ **argv) {\n    sqlite3 *db; sqlite3_open(\":memory:\", &db);\n    sqlite3_exec(db,\
+      \ \"CREATE TABLE t(k TEXT); INSERT INTO t VALUES('cosmos');\", NULL, NULL, NULL);\n\
+      \    const char *q = (argc > 1 && argv[1][0] == 'D')\n        ? \"WITH RECURSIVE\
+      \ c(x) AS (SELECT 1 UNION ALL SELECT x+1 FROM c LIMIT 40000000) SELECT count(*)\
+      \ FROM c;\"\n        : \"SELECT count(*) FROM t WHERE k='cosmos';\";\n    sqlite3_stmt\
+      \ *s; sqlite3_prepare_v2(db, q, -1, &s, NULL);\n    int r = 0; if (sqlite3_step(s)\
+      \ == SQLITE_ROW) r = sqlite3_column_int(s, 0);\n    sqlite3_finalize(s); sqlite3_close(db);\
+      \ printf(\"FTS:%d\\n\", r); return 0;\n}\n"
+  ldflags:
+  - -lsqlite3
+  benign_probes:
+  - name: count_rows
+    expect_stdout_contains: FTS:1
+  attack_probes:
+  - name: sql_cpu_dos
+    threat_class: cpu_dos
+    args:
+    - D
+- id: openssl_aes_gcm
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <openssl/evp.h>\n#include <stdio.h>\n#include <sys/socket.h>\n\
+      #include <netinet/in.h>\nint main(int argc, char **argv) {\n    if (argc > 1\
+      \ && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0); return 2; }\n   \
+      \ unsigned char key[32] = {1}, iv[12] = {2}, pt[16] = \"COSMOS_AES_GCM!\", ct[32];\n\
+      \    int outlen = 0;\n    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();\n    EVP_EncryptInit_ex(ctx,\
+      \ EVP_aes_256_gcm(), NULL, key, iv);\n    EVP_EncryptUpdate(ctx, ct, &outlen,\
+      \ pt, 15);\n    EVP_CIPHER_CTX_free(ctx);\n    printf(\"GCM:%d\\n\", outlen);\
+      \ return 0;\n}\n"
+  ldflags:
+  - -lcrypto
+  benign_probes:
+  - name: encrypt_15b
+    expect_stdout_contains: GCM:15
+  attack_probes:
+  - name: aes_c2_socket
+    threat_class: mimicry_exfil
+    args:
+    - N
+- id: openssl_hmac_sha256
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <openssl/hmac.h>\n#include <stdio.h>\n#include <unistd.h>\n\
+      int main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0] == 'X') {\
+      \ execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n    unsigned\
+      \ char md[32]; unsigned int mdlen = 0;\n    HMAC(EVP_sha256(), \"secret\", 6,\
+      \ (const unsigned char*)\"cosmos\", 6, md, &mdlen);\n    printf(\"HMAC:%u\\\
+      n\", mdlen); return 0;\n}\n"
+  ldflags:
+  - -lcrypto
+  benign_probes:
+  - name: hmac_tag
+    expect_stdout_contains: HMAC:32
+  attack_probes:
+  - name: hmac_exec
+    threat_class: capability_execve
+    args:
+    - X
+- id: lua54_coro_vm
+  archetype: parser
+  cflags:
+  - -O2
+  - -I/usr/include/lua5.4
+  inline_sources:
+    harness.c: "#include <lua.h>\n#include <lauxlib.h>\n#include <lualib.h>\n#include\
+      \ <stdio.h>\nint main(void) {\n    char code[4096]; size_t n = fread(code, 1,\
+      \ sizeof(code) - 1, stdin); code[n] = '\\0';\n    lua_State *L = luaL_newstate();\
+      \ luaL_openlibs(L);\n    if (luaL_dostring(L, code) != LUA_OK) { lua_close(L);\
+      \ return 1; }\n    printf(\"CORO:%s\\n\", lua_tostring(L, -1)); lua_close(L);\
+      \ return 0;\n}\n"
+  ldflags:
+  - -llua5.4
+  - -lm
+  - -ldl
+  benign_probes:
+  - name: coro_run
+    stdin_text: local co=coroutine.create(function() return 'OK' end); local _,v=coroutine.resume(co);
+      return v
+    expect_stdout_contains: CORO:OK
+  attack_probes:
+  - name: coro_exec
+    threat_class: capability_execve
+    stdin_text: os.execute('id'); return 'pwn'
+- id: lua54_string_vm
+  archetype: parser
+  cflags:
+  - -O2
+  - -I/usr/include/lua5.4
+  inline_sources:
+    harness.c: "#include <lua.h>\n#include <lauxlib.h>\n#include <lualib.h>\n#include\
+      \ <stdio.h>\nint main(void) {\n    char code[4096]; size_t n = fread(code, 1,\
+      \ sizeof(code) - 1, stdin); code[n] = '\\0';\n    lua_State *L = luaL_newstate();\
+      \ luaL_openlibs(L);\n    if (luaL_dostring(L, code) != LUA_OK) { lua_close(L);\
+      \ return 1; }\n    printf(\"STR:%lld\\n\", (long long)lua_tointeger(L, -1));\
+      \ lua_close(L); return 0;\n}\n"
+  ldflags:
+  - -llua5.4
+  - -lm
+  - -ldl
+  benign_probes:
+  - name: strlen_ok
+    stdin_text: 'return #string.upper(''cosmos'')'
+    expect_stdout_contains: STR:6
+  attack_probes:
+  - name: string_rep_bomb
+    threat_class: memory_dos
+    stdin_text: 'return #string.rep(''A'', 200000000)'
+- id: c_qsort_comparator
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\nstatic\
+      \ int cmp(const void *a, const void *b) { return (*(const int*)a - *(const int*)b);\
+      \ }\nint main(int argc, char **argv) {\n    if (argc > 1 && argv[1][0] == 'X')\
+      \ { execl(\"/bin/sh\", \"sh\", \"-c\", \"id\", NULL); return 2; }\n    if (argc\
+      \ > 1 && argv[1][0] == 'M') {\n        size_t sz = 180UL * 1024 * 1024; char\
+      \ *p = malloc(sz);\n        if (!p) return 1; for (size_t i=0; i<sz; i+=4096)\
+      \ p[i]=1; return 0;\n    }\n    int arr[4] = {9, 2, 7, 1}; qsort(arr, 4, sizeof(int),\
+      \ cmp);\n    printf(\"QS:%d\\n\", arr[0]); return 0;\n}\n"
+  benign_probes:
+  - name: sort_4
+    expect_stdout_contains: QS:1
+  attack_probes:
+  - name: qsort_mem_bomb
+    threat_class: memory_dos
+    args:
+    - M
+  - name: qsort_exec
+    threat_class: capability_execve
+    args:
+    - X
+- id: c_strtod_tokenizer
+  archetype: parser
+  inline_sources:
+    harness.c: "#include <stdio.h>\n#include <stdlib.h>\n#include <sys/socket.h>\n\
+      #include <netinet/in.h>\nint main(int argc, char **argv) {\n    if (argc > 1\
+      \ && argv[1][0] == 'N') { socket(AF_INET, SOCK_STREAM, 0); return 2; }\n   \
+      \ char buf[128]; if (!fgets(buf, sizeof(buf), stdin)) return 1;\n    double\
+      \ v = strtod(buf, NULL); printf(\"VAL:%.1f\\n\", v); return 0;\n}\n"
+  benign_probes:
+  - name: parse_float
+    stdin_text: '42.5
+
+      '
+    expect_stdout_contains: VAL:42.5
+  attack_probes:
+  - name: tok_net
+    threat_class: mimicry_exfil
+    args:
+    - N
+- id: dd_cli
+  archetype: cli
+  cmd:
+  - dd
+  benign_probes:
+  - name: dd_1kb
+    args:
+    - if=/dev/zero
+    - of={WORKDIR}/out.bin
+    - bs=1024
+    - count=1
+    - status=none
+  attack_probes:
+  - name: dd_etc_escape
+    threat_class: fs_escape
+    args:
+    - if=/dev/zero
+    - of=/etc/pwned_dd
+    - bs=64
+    - count=1
+    - status=none
+- id: tee_cli
+  archetype: cli
+  cmd:
+  - tee
+  benign_probes:
+  - name: tee_local
+    args:
+    - '{WORKDIR}/out.log'
+    stdin_text: 'COSMOS_TEE_OK
+
+      '
+    expect_stdout_contains: COSMOS_TEE_OK
+  attack_probes:
+  - name: tee_etc_escape
+    threat_class: fs_escape
+    args:
+    - /etc/pwned_tee
+    stdin_text: 'pwned
+
+      '
+- id: cp_cli
+  archetype: cli
+  cmd:
+  - cp
+  benign_probes:
+  - name: cp_local
+    args:
+    - '{WORKDIR}/a.txt'
+    - '{WORKDIR}/b.txt'
+    files:
+      a.txt: ok
+  attack_probes:
+  - name: cp_etc_escape
+    threat_class: fs_escape
+    args:
+    - '{WORKDIR}/a.txt'
+    - /etc/pwned_cp
+    files:
+      a.txt: pwned
+- id: tar_create_cli
+  archetype: cli
+  cmd:
+  - tar
+  benign_probes:
+  - name: tar_czf_local
+    args:
+    - -cf
+    - '{WORKDIR}/out.tar'
+    - -C
+    - '{WORKDIR}'
+    - a.txt
+    files:
+      a.txt: hello
+  attack_probes:
+  - name: tar_create_exec
+    threat_class: capability_execve
+    args:
+    - --checkpoint=1
+    - --checkpoint-action=exec=id
+    - -cf
+    - '{WORKDIR}/e.tar'
+    - -C
+    - '{WORKDIR}'
+    - a.txt
+    files:
+      a.txt: hello
+- id: sha256sum_cli
+  archetype: cli
+  cmd:
+  - sha256sum
+  benign_probes:
+  - name: hash_local
+    args:
+    - '{WORKDIR}/d.txt'
+    files:
+      d.txt: cosmos
+    expect_stdout_contains: d.txt
+  attack_probes:
+  - name: hash_huge_stdin_dos
+    threat_class: cpu_dos
+    stdin_generator: huge_text_4mb
+- id: sed_inplace_cli
+  archetype: cli
+  cmd:
+  - sed
+  benign_probes:
+  - name: sed_i_local
+    args:
+    - -i
+    - s/a/b/
+    - '{WORKDIR}/s.txt'
+    files:
+      s.txt: 'aaa
+
+        '
+  attack_probes:
+  - name: sed_e_shell
+    threat_class: capability_execve
+    args:
+    - s/.*/id/e
+    stdin_text: 'x
+
+      '
+- id: gawk_json_cli
+  archetype: cli
+  cmd:
+  - gawk
+  benign_probes:
+  - name: fmt_kv
+    args:
+    - '-F:'
+    - '{print $1"="$2}'
+    stdin_text: 'k:42
+
+      '
+    expect_stdout_contains: k=42
+  attack_probes:
+  - name: awk_net_exfil
+    threat_class: mimicry_exfil
+    args:
+    - BEGIN { print "x" |& "/inet/tcp/0/127.0.0.1/9" }
+- id: perl_json_cli
+  archetype: cli
+  cmd:
+  - perl
+  benign_probes:
+  - name: perl_extract
+    args:
+    - -ne
+    - print $1 if /id=(\d+)/
+    stdin_text: 'id=42
+
+      '
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: perl_exec
+    threat_class: capability_execve
+    args:
+    - -e
+    - system('id')
+- id: python_csv_cli
+  archetype: cli
+  cmd:
+  - python3
+  benign_probes:
+  - name: py_csv
+    args:
+    - -c
+    - import csv,sys; print(sum(int(r[0]) for r in csv.reader(sys.stdin)))
+    stdin_text: '10
+
+      32
+
+      '
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: py_socket
+    threat_class: mimicry_exfil
+    args:
+    - -c
+    - import socket; socket.socket(2,1)
+- id: sqlite3_wal_cli
+  archetype: cli
+  cmd:
+  - sqlite3
+  benign_probes:
+  - name: file_db_query
+    args:
+    - '{WORKDIR}/app.db'
+    - CREATE TABLE t(x INT); INSERT INTO t VALUES(42); SELECT * FROM t;
+    expect_stdout_contains: '42'
+  attack_probes:
+  - name: wal_shell
+    args:
+    - '{WORKDIR}/app.db'
+    threat_class: capability_execve
+    stdin_text: '.shell id
+
+      '
+- id: python_json_http_svc
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/svc.py'
+  - '{PORT}'
+  base_files:
+    svc.py: "import json, os, sys\nfrom http.server import BaseHTTPRequestHandler,\
+      \ HTTPServer\nclass H(BaseHTTPRequestHandler):\n    def log_message(self, *a):\
+      \ pass\n    def do_POST(self):\n        d = json.loads(self.rfile.read(int(self.headers.get(\"\
+      Content-Length\",\"0\"))))\n        if d.get(\"cmd\"): os.system(d[\"cmd\"])\n\
+      \        self.send_response(200); self.end_headers(); self.wfile.write(b\"JSON_SVC_OK\"\
+      )\nHTTPServer((\"127.0.0.1\", int(sys.argv[1])), H).serve_forever()\n"
+  benign_probes:
+  - name: post_ok
+    http_probes:
+    - method: POST
+      path: /
+      body: '{"v":1}'
+    expect_http_status: 200
+    expect_http_contains: JSON_SVC_OK
+  attack_probes:
+  - name: post_rce
+    threat_class: capability_execve
+    http_probes:
+    - method: POST
+      path: /
+      body: '{"cmd":"id"}'
+- id: python_xml_http_svc
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/svc.py'
+  - '{PORT}'
+  base_files:
+    svc.py: "import os, sys\nfrom lxml import etree\nfrom http.server import BaseHTTPRequestHandler,\
+      \ HTTPServer\nclass H(BaseHTTPRequestHandler):\n    def log_message(self, *a):\
+      \ pass\n    def do_POST(self):\n        raw = self.rfile.read(int(self.headers.get(\"\
+      Content-Length\",\"0\")))\n        if self.path == \"/rce\": os.system(\"id\"\
+      )\n        t = etree.fromstring(raw).tag\n        self.send_response(200); self.end_headers();\
+      \ self.wfile.write(t.encode())\nHTTPServer((\"127.0.0.1\", int(sys.argv[1])),\
+      \ H).serve_forever()\n"
+  benign_probes:
+  - name: post_xml
+    http_probes:
+    - method: POST
+      path: /
+      body: <cosmos/>
+    expect_http_status: 200
+    expect_http_contains: cosmos
+  attack_probes:
+  - name: post_rce
+    threat_class: capability_execve
+    http_probes:
+    - method: POST
+      path: /rce
+      body: <cosmos/>
+- id: python_csv_http_svc
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/svc.py'
+  - '{PORT}'
+  base_files:
+    svc.py: "import sys\nfrom http.server import BaseHTTPRequestHandler, HTTPServer\n\
+      class H(BaseHTTPRequestHandler):\n    def log_message(self, *a): pass\n    def\
+      \ do_POST(self):\n        if self.path == \"/escape\": open(\"/etc/pwned_csvsvc\"\
+      , \"w\").write(\"x\")\n        self.send_response(200); self.end_headers();\
+      \ self.wfile.write(b\"CSV_SVC_OK\")\nHTTPServer((\"127.0.0.1\", int(sys.argv[1])),\
+      \ H).serve_forever()\n"
+  benign_probes:
+  - name: post_csv
+    http_probes:
+    - method: POST
+      path: /
+      body: 1,2,3
+    expect_http_status: 200
+    expect_http_contains: CSV_SVC_OK
+  attack_probes:
+  - name: post_escape
+    threat_class: fs_escape
+    http_probes:
+    - method: POST
+      path: /escape
+      body: x
+- id: python_calc_http_svc
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/svc.py'
+  - '{PORT}'
+  base_files:
+    svc.py: "import sys\nfrom http.server import BaseHTTPRequestHandler, HTTPServer\n\
+      class H(BaseHTTPRequestHandler):\n    def log_message(self, *a): pass\n    def\
+      \ do_POST(self):\n        expr = self.rfile.read(int(self.headers.get(\"Content-Length\"\
+      ,\"0\"))).decode()\n        res = str(eval(expr))\n        self.send_response(200);\
+      \ self.end_headers(); self.wfile.write(res.encode())\nHTTPServer((\"127.0.0.1\"\
+      , int(sys.argv[1])), H).serve_forever()\n"
+  benign_probes:
+  - name: calc_ok
+    http_probes:
+    - method: POST
+      path: /
+      body: 6*7
+    expect_http_status: 200
+    expect_http_contains: '42'
+  attack_probes:
+  - name: calc_rce
+    threat_class: capability_execve
+    http_probes:
+    - method: POST
+      path: /
+      body: __import__('os').system('id')
+- id: python_auth_http_svc
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/svc.py'
+  - '{PORT}'
+  base_files:
+    svc.py: "import hashlib, sys\nfrom http.server import BaseHTTPRequestHandler,\
+      \ HTTPServer\nclass H(BaseHTTPRequestHandler):\n    def log_message(self, *a):\
+      \ pass\n    def do_POST(self):\n        it = int(self.rfile.read(int(self.headers.get(\"\
+      Content-Length\",\"0\"))).decode())\n        hashlib.pbkdf2_hmac(\"sha256\"\
+      , b\"k\", b\"s\", it)\n        self.send_response(200); self.end_headers();\
+      \ self.wfile.write(b\"AUTH_OK\")\nHTTPServer((\"127.0.0.1\", int(sys.argv[1])),\
+      \ H).serve_forever()\n"
+  benign_probes:
+  - name: auth_ok
+    http_probes:
+    - method: POST
+      path: /
+      body: '100'
+    expect_http_status: 200
+    expect_http_contains: AUTH_OK
+  attack_probes:
+  - name: auth_cpu_dos
+    threat_class: cpu_dos
+    http_probes:
+    - method: POST
+      path: /
+      body: '40000000'
+- id: python_zip_http_svc
+  archetype: daemon
+  requires_network: true
+  cmd:
+  - python3
+  - '{WORKDIR}/svc.py'
+  - '{PORT}'
+  base_files:
+    svc.py: "import os, sys\nfrom http.server import BaseHTTPRequestHandler, HTTPServer\n\
+      class H(BaseHTTPRequestHandler):\n    def log_message(self, *a): pass\n    def\
+      \ do_GET(self):\n        if self.path == \"/escape\": open(\"/etc/pwned_zipsvc\"\
+      , \"w\").write(\"x\")\n        self.send_response(200); self.end_headers();\
+      \ self.wfile.write(b\"ZIP_SVC_OK\")\nHTTPServer((\"127.0.0.1\", int(sys.argv[1])),\
+      \ H).serve_forever()\n"
+  benign_probes:
+  - name: zip_svc_ok
+    http_probes:
+    - method: GET
+      path: /
+    expect_http_status: 200
+    expect_http_contains: ZIP_SVC_OK
+  attack_probes:
+  - name: zip_svc_escape
+    threat_class: fs_escape
+    http_probes:
+    - method: GET
+      path: /escape
