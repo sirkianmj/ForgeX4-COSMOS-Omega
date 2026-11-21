@@ -43,7 +43,7 @@ def mann_whitney_u_pvalue(xs, ys) -> float:
 
 
 def _eval_one(foundry, target, pop, gens, pace_ms, split_name):
-    r = foundry.synthesize(target, pop, gens, True)
+    r = foundry.synthesize(target, pop, gens, True, split=split_name)
     r["split"] = split_name
     if pace_ms > 0:
         time.sleep(pace_ms / 1000.0)

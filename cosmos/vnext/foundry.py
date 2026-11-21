@@ -170,6 +170,8 @@ class GeneralistFoundry:
             blocked = self._is_contained(a["meta"], policy)
             if blocked:
                 attack_blocked += 1
+            c_user = float(a["meta"].get("cpu_user_ms", 0.0))
+            c_sys = float(a["meta"].get("cpu_sys_ms", 0.0))
             attack_details.append({
                 "probe": a["probe"],
                 "threat_class": a["threat_class"],
@@ -177,6 +179,7 @@ class GeneralistFoundry:
                 "outcome": a["meta"].get("outcome"),
                 "violations": a["meta"].get("violations", ""),
                 "wall_ms": a["meta"].get("wall_ms", 0),
+                "cpu_ms": round(c_user + c_sys, 3),
             })
 
         benign_rate = benign_ok / max(1, len(bundle["benign"]))
@@ -257,7 +260,7 @@ class GeneralistFoundry:
                 best = res
         return best
 
-    def synthesize(self, target: BaseTargetDriver, pop_size: int = 8, generations: int = 4, use_twin: bool = True) -> Dict[str, Any]:
+    def synthesize(self, target: BaseTargetDriver, pop_size: int = 8, generations: int = 4, use_twin: bool = True, split: str = "default") -> Dict[str, Any]:
         rng = random.Random(f"{self.seed}:{target.id}")
         target.prepare(self.client)
         calib = self.calibrate_benign_baseline(target)
@@ -316,6 +319,8 @@ class GeneralistFoundry:
         summary = {
             "target_id": target.id,
             "archetype": target.archetype,
+            "seed": self.seed,
+            "split": split,
             "calibration": calib,
             "cosmos_omega": champion_res,
             "baseline_quantile_2float": quantile_res,
